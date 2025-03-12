@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SI Trace Study Ma Chung</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- CSS Dependencies -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" />
+    <link href="assets/css/app.min.css" rel="stylesheet" />
+    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="account-pages my-5 pt-sm-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card overflow-hidden">
+                        <div class="bg-primary bg-soft">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="text-primary p-4">
+                                        <h3 class="text-primary">Selamat Datang!</h3>
+                                        <p>Isi data diri Anda sebelum melanjutkan.</p>
+                                    </div>
+                                </div>
+                                <div class="col-5 align-self-end">
+                                    <img src="assets/images/profile-img.png" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0"> 
+                            <div class="p-2">
+                                <form id="registerForm" class="mt-4" novalidate>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
+                                        <select id="tahun_lulus" name="tahun_lulus" class="form-select" required>
+                                            <option value="" selected disabled>Pilih...</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2022">2022</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Nama Mahasiswa <span class="text-danger">*</span></label>
+                                        <select id="nama" name="nama" class="form-control select2">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Email <span class="text-danger">*</span></label>
+                                        <input type="text" id="email" name="email" class="form-control" placeholder="Masukkan Email" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">No. Telepon <span class="text-danger">*</span></label>
+                                        <input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="Masukkan No. Telepon" required>
+                                    </div>
+
+                                    <div class="mt-4 d-grid">
+                                        <button id="btn-daftar" class="btn btn-primary waves-effect waves-light" type="button">Daftar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <p>© SI Trace Study <script>document.write(new Date().getFullYear())</script>, Crafted with <i class="mdi mdi-heart text-danger"></i> by Ma Chung</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Dependencies -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/select2/js/select2.min.js"></script>
+    <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".select2").select2();
+        });
+
+        $("#tahun_lulus").change(function () {
+            let selectedTahun = $(this).val();
+            let namaMahasiswaSelect = $("#nama");
+
+            namaMahasiswaSelect.html('<option value="">Loading...</option>');
+
+            fetch("ts_get_nama_mahasiswa.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `tahun=${selectedTahun}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                namaMahasiswaSelect.html('<option value="">Pilih Nama</option>');
+                if (data.status === 200 && Array.isArray(data.data)) {
+                    data.data.forEach(nama => {
+                        namaMahasiswaSelect.append(new Option(nama, nama));
+                    });
+                } else {
+                    namaMahasiswaSelect.html('<option value="">Data tidak ditemukan</option>');
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                namaMahasiswaSelect.html('<option value="">Gagal memuat data</option>');
+            });
+        });
+
+        $("#btn-daftar").click(function () {
+            let success = Math.random() > 0.5;
+            if (success) {
+                Swal.fire({
+                    title: 'Processing...',
+                    text: 'Please wait a moment',
+                    allowOutsideClick: false,
+                    didOpen: () => Swal.showLoading()
+                });
+                setTimeout(() => window.location.href = "auth-two-step-verification.html", 2000);
+            } else {
+                Swal.fire({ title: 'Cancelled', text: 'Your imaginary file is safe :)', icon: 'error' });
+            }
+        });
+    </script>
+</body>
+</html>
