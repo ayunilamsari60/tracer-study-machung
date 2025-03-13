@@ -15,6 +15,7 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" />
     <link href="assets/css/app.min.css" rel="stylesheet" />
     <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" />
+<<<<<<< HEAD:views/auth-register.html
 <<<<<<< HEAD
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <script>
@@ -42,23 +43,12 @@
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
 >>>>>>> 210cdf7 (ganti css)
+=======
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+>>>>>>> ff02338 (tambahan backend):views/auth-register.php
 </head>
 
 <body>
-<?php
-// Ambil pesan sukses atau error dari session (jika ada)
-$successMessage = $_SESSION['success_message'] ?? "";
-$errorMessage = $_SESSION['error_message'] ?? "";
-
-// Hapus session setelah ditampilkan agar tidak muncul terus-menerus
-unset($_SESSION['success_message']);
-unset($_SESSION['error_message']);
-?>
-
-<!-- Tampilkan pesan sukses -->
-<?php if ($successMessage): ?>
-    <p style="color: green;"><?= $successMessage ?></p>
-<?php endif; ?>
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -77,18 +67,17 @@ unset($_SESSION['error_message']);
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body pt-0"> 
+                        <div class="card-body pt-0">
                             <div class="p-2">
-                                <form id="registerForm" action="../backend/tes.php" method="POST" class="mt-4" novalidate>
-                                    <!-- Input untuk menampilkan error -->
-    <input type="text" name="error" value="<?= $errorMessage ?>" readonly style="border: 1px solid red; color: red;">
+                                <form id="registerForm" action="../backend/ts_register_mahasiswa.php" method="POST" class="mt-4" novalidate>
                                     <div class="mb-3">
                                         <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
                                         <select id="tahun_lulus" name="tahun_lulus" class="form-select" required onchange="updateNamaMahasiswa()">
                                             <option value="" selected disabled>Pilih...</option>
-                                            <option value="2024">2024</option>
-                                            <option value="2023">2023</option>
-                                            <option value="2022">2022</option>
+                                            <!-- Loop dengan PHP -->
+                                             <?php for ($tahun = 2015; $tahun <= 2024; $tahun++) { ?>
+                                            <option value="<?php echo $tahun; ?>"><?php echo $tahun; ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
 
@@ -117,7 +106,9 @@ unset($_SESSION['error_message']);
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <p>© SI Trace Study <script>document.write(new Date().getFullYear())</script>, Crafted with <i class="mdi mdi-heart text-danger"></i> by Ma Chung</p>
+                        <p>© SI Trace Study <script>
+                                document.write(new Date().getFullYear())
+                            </script>, Crafted with <i class="mdi mdi-heart text-danger"></i> by Ma Chung</p>
                     </div>
                 </div>
             </div>
@@ -132,12 +123,17 @@ unset($_SESSION['error_message']);
     <script src="assets/js/app.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".select2").select2();
         });
+        function updateNamaMahasiswa() {
+            var tahun = document.getElementById("tahun_lulus").value;
+            var namaSelect = document.getElementById("nama");
 
-        
+            // Hapus semua opsi sebelum menambahkan data baru
+            namaSelect.innerHTML = '<option value="">Loading...</option>';
 
+<<<<<<< HEAD:views/auth-register.html
 <<<<<<< HEAD
         // $("#btn-daftar").click(function () {
         //     let success = Math.random() > 0.5;
@@ -168,39 +164,43 @@ unset($_SESSION['error_message']);
                     data.data.forEach(nama => {
                         namaMahasiswaSelect.append(new Option(nama, nama));
                     });
+=======
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "proses.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    namaSelect.innerHTML = xhr.responseText; // Isi langsung dengan opsi HTML
+>>>>>>> ff02338 (tambahan backend):views/auth-register.php
                 } else {
-                    namaMahasiswaSelect.html('<option value="">Data tidak ditemukan</option>');
+                    namaSelect.innerHTML = '<option value="">Tidak Ada data</option>';
                 }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                namaMahasiswaSelect.html('<option value="">Gagal memuat data</option>');
-            });
-        });
+            };
+            xhr.send("tahun_lulus=" + tahun);
+        }
 
-        $("#btn-daftar").click(function () {
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
             Swal.fire({
-                title: 'Processing...',
-                text: 'Please wait a moment',
+                title: 'Proses...',
+                text: 'Mohon menunggu sebentar',
                 allowOutsideClick: false,
                 didOpen: () => Swal.showLoading()
             });
-
-            setTimeout(() => {
-                let success = Math.random() > 0.5;
-                if (success) {
-                    window.location.href = "auth-two-step-verification.html";
-                } else {
-                    Swal.fire({
-                        title: 'Cancelled',
-                        text: 'Your imaginary file is safe :)',
-                        icon: 'error'
-                    });
-                }
-            }, 2000); // Simulasi loading dulu sebelum error/sukses
         });
+<<<<<<< HEAD:views/auth-register.html
 
 >>>>>>> 6449889 (ubah html dan css)
+=======
+        <?php if (isset($_SESSION['error'])) { ?>
+            Swal.fire({
+                title: 'Gagal!',
+                text: '<?php echo $_SESSION['error']; ?>',
+                icon: 'error'
+            });
+        <?php unset($_SESSION['error']);
+        } ?>
+>>>>>>> ff02338 (tambahan backend):views/auth-register.php
     </script>
 </body>
+
 </html>
