@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!doctype html>
 <html lang="en">
 
@@ -15,9 +16,44 @@
     <link href="assets/css/app.min.css" rel="stylesheet" />
     <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" />
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <script>
+        function updateNamaMahasiswa() {
+            var tahun = document.getElementById("tahun_lulus").value;
+            var namaSelect = document.getElementById("nama");
+
+            // Hapus semua opsi sebelum menambahkan data baru
+            namaSelect.innerHTML = '<option value="">Loading...</option>';
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "proses.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    namaSelect.innerHTML = xhr.responseText; // Isi langsung dengan opsi HTML
+                } else {
+                    namaSelect.innerHTML = '<option value="">Tidak Ada data</option>';
+                }
+            };
+            xhr.send("tahun_lulus=" + tahun);
+        }
+    </script>
 </head>
 
 <body>
+<?php
+// Ambil pesan sukses atau error dari session (jika ada)
+$successMessage = $_SESSION['success_message'] ?? "";
+$errorMessage = $_SESSION['error_message'] ?? "";
+
+// Hapus session setelah ditampilkan agar tidak muncul terus-menerus
+unset($_SESSION['success_message']);
+unset($_SESSION['error_message']);
+?>
+
+<!-- Tampilkan pesan sukses -->
+<?php if ($successMessage): ?>
+    <p style="color: green;"><?= $successMessage ?></p>
+<?php endif; ?>
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -38,11 +74,12 @@
                         </div>
                         <div class="card-body pt-0"> 
                             <div class="p-2">
-                                <form id="registerForm" class="mt-4" novalidate>
-                                    
+                                <form id="registerForm" action="../backend/tes.php" method="POST" class="mt-4" novalidate>
+                                    <!-- Input untuk menampilkan error -->
+    <input type="text" name="error" value="<?= $errorMessage ?>" readonly style="border: 1px solid red; color: red;">
                                     <div class="mb-3">
                                         <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
-                                        <select id="tahun_lulus" name="tahun_lulus" class="form-select" required>
+                                        <select id="tahun_lulus" name="tahun_lulus" class="form-select" required onchange="updateNamaMahasiswa()">
                                             <option value="" selected disabled>Pilih...</option>
                                             <option value="2024">2024</option>
                                             <option value="2023">2023</option>
@@ -68,7 +105,7 @@
                                     </div>
 
                                     <div class="mt-4 d-grid">
-                                        <button id="btn-daftar" class="btn btn-primary waves-effect waves-light" type="button">Daftar</button>
+                                        <button id="btn-daftar" class="btn btn-primary waves-effect waves-light" type="submit">Daftar</button>
                                     </div>
                                 </form>
                             </div>
@@ -94,48 +131,22 @@
             $(".select2").select2();
         });
 
-        $("#tahun_lulus").change(function () {
-            let selectedTahun = $(this).val();
-            let namaMahasiswaSelect = $("#nama");
+        
 
-            namaMahasiswaSelect.html('<option value="">Loading...</option>');
-
-            fetch("ts_get_nama_mahasiswa.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `tahun=${selectedTahun}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                namaMahasiswaSelect.html('<option value="">Pilih Nama</option>');
-                if (data.status === 200 && Array.isArray(data.data)) {
-                    data.data.forEach(nama => {
-                        namaMahasiswaSelect.append(new Option(nama, nama));
-                    });
-                } else {
-                    namaMahasiswaSelect.html('<option value="">Data tidak ditemukan</option>');
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                namaMahasiswaSelect.html('<option value="">Gagal memuat data</option>');
-            });
-        });
-
-        $("#btn-daftar").click(function () {
-            let success = Math.random() > 0.5;
-            if (success) {
-                Swal.fire({
-                    title: 'Processing...',
-                    text: 'Please wait a moment',
-                    allowOutsideClick: false,
-                    didOpen: () => Swal.showLoading()
-                });
-                setTimeout(() => window.location.href = "auth-two-step-verification.html", 2000);
-            } else {
-                Swal.fire({ title: 'Cancelled', text: 'Your imaginary file is safe :)', icon: 'error' });
-            }
-        });
+        // $("#btn-daftar").click(function () {
+        //     let success = Math.random() > 0.5;
+        //     if (success) {
+        //         Swal.fire({
+        //             title: 'Processing...',
+        //             text: 'Please wait a moment',
+        //             allowOutsideClick: false,
+        //             didOpen: () => Swal.showLoading()
+        //         });
+        //         setTimeout(() => window.location.href = "auth-two-step-verification.html", 2000);
+        //     } else {
+        //         Swal.fire({ title: 'Cancelled', text: 'Your imaginary file is safe :)', icon: 'error' });
+        //     }
+        // });
     </script>
 </body>
 </html>
