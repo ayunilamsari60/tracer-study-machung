@@ -71,7 +71,7 @@
                     </div>
                     
                     <div class="mt-5 text-center">
-                        <p>Tidak mendapatkan OTP? <a href="auth-two-step-verification-2.html" class="fw-medium text-primary">Kirim Ulang</a></p>
+                        <p>Tidak mendapatkan OTP? <a href="#" class="fw-medium text-primary resend-otp">Kirim Ulang</a></p>
                     </div>
 
                 </div>
@@ -91,6 +91,29 @@
 
     <!-- App js -->
     <script src="assets/js/app.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".resend-otp").click(function (e) {
+                e.preventDefault(); // Mencegah pindah halaman
+    
+                // Hapus alert sebelumnya jika ada
+                $(".otp-alert").remove();
+    
+                // Tampilkan pesan sukses
+                $("<h4 class='alert alert-success text-center otp-alert'>OTP baru telah dikirim ke email Anda</h4>")
+                    .hide()
+                    .prependTo(".container") // Masukkan di dalam container
+                    .fadeIn(500);
+    
+                // Simulasi request OTP (kamu bisa ganti ini dengan AJAX untuk benar-benar mengirim OTP)
+                setTimeout(() => {
+                    console.log("OTP baru dikirim ke email");
+                }, 1000);
+            });
+        });
+    </script>
+    
 </body>
 
 </html>

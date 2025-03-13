@@ -15,6 +15,7 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" />
     <link href="assets/css/app.min.css" rel="stylesheet" />
     <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" />
+<<<<<<< HEAD:views/auth-register.php
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <script>
         function updateNamaMahasiswa() {
@@ -37,6 +38,10 @@
             xhr.send("tahun_lulus=" + tahun);
         }
     </script>
+=======
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+>>>>>>> 6449889607839e1aaff2ec2df75a516f700839d8:views/auth-register.html
 </head>
 
 <body>
@@ -64,7 +69,7 @@ unset($_SESSION['error_message']);
                                 <div class="col-7">
                                     <div class="text-primary p-4">
                                         <h3 class="text-primary">Selamat Datang!</h3>
-                                        <p>Isi data diri Anda sebelum melanjutkan.</p>
+                                        <p>Sebelum mengisi form, isi data diri Anda terlebih dahulu.</p>
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -90,7 +95,7 @@ unset($_SESSION['error_message']);
                                     <div class="mb-3">
                                         <label class="form-label">Nama Mahasiswa <span class="text-danger">*</span></label>
                                         <select id="nama" name="nama" class="form-control select2">
-                                            <option>Select</option>
+                                            <option>Cari...</option>
                                         </select>
                                     </div>
 
@@ -133,6 +138,7 @@ unset($_SESSION['error_message']);
 
         
 
+<<<<<<< HEAD:views/auth-register.php
         // $("#btn-daftar").click(function () {
         //     let success = Math.random() > 0.5;
         //     if (success) {
@@ -147,6 +153,54 @@ unset($_SESSION['error_message']);
         //         Swal.fire({ title: 'Cancelled', text: 'Your imaginary file is safe :)', icon: 'error' });
         //     }
         // });
+=======
+            namaMahasiswaSelect.html('<option value="">Loading...</option>');
+
+            fetch("ts_get_nama_mahasiswa.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `tahun=${selectedTahun}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                namaMahasiswaSelect.html('<option value="">Pilih Nama</option>');
+                if (data.status === 200 && Array.isArray(data.data)) {
+                    data.data.forEach(nama => {
+                        namaMahasiswaSelect.append(new Option(nama, nama));
+                    });
+                } else {
+                    namaMahasiswaSelect.html('<option value="">Data tidak ditemukan</option>');
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                namaMahasiswaSelect.html('<option value="">Gagal memuat data</option>');
+            });
+        });
+
+        $("#btn-daftar").click(function () {
+            Swal.fire({
+                title: 'Processing...',
+                text: 'Please wait a moment',
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading()
+            });
+
+            setTimeout(() => {
+                let success = Math.random() > 0.5;
+                if (success) {
+                    window.location.href = "auth-two-step-verification.html";
+                } else {
+                    Swal.fire({
+                        title: 'Cancelled',
+                        text: 'Your imaginary file is safe :)',
+                        icon: 'error'
+                    });
+                }
+            }, 2000); // Simulasi loading dulu sebelum error/sukses
+        });
+
+>>>>>>> 6449889607839e1aaff2ec2df75a516f700839d8:views/auth-register.html
     </script>
 </body>
 </html>
