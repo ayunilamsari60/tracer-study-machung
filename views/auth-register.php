@@ -104,7 +104,7 @@
             namaSelect.innerHTML = '<option value="">Loading...</option>';
 
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "proses.php", true);
+            xhr.open("POST", "../backend/ts_get_nama_mahasiswa.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
