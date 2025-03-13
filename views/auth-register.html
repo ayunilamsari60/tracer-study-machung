@@ -29,7 +29,7 @@
                                 <div class="col-7">
                                     <div class="text-primary p-4">
                                         <h3 class="text-primary">Selamat Datang!</h3>
-                                        <p>Isi data diri Anda sebelum melanjutkan.</p>
+                                        <p>Sebelum mengisi form, isi data diri Anda terlebih dahulu.</p>
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -54,7 +54,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">Nama Mahasiswa <span class="text-danger">*</span></label>
                                         <select id="nama" name="nama" class="form-control select2">
-                                            <option>Select</option>
+                                            <option>Cari...</option>
                                         </select>
                                     </div>
 
@@ -124,19 +124,27 @@
         });
 
         $("#btn-daftar").click(function () {
-            let success = Math.random() > 0.5;
-            if (success) {
-                Swal.fire({
-                    title: 'Processing...',
-                    text: 'Please wait a moment',
-                    allowOutsideClick: false,
-                    didOpen: () => Swal.showLoading()
-                });
-                setTimeout(() => window.location.href = "auth-two-step-verification.html", 2000);
-            } else {
-                Swal.fire({ title: 'Cancelled', text: 'Your imaginary file is safe :)', icon: 'error' });
-            }
+            Swal.fire({
+                title: 'Processing...',
+                text: 'Please wait a moment',
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading()
+            });
+
+            setTimeout(() => {
+                let success = Math.random() > 0.5;
+                if (success) {
+                    window.location.href = "auth-two-step-verification.html";
+                } else {
+                    Swal.fire({
+                        title: 'Cancelled',
+                        text: 'Your imaginary file is safe :)',
+                        icon: 'error'
+                    });
+                }
+            }, 2000); // Simulasi loading dulu sebelum error/sukses
         });
+
     </script>
 </body>
 </html>

@@ -249,6 +249,12 @@
     appearance: none;
 }
 
+.select2-container--default.select2-container--open .select2-selection--single {
+    border-color: #b9bfc4; /* Warna border saat diklik */
+    box-shadow: 0 0 0 0.15rem rgba(85, 110, 230, 0.25); /* Efek glow */
+}
+
+
 .select2-container--default .select2-selection--single:focus {
     border-color: #b9bfc4; /* Samakan warna border */
     outline: none;
