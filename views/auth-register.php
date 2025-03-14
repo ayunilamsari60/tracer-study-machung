@@ -39,7 +39,7 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="p-2">
-                                <form id="registerForm" action="../backend/ts_register_mahasiswa.php" method="POST" class="mt-4" novalidate>
+                                <form id="registerForm" action="../backend/ts_register_mahasiswa.php" method="POST" class="mt-4">
                                     <div class="mb-3">
                                         <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
                                         <select id="tahun_lulus" name="tahun_lulus" class="form-select" required onchange="updateNamaMahasiswa()">
