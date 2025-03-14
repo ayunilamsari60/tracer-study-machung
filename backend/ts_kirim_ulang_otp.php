@@ -42,7 +42,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = 'Kode OTP Baru';
-        $mail->Body = "<p>Kode OTP Anda adalah <strong>$otp_kode</strong>. Berlaku selama 10 menit.</p>";
+        $mail->Body = "
+        <div style='text-align:center; margin-top:20px;'>
+            <b style='font-size: 18px;'>Verifikasi Email untuk Proses Tiket Anda!</b>
+            <b style='font-size: 18px;'>Kode OTP Anda adalah <strong>{$otp_kode}</strong> </b>
+            <p style='text-align: justify;'>
+                Tiket Anda memerlukan verifikasi OTP agar dapat diproses oleh admin. Silakan masukkan kode OTP di form verifikasi untuk melanjutkan proses.<br><br>
+                <b>Kode ini hanya berlaku selama 10 menit.</b>
+            </p>
+            <p style='text-align: justify;'>*Catatan: Mohon untuk tidak membalas email ini.</p>
+        </div>";
 
         $mail->send();
 
@@ -55,4 +64,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         exit();
     }
 }
-?>
