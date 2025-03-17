@@ -40,6 +40,8 @@ if (!isset($_SESSION['email'])) {
                     <h4 class="alert alert-success text-center otp-alert">OTP baru telah dikirim ke email Anda</h4>
                 <?php elseif (isset($_GET['kirim_ulang']) && $_GET['kirim_ulang'] == 'error'): ?>
                     <h4 class="alert alert-danger text-center otp-alert">Gagal mengirim OTP. Silakan coba lagi!</h4>
+                <?php elseif (isset($_GET['kirim_ulang']) && $_GET['kirim_ulang'] == 'limit'): ?>
+                    <h4 class="alert alert-warning text-center otp-alert">Maaf, Anda hanya bisa meminta OTP sebanyak 2 kali dalam sehari.</h4>
                 <?php endif; ?>
 
                 <div class="row justify-content-center">
