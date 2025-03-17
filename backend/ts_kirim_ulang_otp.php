@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        $mail->setFrom('noreply@yourdomain.com', 'Admin Sistem');
+        $mail->setFrom(getenv('EMAIL_USERNAME'), 'Manusia Gokil');
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = 'Kode OTP Baru';
