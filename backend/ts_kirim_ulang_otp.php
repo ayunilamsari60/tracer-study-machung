@@ -15,12 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
     $email = $_SESSION['email'];
 
     try {
-        $conn->beginTransaction(); // Mulai transaksi
+        $conn->begin_transaction(); // Mulai transaksi
 
         // Ambil data pengguna dari database
         $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM ts_register_mahasiswa WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $stmt->close();
 
         if (!$user) {
             throw new Exception("User tidak ditemukan");
@@ -48,7 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $stmt = $conn->prepare("UPDATE ts_register_mahasiswa 
                                 SET otp_kode = ?, otp_kadaluwarsa = ?, otp_pengiriman = ?, updated_at = NOW() 
                                 WHERE email = ?");
-        $stmt->execute([$otp_kode, $otp_kadaluwarsa, $otp_attempts, $email]);
+        $stmt->bind_param('ssis', $otp_kode, $otp_kadaluwarsa, $otp_attempts, $email);
+        $stmt->execute();
+        $stmt->close();
 
         $conn->commit(); // Selesai transaksi
 

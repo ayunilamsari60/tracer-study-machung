@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../config/koneksi.php';
-require '../vendor/autoload.php'; // Pastikan PHPMailer sudah diinstall
+require '../vendor/autoload.php'; // Pastikan PHPMailer sudah diinstal
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -24,12 +24,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             throw new Exception("Koneksi database gagal!");
         }
 
-        $conn->beginTransaction(); // Mulai transaksi
+        $conn->begin_transaction(); // Mulai transaksi
 
-        // Ambil data pengguna dari database
+        // Cek apakah email sudah terdaftar
+        $stmt = $conn->prepare("SELECT otp_verifikasi FROM ts_register_mahasiswa WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $existingUser = $result->fetch_assoc();
+        $stmt->close();
+
+        if ($existingUser && $existingUser['otp_verifikasi'] == 1) {
+            $_SESSION['error'] = "Email sudah terdaftar!";
+            header("Location: ../views/auth-register.php");
+            exit;
+        }
+
+        // Ambil data pengguna dari database untuk mengecek jumlah permintaan OTP
         $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM ts_register_mahasiswa WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $stmt->close();
 
         if ($user) {
             $lastUpdatedDate = $user['updated_at'] ? date("Y-m-d", strtotime($user['updated_at'])) : null;
@@ -46,44 +63,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $otp_attempts = 1;
         }
 
-        $stmt = $conn->prepare("SELECT otp_verifikasi FROM ts_register_mahasiswa WHERE email = :email");
-        $stmt->execute([':email' => $email]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($result && $result['otp_verifikasi'] == 1) {
-            $_SESSION['error'] = "Email sudah terdaftar!";
-            header("Location: ../views/auth-register.php");
-            exit;
-        }
 
         $otp_kode = rand(1000, 9999);
         $otp_kadaluwarsa = date("Y-m-d H:i:s", strtotime("+10 minutes"));
 
-        // Perbaikan untuk `ON DUPLICATE KEY UPDATE`
-        $query = "INSERT INTO ts_register_mahasiswa (tahun_kelulusan, nama, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman) 
-                  VALUES (:tahun_kelulusan, :nama, :email, :no_telepon, :otp_kode, :otp_kadaluwarsa, 0, :otp_pengiriman)
-                  ON DUPLICATE KEY UPDATE 
-                  tahun_kelulusan = VALUES(tahun_kelulusan), 
-                  nama = VALUES(nama), 
-                  no_telepon = VALUES(no_telepon),
-                  otp_kode = VALUES(otp_kode), 
-                  otp_kadaluwarsa = VALUES(otp_kadaluwarsa), 
-                  otp_verifikasi = 0,
-                  otp_pengiriman = :otp_pengiriman";
-
-        $stmt = $conn->prepare($query);
-        $stmt->execute([
-            ':tahun_kelulusan' => $tahun_kelulusan,
-            ':nama' => $nama,
-            ':email' => $email,
-            ':no_telepon' => $no_telepon,
-            ':otp_kode' => $otp_kode,
-            ':otp_kadaluwarsa' => $otp_kadaluwarsa,
-            ':otp_pengiriman' => $otp_attempts
-        ]);
+        // Insert atau Update data
+        $stmt = $conn->prepare("
+            INSERT INTO ts_register_mahasiswa (tahun_kelulusan, nama, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman) 
+            VALUES (?, ?, ?, ?, ?, ?, 0, ?)
+            ON DUPLICATE KEY UPDATE 
+            tahun_kelulusan = VALUES(tahun_kelulusan), 
+            nama = VALUES(nama), 
+            no_telepon = VALUES(no_telepon),
+            otp_kode = VALUES(otp_kode), 
+            otp_kadaluwarsa = VALUES(otp_kadaluwarsa), 
+            otp_verifikasi = 0,
+            otp_pengiriman = VALUES(otp_pengiriman)
+        ");
+        $stmt->bind_param("isssssi", $tahun_kelulusan, $nama, $email, $no_telepon, $otp_kode, $otp_kadaluwarsa, $otp_attempts);
+        $stmt->execute();
+        $stmt->close();
 
         $_SESSION['email'] = $email;
 
+        // Kirim email dengan PHPMailer
         $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
@@ -97,29 +100,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = 'Kode OTP Anda';
-        $mail->Body = '
-        <div style="text-align:center; margin-top:20px;">
-            <img src="cid:checklist_image" alt="logo" style="width:200px; height:auto;">
+        $mail->Body = "
+        <div style='text-align:center; margin-top:20px;'>
+            <img src='cid:checklist_image' alt='logo' style='width:200px; height:auto;'>
         </div>
-        <div style="text-align: center; width: 400px; margin: 0 auto;">
-            <b style="font-size: 18px;">Verifikasi Email untuk Proses Tiket Anda!</b>
-            <b style="font-size: 18px;">Kode OTP Anda adalah <strong>' . $otp_kode . '</strong> </b>
+        <div style='text-align: center; width: 400px; margin: 0 auto;'>
+            <b style='font-size: 18px;'>Verifikasi Email untuk Proses Tiket Anda!</b>
+            <b style='font-size: 18px;'>Kode OTP Anda adalah <strong>{$otp_kode}</strong> </b>
 
-            <p style="text-align: justify;">
+            <p style='text-align: justify;'>
                 Tiket Anda memerlukan verifikasi OTP agar dapat diproses oleh admin. Silakan masukkan kode OTP di form verifikasi untuk melanjutkan proses.<br><br>
                 <b>Kode ini hanya berlaku selama 10 menit.</b>
             </p>
             <br>
-            <p style="text-align: justify;">*Catatan: Mohon untuk tidak membalas email ini.</p>
+            <p style='text-align: justify;'>*Catatan: Mohon untuk tidak membalas email ini.</p>
         </div>
-        <div style="margin-top: 2rem;">
-            <img src="cid:logo_image" alt="logo" style="width:150px; height:auto;"><br>
+        <div style='margin-top: 2rem;'>
+            <img src='cid:logo_image' alt='logo' style='width:150px; height:auto;'><br>
             <b>Unit Sistem Informasi dan Pusat Data Universitas Ma Chung</b><br>
             Jika Anda memerlukan informasi lebih lanjut, silakan hubungi kontak di bawah ini.<br>
             E-mail   : uptsisteminformasi@machung.ac.id<br>
             Address  : Villa Puncak Tidar Blok N No. 01 Malang
-        </div>
-        ';
+        </div>";
 
         $mail->send();
 
@@ -127,8 +129,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         header("Location: ../views/verifikasi_otp.php");
         exit;
-    } catch (PDOException $e) {
-        $conn->rollBack(); // Rollback jika ada error database
+    } catch (mysqli_sql_exception $e) {
+        $conn->rollback(); // Rollback jika ada error database
         $_SESSION['error'] = "Gagal menyimpan data: " . $e->getMessage();
         header("Location: ../views/auth-register.php");
         exit;
