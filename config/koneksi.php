@@ -11,6 +11,7 @@ putenv("EMAIL_USERNAME=dirgafarrel2008@gmail.com");
 putenv("EMAIL_PASSWORD=ogby bfce flrc noku");
 
 date_default_timezone_set('Asia/Jakarta');
+// s
 // try {
 //     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // } catch (PDOException $e) {
