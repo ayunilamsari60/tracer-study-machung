@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>SI Trace Study Ma Chung</title>
+    <title>Tracerstudy Ma Chung</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <p>© SI Trace Study <script>
+                        <p>© SI Tracer Study <script>
                                 document.write(new Date().getFullYear())
                             </script>, Crafted with <i class="mdi mdi-heart text-danger"></i> by Ma Chung</p>
                     </div>
@@ -93,9 +93,6 @@
     <script src="assets/js/app.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $(".select2").select2();
-        });
         function updateNamaMahasiswa() {
             var tahun = document.getElementById("tahun_lulus").value;
             var namaSelect = document.getElementById("nama");
