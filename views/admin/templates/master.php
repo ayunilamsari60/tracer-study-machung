@@ -1,6 +1,8 @@
 <!-- layout.php -->
 <?php
 $title = isset($title) ? $title . " - Tracerstudy Ma Chung" : "Tracerstudy Ma Chung";
+$custom_css = isset($custom_css) ? $custom_css : ""; // Default kosong jika tidak ada
+$custom_js = isset($custom_js) ? $custom_js : ""; // Default kosong jika tidak ada
 ?>
 
 <!DOCTYPE html>
@@ -21,16 +23,18 @@ $title = isset($title) ? $title . " - Tracerstudy Ma Chung" : "Tracerstudy Ma Ch
 
     <!-- App Css-->
     <link href="../assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS dari halaman -->
+    <?php echo $custom_css; ?>
 </head>
 
 <body data-sidebar="dark">
     <div id="layout-wrapper">
 
         <!-- Header -->
-        <?php include 'components/header.php'; ?>
+        <?php include 'header.php'; ?>
 
         <!-- Sidebar -->
-        <?php include 'components/sidebar.php'; ?>
+        <?php include 'sidebar.php'; ?>
 
         <!-- Bagian Konten Dinamis -->
         <div class="main-content">
@@ -42,7 +46,7 @@ $title = isset($title) ? $title . " - Tracerstudy Ma Chung" : "Tracerstudy Ma Ch
             </div>
 
             <!-- Footer -->
-            <?php include 'components/footer.php'; ?>
+            <?php include 'footer.php'; ?>
         </div>
     </div>
     <div class="rightbar-overlay"></div>
@@ -56,6 +60,8 @@ $title = isset($title) ? $title . " - Tracerstudy Ma Chung" : "Tracerstudy Ma Ch
     <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
 
     <script src="../assets/js/app.js"></script>
+    <!-- Custom JS dari halaman -->
+    <?php echo $custom_js; ?>
 </body>
 
 </html>

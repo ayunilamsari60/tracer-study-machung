@@ -18,5 +18,5 @@ ob_start(); // Mulai output buffering
 
 <?php
 $content = ob_get_clean(); // Simpan konten yang sudah dibuat
-include 'master.php'; // Gunakan template utama
+include 'templates/master.php'; // Gunakan template utama
 ?>

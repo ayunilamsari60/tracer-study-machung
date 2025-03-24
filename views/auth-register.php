@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Tracerstudy Ma Chung</title>
+    <title>SI Trace Study Ma Chung</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -15,41 +15,7 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" />
     <link href="assets/css/app.min.css" rel="stylesheet" />
     <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" />
-<<<<<<< HEAD
-<<<<<<< HEAD:views/auth-register.html
-<<<<<<< HEAD
-    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
-    <script>
-        function updateNamaMahasiswa() {
-            var tahun = document.getElementById("tahun_lulus").value;
-            var namaSelect = document.getElementById("nama");
-
-            // Hapus semua opsi sebelum menambahkan data baru
-            namaSelect.innerHTML = '<option value="">Loading...</option>';
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "proses.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    namaSelect.innerHTML = xhr.responseText; // Isi langsung dengan opsi HTML
-                } else {
-                    namaSelect.innerHTML = '<option value="">Tidak Ada data</option>';
-                }
-            };
-            xhr.send("tahun_lulus=" + tahun);
-        }
-    </script>
-=======
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-
->>>>>>> 210cdf7 (ganti css)
-=======
-    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
->>>>>>> ff02338 (tambahan backend):views/auth-register.php
-=======
-    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
->>>>>>> c80a3cca90979a9b3688e25e0f450bf214230287
 </head>
 
 <body>
@@ -110,11 +76,7 @@
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-<<<<<<< HEAD
                         <p>© SI Trace Study <script>
-=======
-                        <p>© SI Tracer Study <script>
->>>>>>> c80a3cca90979a9b3688e25e0f450bf214230287
                                 document.write(new Date().getFullYear())
                             </script>, Crafted with <i class="mdi mdi-heart text-danger"></i> by Ma Chung</p>
                     </div>
@@ -131,7 +93,6 @@
     <script src="assets/js/app.js"></script>
 
     <script>
-<<<<<<< HEAD
         $(document).ready(function() {
             $(".select2").select2();
         });
@@ -142,72 +103,6 @@
             // Hapus semua opsi sebelum menambahkan data baru
             namaSelect.innerHTML = '<option value="">Loading...</option>';
 
-<<<<<<< HEAD:views/auth-register.html
-<<<<<<< HEAD
-        // $("#btn-daftar").click(function () {
-        //     let success = Math.random() > 0.5;
-        //     if (success) {
-        //         Swal.fire({
-        //             title: 'Processing...',
-        //             text: 'Please wait a moment',
-        //             allowOutsideClick: false,
-        //             didOpen: () => Swal.showLoading()
-        //         });
-        //         setTimeout(() => window.location.href = "auth-two-step-verification.html", 2000);
-        //     } else {
-        //         Swal.fire({ title: 'Cancelled', text: 'Your imaginary file is safe :)', icon: 'error' });
-        //     }
-        // });
-=======
-            namaMahasiswaSelect.html('<option value="">Loading...</option>');
-
-            fetch("ts_get_nama_mahasiswa.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `tahun=${selectedTahun}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                namaMahasiswaSelect.html('<option value="">Pilih Nama</option>');
-                if (data.status === 200 && Array.isArray(data.data)) {
-                    data.data.forEach(nama => {
-                        namaMahasiswaSelect.append(new Option(nama, nama));
-                    });
-=======
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "../backend/ts_get_nama_mahasiswa.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    namaSelect.innerHTML = xhr.responseText; // Isi langsung dengan opsi HTML
->>>>>>> ff02338 (tambahan backend):views/auth-register.php
-                } else {
-                    namaSelect.innerHTML = '<option value="">Tidak Ada data</option>';
-                }
-            };
-            xhr.send("tahun_lulus=" + tahun);
-        }
-
-        document.getElementById("registerForm").addEventListener("submit", function(event) {
-            Swal.fire({
-                title: 'Proses...',
-                text: 'Mohon menunggu sebentar',
-                allowOutsideClick: false,
-                didOpen: () => Swal.showLoading()
-            });
-        });
-<<<<<<< HEAD:views/auth-register.html
-
->>>>>>> 6449889 (ubah html dan css)
-=======
-=======
-        function updateNamaMahasiswa() {
-            var tahun = document.getElementById("tahun_lulus").value;
-            var namaSelect = document.getElementById("nama");
-
-            // Hapus semua opsi sebelum menambahkan data baru
-            namaSelect.innerHTML = '<option value="">Loading...</option>';
-
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "../backend/ts_get_nama_mahasiswa.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -229,7 +124,6 @@
                 didOpen: () => Swal.showLoading()
             });
         });
->>>>>>> c80a3cca90979a9b3688e25e0f450bf214230287
         <?php if (isset($_SESSION['error'])) { ?>
             Swal.fire({
                 title: 'Gagal!',
@@ -238,10 +132,6 @@
             });
         <?php unset($_SESSION['error']);
         } ?>
-<<<<<<< HEAD
->>>>>>> ff02338 (tambahan backend):views/auth-register.php
-=======
->>>>>>> c80a3cca90979a9b3688e25e0f450bf214230287
     </script>
 </body>
 
