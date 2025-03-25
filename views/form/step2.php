@@ -1,14 +1,20 @@
 <h3>Step 2: Detail Status</h3>
 <section>
+    <!-- Pekerjaan Content Start -->
     <div id="bekerja-content" class="step-2-content" style="display: none">
         <label>Pekerjaan apa yang Anda lakukan?</label>
         <input type="text" class="form-control" name="pekerjaan"
             placeholder="Masukkan pekerjaan Anda" />
     </div>
+    <!-- Pekerjaan Content End -->
+
+    <!-- Wiraswasta Content Start -->
     <div id="wiraswasta-content" class="step-2-content" style="display: none">
         <label>Apa jenis usaha yang Anda jalankan?</label>
         <input type="text" class="form-control" name="usaha" placeholder="Masukkan jenis usaha" />
     </div>
+    <!-- Wiraswasta Content End -->
+
     <!-- Pendidikan Content Start -->
     <div id="pendidikan-content" class="step-2-content" style="display: none">
         <div class="mb-3">
@@ -88,13 +94,18 @@
     </div>
     <!-- Pendidikan Content End -->
 
+    <!-- Mencari Kerja Content Start -->
     <div id="mencari-kerja-content" class="step-2-content" style="display: none">
         <label>Bagaimana strategi Anda dalam mencari pekerjaan?</label>
         <input type="text" class="form-control" name="strategi_mencari"
             placeholder="Masukkan strategi Anda" />
     </div>
+    <!-- Mencari Kerja Content End -->
+     
+    <!-- Tidak Bekerja Content Start -->
     <div id="tidak-bekerja-content" class="step-2-content" style="display: none">
         <label>Mengapa Anda belum memungkinkan untuk bekerja?</label>
         <input type="text" class="form-control" name="alasan" placeholder="Jelaskan alasan Anda" />
     </div>
+    <!-- Tidak Bekerja Content End -->
 </section>
