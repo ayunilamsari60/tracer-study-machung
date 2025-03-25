@@ -1,27 +1,41 @@
+<?php
+// List kompetensi
+$kompetensi = [
+    ["f1761", "Etika", "f1762"],
+    ["f1763", "Keahlian Berdasarkan Bidang Ilmu", "f1764"],
+    ["f1765", "Bahasa Inggris", "f1766"],
+    ["1767","Penggunaan Teknologi Informasi", "f1768"],
+    ["f1769", "Komunikasi", "f1770"],
+    ["f1771", "Kerja sama tim", "f1772"],
+    ["f1773", "Pengembangan", "f1774"],
+];
+
+// List pertanyaan
+$pertanyaan = [
+    "f21" => "Perkuliahan",
+    "f22" => "Demonstrasi",
+    "f23" => "Partisipasi dalam proyek riset",
+    "f24" => "Magang",
+    "f25" => "Praktikum",
+    "f26" => "Kerja Lapangan",
+    "f27" => "Diskusi",
+];
+
+$opsi = [
+    1 => "Sangat Besar (1)",
+    2 => "Besar (2)",
+    3 => "Cukup Besar (3)",
+    4 => "Kurang Besar (4)",
+    5 => "Tidak Sama Sekali (5)"
+];
+?>
+
 <h3>Informasi Tambahan</h3>
 <section>
-    <div id="informasi-tambahan-content" class="step-3-content" style="display: none">
-        <div class="mb-3">
-            <label for="hobi" class="form-label">Hobi</label>
-            <input type="text" class="form-control" name="hobi" id="hobi"
-                placeholder="Masukkan hobi Anda">
-        </div>
-
-        <div class="mb-3">
-            <label for="cita_cita" class="form-label">Cita-Cita</label>
-            <input type="text" class="form-control" name="cita_cita" id="cita_cita"
-                placeholder="Masukkan cita-cita Anda">
-        </div>
-
-        <?php
-        $kompetensi = [
-            ["f1761", "Etika", "f1762"],
-            ["f1763", "Keahlian Berdasarkan Bidang Ilmu", "f1764"],
-            ["f1765", "Bahasa Inggris", "f1766"]
-        ];
-        ?>
-
-        <div class="mb-3">
+    <div id="kemampuan-content" class="step-3-content" style="display: none">
+        <!-- Kompetensi Content Start -->
+        <div class="mb-5">
+            <label for="label-content">Pada saat lulus, pada tingkat mana kompetensi di bawah ini anda : kuasai? (A) Pada saat ini, pada tingkat mana kompetensi di bawah ini diperlukan dalam pekerjaan? (B) *(Wajib diisi)</label>
             <table class="table table-bordered text-center">
                 <thead>
                     <tr>
@@ -67,28 +81,14 @@
                 </tbody>
             </table>
         </div>
+        <!-- Kompetensi Content End -->
+
+        <!-- Pertanyaan Content Start -->
         <div class="mb-3">
             <h3 for="" class="mb-3">Menurut anda seberapa besar penekanan pada metode pembelajaran dibawah ini dilaksanakan di program studi anda?
             </h3>
 
-            <?php
-            $pertanyaan = [
-                "f21" => "Perkuliahan",
-                "f22" => "Demonstrasi",
-                "f23" => "Partisipasi dalam proyek riset",
-                "f24" => "Magang",
-                "f25" => "Praktikum",
-                "f26" => "Kerja Lapangan"
-            ];
 
-            $opsi = [
-                1 => "Sangat Besar (1)",
-                2 => "Besar (2)",
-                3 => "Cukup Besar (3)",
-                4 => "Kurang Besar (4)",
-                5 => "Tidak Sama Sekali (5)"
-            ];
-            ?>
             <div class="container">
                 <div class="row g-3"> <!-- Tambahkan row dengan gap -->
                     <?php foreach ($pertanyaan as $key => $judul) : ?>
@@ -110,5 +110,6 @@
                                     Bekerja (1)
                                 </div> -->
         </div>
+        <!-- Pertanyaan Content End -->
     </div>
 </section>

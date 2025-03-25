@@ -1,16 +1,5 @@
 <?php
-$servername = "localhost"; // Ganti dengan server database Anda
-$username = "root"; // Ganti dengan username database
-$password = ""; // Ganti dengan password database jika ada
-$dbname = "tracer_study"; // Ganti dengan nama database Anda
-
-// Koneksi ke database
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+include '../config/koneksi.php';
 
 // Tangkap data dari form
 $status_kerja = $_POST['status_kerja'];
