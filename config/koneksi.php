@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
+$host = '10.50.3.54';
 $dbname = 'tracer_study';
-$username = 'root';
-$password = '';
+$username = 'ayu';
+$password = 'qwertyuiop12345678';
 
 // $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
