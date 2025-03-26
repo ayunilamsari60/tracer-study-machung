@@ -90,31 +90,14 @@
                     $("#job-form-wizard").submit();
                 },
             });
-
-            // // **Hapus tanda error saat user mengetik**
-            // $(document).on("input", ".step-2-content input", function() {
-            //     if ($(this).val().trim() !== "") {
-            //         $(this).removeClass("is-invalid");
-            //     }
-            // });
-
-            // // **Tampilkan input "Sumber Dana Lainnya" hanya jika opsi ke-7 dipilih**
-            // $("input[name='sumber_dana']").change(function() {
-            //     if ($("#sumber_dana7").is(":checked")) {
-            //         $("#sumber_dana_lainnya").show().focus();
-            //     } else {
-            //         $("#sumber_dana_lainnya").hide().val(""); // Sembunyikan dan reset nilai
-            //     }
-            // });
         });
     </script>
 
 
     <script>
         $(document).ready(function() {
-            $("input[name='sumber_dana']").on("change", function() {
+            $("input[name='F1201']").on("change", function() {
                 // console.log("Sumber dana berubah:", $(this).val()); // Debugging
-
                 if ($(this).val() === "7") {
                     $("#sumber_dana_lainnya").show().prop("required", true);
                 } else {
