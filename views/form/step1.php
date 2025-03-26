@@ -1,6 +1,6 @@
 <h3>Step 1: Status Anda</h3>
 <section>
-    <label class="mb-3 form-label">Jelaskan status anda saat ini?</label>
+    <label class="mb-3 form-label">Jelaskan status anda saat ini?<span class="text-danger"> *(Wajib diisi)</span></label>
     <div class="form-check mb-3">
         <input class="form-check-input" id="bekerja" type="radio" name="F8" value="1" />
         <label class="form-check-label" for="bekerja">Bekerja (1)</label>

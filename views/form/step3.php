@@ -35,58 +35,73 @@ $opsi = [
     <div id="kemampuan-content" class="step-3-content" style="display: none">
         <!-- Kompetensi Content Start -->
         <div class="mb-5">
-            <label for="label-content">Pada saat lulus, pada tingkat mana kompetensi di bawah ini anda : kuasai? (A) Pada saat ini, pada tingkat mana kompetensi di bawah ini diperlukan dalam pekerjaan? (B) *(Wajib diisi)</label>
-            <table class="table table-bordered text-center">
-                <thead>
-                    <tr>
-                        <th colspan="5">A</th>
-                        <th rowspan="3">Kompetensi</th>
-                        <th colspan="5">B</th>
-                    </tr>
-                    <tr>
-                        <th colspan="5">Sangat Rendah - Sangat Tinggi</th>
-                        <th colspan="5">Sangat Rendah - Sangat Tinggi</th>
-                    </tr>
-                    <tr>
-                        <?php for ($i = 1; $i <= 5; $i++) : ?>
-                            <th><?= $i ?></th>
-                        <?php endfor; ?>
-                        <?php for ($i = 1; $i <= 5; $i++) : ?>
-                            <th><?= $i ?></th>
-                        <?php endfor; ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($kompetensi as $item) : ?>
-                        <?php
-                        $kodeA = $item[0]; // Kode untuk kolom A
-                        $judul = $item[1]; // Nama Kompetensi
-                        $kodeB = $item[2]; // Kode untuk kolom B
-                        ?>
+            <label for="label-content">
+                Pada saat lulus, pada tingkat mana kompetensi di bawah ini anda kuasai? (A)  
+                Pada saat ini, pada tingkat mana kompetensi di bawah ini diperlukan dalam pekerjaan? (B) <span class="text-danger">*(Wajib diisi)</span>
+            </label>
+
+            <!-- Warning untuk mobile -->
+            <div class="alert alert-warning d-md-none" role="alert">
+                ⚠️ Geser ke samping untuk melihat seluruh tabel.
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
                         <tr>
-                            <!-- Kolom A -->
+                            <th colspan="5">A</th>
+                            <th rowspan="3">Kompetensi</th>
+                            <th colspan="5">B</th>
+                        </tr>
+                        <tr>
+                            <th colspan="5">Sangat Rendah - Sangat Tinggi</th>
+                            <th colspan="5">Sangat Rendah - Sangat Tinggi</th>
+                        </tr>
+                        <tr>
                             <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                <td><label><input type="radio" name="<?= $kodeA ?>" value="<?= $i ?>"> </label></td>
+                                <th><?= $i ?></th>
                             <?php endfor; ?>
-
-                            <!-- Kompetensi -->
-                            <td>(<?= $kodeA ?>) <?= $judul ?> (<?= $kodeB ?>)</td>
-
-                            <!-- Kolom B -->
                             <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                <td><label><input type="radio" name="<?= $kodeB ?>" value="<?= $i ?>"> </label></td>
+                                <th><?= $i ?></th>
                             <?php endfor; ?>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($kompetensi as $item) : ?>
+                            <?php
+                            $kodeA = $item[0]; // Kode untuk kolom A
+                            $judul = $item[1]; // Nama Kompetensi
+                            $kodeB = $item[2]; // Kode untuk kolom B
+                            ?>
+                            <tr>
+                                <!-- Kolom A -->
+                                <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                    <td><label><input type="radio" name="<?= $kodeA ?>" value="<?= $i ?>"> </label></td>
+                                <?php endfor; ?>
+
+                                <!-- Kompetensi -->
+                                <td>(<?= $kodeA ?>) <?= $judul ?> (<?= $kodeB ?>)</td>
+
+                                <!-- Kolom B -->
+                                <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                    <td><label><input type="radio" name="<?= $kodeB ?>" value="<?= $i ?>"> </label></td>
+                                <?php endfor; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+
         <!-- Kompetensi Content End -->
 
         <!-- Pertanyaan Content Start -->
         <div class="mb-3">
-            <h3 for="" class="mb-3">Menurut anda seberapa besar penekanan pada metode pembelajaran dibawah ini dilaksanakan di program studi anda?
-            </h3>
+        <label for="label-content">
+                Pada saat lulus, pada tingkat mana kompetensi di bawah ini anda kuasai? (A)  
+                Pada saat ini, pada tingkat mana kompetensi di bawah ini diperlukan dalam pekerjaan? (B) <span class="text-danger">*(Wajib diisi)</span>
+        </label>
 
 
             <div class="container">
