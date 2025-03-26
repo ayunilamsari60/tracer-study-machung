@@ -1,24 +1,24 @@
 <?php
 // List kompetensi
 $kompetensi = [
-    ["f1761", "Etika", "f1762"],
-    ["f1763", "Keahlian Berdasarkan Bidang Ilmu", "f1764"],
-    ["f1765", "Bahasa Inggris", "f1766"],
-    ["1767","Penggunaan Teknologi Informasi", "f1768"],
-    ["f1769", "Komunikasi", "f1770"],
-    ["f1771", "Kerja sama tim", "f1772"],
-    ["f1773", "Pengembangan", "f1774"],
+    ["F1761", "Etika", "F1762"],
+    ["F1763", "Keahlian Berdasarkan Bidang Ilmu", "F1764"],
+    ["F1765", "Bahasa Inggris", "F1766"],
+    ["F1767","Penggunaan Teknologi Informasi", "F1768"],
+    ["F1769", "Komunikasi", "F1770"],
+    ["F1771", "Kerja sama tim", "F1772"],
+    ["F1773", "Pengembangan", "F1774"],
 ];
 
 // List pertanyaan
 $pertanyaan = [
-    "f21" => "Perkuliahan",
-    "f22" => "Demonstrasi",
-    "f23" => "Partisipasi dalam proyek riset",
-    "f24" => "Magang",
-    "f25" => "Praktikum",
-    "f26" => "Kerja Lapangan",
-    "f27" => "Diskusi",
+    "F21" => "Perkuliahan",
+    "F22" => "Demonstrasi",
+    "F23" => "Partisipasi dalam proyek riset",
+    "F24" => "Magang",
+    "F25" => "Praktikum",
+    "F26" => "Kerja Lapangan",
+    "F27" => "Diskusi",
 ];
 
 $opsi = [
