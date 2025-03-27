@@ -8,6 +8,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $F8 = isset($_POST["F8"]) ? $_POST["F8"] : '';
     // Step 1 data End
 
+    // Step 2 data General start
+    $F1101 = ($_POST['f1101']) ?? '';
+    $F1102 = ($_POST['f1102']) ?? '';
+
+    if ($F1101 !== "7") {
+        $F1102 = '';
+    }
+    // Step 2 data General end
+
     // Step 2 data : Pendidikan Start
     $F18a = isset($_POST['F18a']) ? $_POST['F18a'] : '';
     $F18b = isset($_POST['F18b']) ? $_POST['F18b'] : '';
@@ -46,15 +55,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $f25 = isset($_POST['F25']) ? $_POST['F25'] : '';
     $f26 = isset($_POST['F26']) ? $_POST['F26'] : '';
     $f27 = isset($_POST['F27']) ? $_POST['F27'] : '';
-    
+
     // Step 3 data End
+
+    // Debugging hasil input
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
 
     // Query untuk menyimpan data
     $sql = "INSERT INTO data_table 
-            (F8, F18a, F18b, F18c, F18d, F1201, F1202, F1761, F1762, F1763, F1764, F1765, F1766, F1767, F1768, F1769, F1770, F1771, F1772, F1773, F1774, f21, f22, f23, f24, f25, f26, f27) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            (F8, F18a, F18b, F18c, F18d, F1101, F1102, F1201, F1202, F1761, F1762, F1763, F1764, F1765, F1766, F1767, F1768, F1769, F1770, F1771, F1772, F1773, F1774, f21, f22, f23, f24, f25, f26, f27) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssssssssssssssssssssss", $F8, $F18a, $F18b, $F18c, $F18d, $f1201, $f1202, $F1761, $F1762, $F1763, $F1764, $F1765, $F1766, $F1767, $F1768, $F1769, $F1770, $F1771, $F1772, $F1773, $F1774, $f21, $f22, $f23, $f24, $f25, $f26, $f27);
+    $stmt->bind_param("ssssssssssssssssssssssssssssss", $F8, $F18a, $F18b, $F18c, $F18d, $F1101, $F1102, $f1201, $f1202, $F1761, $F1762, $F1763, $F1764, $F1765, $F1766, $F1767, $F1768, $F1769, $F1770, $F1771, $F1772, $F1773, $F1774, $f21, $f22, $f23, $f24, $f25, $f26, $f27);
 
     if ($stmt->execute()) {
         echo "Data berhasil disimpan!";
