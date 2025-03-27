@@ -84,7 +84,7 @@
                 <input class="form-check-input" type="radio" name="f1101" value="7" id="instansi7">
                 <label class="form-check-label" for="instansi7">Lainnya, tuliskan</label>
             </div>
-            <div  class="mb-4 instansiLainnyaInput" style="display: none;">
+            <div class="mb-4 instansiLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f1102" placeholder="Tuliskan lainnya" />
             </div>
         </div>
@@ -403,8 +403,7 @@
     <div id="wiraswasta-content" class="step-2-content" style="display: none">
         <div class="mb-4">
             <label>Dalam berapa bulan Anda memulai wiraswasta?</label>
-            <input type="number" class="form-control" name="f502"
-                placeholder="Masukkan jumlah bulan" />
+            <input type="number" class="form-control" name="f502" placeholder="Masukkan jumlah bulan" />
         </div>
 
         <div class="mb-4">
@@ -444,13 +443,14 @@
                 <input class="form-check-input" type="radio" name="f1101" value="7" id="instansi7w">
                 <label class="form-check-label" for="instansi7w">Lainnya, tuliskan</label>
             </div>
-            <div  class="mb-4 instansiLainnyaInput" style="display: none;">
+            <div class="mb-4 instansiLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f1102" placeholder="Tuliskan lainnya" />
             </div>
         </div>
 
         <div class="mb-4">
-            <label for="posisi_wiraswasta" class="form-label">Bila berwiraswasta, apa posisi/jabatan Anda saat ini?</label>
+            <label for="posisi_wiraswasta" class="form-label">Bila berwiraswasta, apa posisi/jabatan Anda saat
+                ini?</label>
             <select id="posisi_wiraswasta" class="form-select" name="f5c">
                 <option selected disabled>Silahkan Pilih...</option>
                 <option value="1">Founder</option>
@@ -473,28 +473,28 @@
         <div class="mb-4">
             <label class="form-label">Seberapa erat hubungan bidang studi dengan pekerjaan Anda?</label>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="1" id="hubungan1">
-                <label class="form-check-label" for="hubungan1">Sangat erat</label>
+                <input class="form-check-input" type="radio" name="f14" value="1" id="hubungan1w">
+                <label class="form-check-label" for="hubungan1w">Sangat erat</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="2" id="hubungan2">
-                <label class="form-check-label" for="hubungan2">Erat</label>
+                <input class="form-check-input" type="radio" name="f14" value="2" id="hubungan2w">
+                <label class="form-check-label" for="hubungan2w">Erat</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="3" id="hubungan3">
-                <label class="form-check-label" for="hubungan3">Cukup Erat</label>
+                <input class="form-check-input" type="radio" name="f14" value="3" id="hubungan3w">
+                <label class="form-check-label" for="hubungan3w">Cukup Erat</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="4" id="hubungan4">
-                <label class="form-check-label" for="hubungan4">Kurang Erat</label>
+                <input class="form-check-input" type="radio" name="f14" value="4" id="hubungan4w">
+                <label class="form-check-label" for="hubungan4w">Kurang Erat</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="5" id="hubungan5">
-                <label class="form-check-label" for="hubungan5">Tidak Sama Sekali</label>
+                <input class="form-check-input" type="radio" name="f14" value="5" id="hubungan5w">
+                <label class="form-check-label" for="hubungan5w">Tidak Sama Sekali</label>
             </div>
         </div>
 
@@ -737,7 +737,7 @@
                 <label class="form-check-label" for="sumber_dana7">Lainnya, tuliskan</label>
             </div>
 
-            <div  class="mb-4 danaLainnyaInput" style="display: none;">
+            <div class="mb-4 danaLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f1202" placeholder="Tuliskan lainnya" />
             </div>
         </div>

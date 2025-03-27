@@ -17,6 +17,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Step 2 data General end
 
+    // Step 2 data : Bekerja Start
+    $f502 = isset($_POST['f502']) ? $_POST['f502'] : '';
+    $f505 = isset($_POST['f505']) ? $_POST['f505'] : '';
+    $f5a1 = isset($_POST['f5a1']) ? $_POST['f5a1'] : '';
+    $f5a2 = isset($_POST['f5a2']) ? $_POST['f5a2'] : '';
+    $f5b = isset($_POST['f5b']) ? $_POST['f5b'] : '';
+    $f5d = isset($_POST['f5d']) ? $_POST['f5d'] : '';
+    $f14 = isset($_POST['f14']) ? $_POST['f14'] : '';
+    $f15 = isset($_POST['f15']) ? $_POST['f15'] : '';
+
+    $f301 = isset($_POST['f301']) ? $_POST['f301'] : '';
+    $f302 = isset($_POST['f302']) ? $_POST['f302'] : '';
+    $f303 = isset($_POST['f303']) ? $_POST['f303'] : '';
+    
+    $f401 = isset($_POST['f401']) ? $_POST['f401'] : '';
+    $f402 = isset($_POST['f402']) ? $_POST['f402'] : '';
+    $f403 = isset($_POST['f403']) ? $_POST['f403'] : '';
+    $f404 = isset($_POST['f404']) ? $_POST['f404'] : '';
+    $f405 = isset($_POST['f405']) ? $_POST['f405'] : '';
+    $f406 = isset($_POST['f406']) ? $_POST['f406'] : '';
+    $f407 = isset($_POST['f407']) ? $_POST['f407'] : '';
+    $f408 = isset($_POST['f408']) ? $_POST['f408'] : '';
+    $f409 = isset($_POST['f409']) ? $_POST['f409'] : '';
+    $f4010 = isset($_POST['f4010']) ? $_POST['f4010'] : '';
+    $f4011 = isset($_POST['f4011']) ? $_POST['f4011'] : '';
+    $f4012 = isset($_POST['f4012']) ? $_POST['f4012'] : '';
+    $f4013 = isset($_POST['f4013']) ? $_POST['f4013'] : '';
+    $f4014 = isset($_POST['f4014']) ? $_POST['f4014'] : '';
+    $f4015 = isset($_POST['f4015']) ? $_POST['f4015'] : '';
+
+    // Step 2 data : Bekerja End
+
     // Step 2 data : Pendidikan Start
     $F18a = isset($_POST['F18a']) ? $_POST['F18a'] : '';
     $F18b = isset($_POST['F18b']) ? $_POST['F18b'] : '';
@@ -59,24 +91,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Step 3 data End
 
     // Debugging hasil input
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "</pre>";
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
 
     // Query untuk menyimpan data
-    $sql = "INSERT INTO data_table 
-            (F8, F18a, F18b, F18c, F18d, F1101, F1102, F1201, F1202, F1761, F1762, F1763, F1764, F1765, F1766, F1767, F1768, F1769, F1770, F1771, F1772, F1773, F1774, f21, f22, f23, f24, f25, f26, f27) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssssssssssssssssssssssss", $F8, $F18a, $F18b, $F18c, $F18d, $F1101, $F1102, $f1201, $f1202, $F1761, $F1762, $F1763, $F1764, $F1765, $F1766, $F1767, $F1768, $F1769, $F1770, $F1771, $F1772, $F1773, $F1774, $f21, $f22, $f23, $f24, $f25, $f26, $f27);
+    // $sql = "INSERT INTO data_table 
+    //         (F8, F18a, F18b, F18c, F18d, F1101, F1102, F1201, F1202, F1761, F1762, F1763, F1764, F1765, F1766, F1767, F1768, F1769, F1770, F1771, F1772, F1773, F1774, f21, f22, f23, f24, f25, f26, f27) 
+    //         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // $stmt = $conn->prepare($sql);
+    // $stmt->bind_param("ssssssssssssssssssssssssssssss", $F8, $F18a, $F18b, $F18c, $F18d, $F1101, $F1102, $f1201, $f1202, $F1761, $F1762, $F1763, $F1764, $F1765, $F1766, $F1767, $F1768, $F1769, $F1770, $F1771, $F1772, $F1773, $F1774, $f21, $f22, $f23, $f24, $f25, $f26, $f27);
 
-    if ($stmt->execute()) {
-        echo "Data berhasil disimpan!";
-        header("Location: halaman_tujuan.php"); // Ganti dengan halaman yang sesuai
-        exit;
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+    // if ($stmt->execute()) {
+    //     echo "Data berhasil disimpan!";
+    //     header("Location: halaman_tujuan.php"); // Ganti dengan halaman yang sesuai
+    //     exit;
+    // } else {
+    //     echo "Error: " . $stmt->error;
+    // }
 
     $stmt->close();
     $conn->close();

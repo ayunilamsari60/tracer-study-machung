@@ -17,7 +17,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Form Mahasiswa - Pekerjaan</h4>
                 <form id="job-form-wizard" action="submit1.php" method="POST">
-                    
+
                     <?php include 'form/step1.php'; ?>
 
                     <?php include 'form/step2.php'; ?>
@@ -33,13 +33,13 @@
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#job-form-wizard").steps({
                 headerTag: "h3",
                 bodyTag: "section",
                 transitionEffect: "slide",
                 autoFocus: true,
-                onStepChanging: function(event, currentIndex, newIndex) {
+                onStepChanging: function (event, currentIndex, newIndex) {
                     // **Validasi Step 1 sebelum lanjut ke Step 2**
                     if (currentIndex === 0 && newIndex > currentIndex) {
                         let statusKerja = $("input[name='F8']:checked").val();
@@ -67,26 +67,43 @@
                         let isValid = true;
 
                         // Cek semua input yang terlihat di Step 2
-                        $(".step-2-content input:visible").each(function() {
-                            if ($(this).is(":visible") && $(this).val().trim() === "") {
-                                isValid = false;
-                                $(this).addClass("is-invalid"); // Tambahkan class error
-                            } else {
-                                $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
-                            }
-                        });
+                        // $(".step-2-content input:visible").each(function () {
+                        //     if ($(this).is(":visible") && $(this).val().trim() === "") {
+                        //         isValid = false;
+                        //         $(this).addClass("is-invalid"); // Tambahkan class error
+                        //     } else {
+                        //         $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
+                        //     }
+                        // });
 
-                        if (!isValid) {
-                            alert("Mohon isi semua data di Step 2 sebelum melanjutkan!");
-                            return false;
-                        }
+                        // if (!isValid) {
+                        //     alert("Mohon isi semua data di Step 2 sebelum melanjutkan!");
+                        //     return false;
+                        // }
 
                         $(".step-3-content").show(); // Tampilkan Step 3 jika valid
                     }
 
                     return true;
                 },
-                onFinished: function(event, currentIndex) {
+                onFinished: function (event, currentIndex) {
+                    // let isValid = true;
+
+                    // // Cek semua input di form sebelum submit
+                    // $("#job-form-wizard input:visible").each(function () {
+                    //     if ($(this).is(":visible") && $(this).val().trim() === "") {
+                    //         isValid = false;
+                    //         $(this).addClass("is-invalid"); // Tambahkan class error
+                    //     } else {
+                    //         $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
+                    //     }
+                    // });
+
+                    // if (!isValid) {
+                    //     alert("Mohon lengkapi semua data sebelum menyelesaikan!");
+                    //     return false;
+                    // }
+
                     $("#job-form-wizard").submit();
                 },
             });
@@ -96,7 +113,7 @@
 
     <script>
         // jquery untuk menampilkan inputan lainnya
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("input[name='f1101']").on("change", function () {
                 let selectedValue = $(this).val();
 
@@ -110,8 +127,13 @@
                     $(".instansiLainnyaInput").hide();
                 }
             });
+            $("input[name='f1101']").on("input", function () {
+                let selectedValue = $(this).val();
+                console.log("Real-time input: " + selectedValue);
+            });
 
-            $(document).ready(function() {
+
+            $(document).ready(function () {
                 $("input[name='F1201']").on("change", function () {
                     let selectedValue = $(this).val();
                     let lainnyaInput = $(this).closest('.mb-4').find(".danaLainnyaInput");
