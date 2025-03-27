@@ -106,7 +106,7 @@
                 }
             });
 
-            // Handle input lainnya untuk checkbox "cariLainnyaInput"
+            // Handle input lainnya "cariLainnyaInput"
             $("input[name='f415']").on("change", function () {
                 let container = $(".cariLainnyaInput"); // Ambil div dengan class cariLainnyaInput
                 if ($(this).is(":checked")) {
@@ -116,7 +116,7 @@
                 }
             });
 
-            // Handle input lainnya untuk checkbox "alasanLainnyaInput"
+            // Handle input lainnya "alasanLainnyaInput"
             $("input[name='f1613']").on("change", function () {
                 let container = $(".alasanLainnyaInput"); // Seleksi langsung elemen dengan class alasanLainnyaInput
                 if ($(this).is(":checked")) {
