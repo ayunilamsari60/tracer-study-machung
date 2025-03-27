@@ -85,7 +85,7 @@
                 <label class="form-check-label" for="instansi7">Lainnya, tuliskan</label>
             </div>
             <div  class="mb-4 instansiLainnyaInput" style="display: none;">
-                <input type="text" class="form-control" name="f1101" placeholder="Tuliskan lainnya" />
+                <input type="text" class="form-control" name="f1102" placeholder="Tuliskan lainnya" />
             </div>
         </div>
 
@@ -411,41 +411,41 @@
             <label class="form-label">Apa jenis perusahaan/instansi/institusi tempat Anda bekerja sekarang?</label>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1101" value="1" id="instansi1">
-                <label class="form-check-label" for="instansi1">Instansi Pemerintahan</label>
+                <input class="form-check-input" type="radio" name="f1101" value="1" id="instansi1w">
+                <label class="form-check-label" for="instansi1w">Instansi Pemerintahan</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1101" value="2" id="instansi2">
-                <label class="form-check-label" for="instansi2">Organisasi non-profit/LSM</label>
+                <input class="form-check-input" type="radio" name="f1101" value="2" id="instansi2w">
+                <label class="form-check-label" for="instansi2w">Organisasi non-profit/LSM</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1101" value="3" id="instansi3">
-                <label class="form-check-label" for="instansi3">Perusahaan Swasta</label>
+                <input class="form-check-input" type="radio" name="f1101" value="3" id="instansi3w">
+                <label class="form-check-label" for="instansi3w">Perusahaan Swasta</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1101" value="4" id="instansi4">
-                <label class="form-check-label" for="instansi4">Wiraswasta/Perusahaan sendiri</label>
+                <input class="form-check-input" type="radio" name="f1101" value="4" id="instansi4w">
+                <label class="form-check-label" for="instansi4w">Wiraswasta/Perusahaan sendiri</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1101" value="5" id="instansi5">
-                <label class="form-check-label" for="instansi5">BUMN/BUMD</label>
+                <input class="form-check-input" type="radio" name="f1101" value="5" id="instansi5w">
+                <label class="form-check-label" for="instansi5w">BUMN/BUMD</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1101" value="6" id="instansi6">
-                <label class="form-check-label" for="instansi6">Institusi/Organisasi Multilateral</label>
+                <input class="form-check-input" type="radio" name="f1101" value="6" id="instansi6w">
+                <label class="form-check-label" for="instansi6w">Institusi/Organisasi Multilateral</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1101" value="7" id="instansi7">
-                <label class="form-check-label" for="instansi7">Lainnya, tuliskan</label>
+                <input class="form-check-input" type="radio" name="f1101" value="7" id="instansi7w">
+                <label class="form-check-label" for="instansi7w">Lainnya, tuliskan</label>
             </div>
             <div  class="mb-4 instansiLainnyaInput" style="display: none;">
-                <input type="text" class="form-control" name="f1101" placeholder="Tuliskan lainnya" />
+                <input type="text" class="form-control" name="f1102" placeholder="Tuliskan lainnya" />
             </div>
         </div>
     </div>
