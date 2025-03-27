@@ -106,19 +106,23 @@
                 }
             });
 
-            // Menangani Checkbox
-            $("input[name='f4015']").on("change", function() {
+            // Handle input lainnya untuk checkbox "cariLainnyaInput"
+            $("input[name='f415']").on("change", function () {
+                let container = $(".cariLainnyaInput"); // Ambil div dengan class cariLainnyaInput
                 if ($(this).is(":checked")) {
-                    $("#cariLainnyaInput").show().prop("required", true);
+                    container.show().find("input").prop("required", true);
                 } else {
-                    $("#cariLainnyaInput").hide().val("").prop("required", false);
+                    container.hide().find("input").val("").prop("required", false);
                 }
             });
-            $("input[name='f1613']").on("change", function() {
+
+            // Handle input lainnya untuk checkbox "alasanLainnyaInput"
+            $("input[name='f1613']").on("change", function () {
+                let container = $(".alasanLainnyaInput"); // Seleksi langsung elemen dengan class alasanLainnyaInput
                 if ($(this).is(":checked")) {
-                    $("#alassanf1613").show().prop("required", true);
+                    container.show().find("input").prop("required", true);
                 } else {
-                    $("#alassanf1613").hide().val("").prop("required", false);
+                    container.hide().find("input").val("").prop("required", false);
                 }
             });
         });

@@ -232,38 +232,38 @@
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f4010" value="1" id="cari10">
+                <input class="form-check-input" type="checkbox" name="f410" value="1" id="cari10">
                 <label class="form-check-label" for="cari10">Membangun jejaring (network) sejak masih kuliah</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f4011" value="1" id="cari11">
+                <input class="form-check-input" type="checkbox" name="f411" value="1" id="cari11">
                 <label class="form-check-label" for="cari11">Melalui relasi (misalnya dosen, orang tua, saudara, teman,
                     dll.)</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f4012" value="1" id="cari12">
+                <input class="form-check-input" type="checkbox" name="f412" value="1" id="cari12">
                 <label class="form-check-label" for="cari12">Membangun bisnis sendiri</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f4013" value="1" id="cari13">
+                <input class="form-check-input" type="checkbox" name="f413" value="1" id="cari13">
                 <label class="form-check-label" for="cari13">Melalui penempatan kerja atau magang</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f4014" value="1" id="cari14">
+                <input class="form-check-input" type="checkbox" name="f414" value="1" id="cari14">
                 <label class="form-check-label" for="cari14">Bekerja di tempat yang sama dengan tempat kerja semasa
                     kuliah</label>
             </div>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
-                <input class="form-check-input" type="checkbox" name="f4015" value="1" id="cari15">
+                <input class="form-check-input" type="checkbox" name="f415" value="1" id="cari15">
                 <label class="form-check-label" for="cari15">Lainnya, tuliskan</label>
             </div>
-            <div class="mb-4" id="cariLainnyaInput" style="display: none;">
-                <input type="text" class="form-control" name="f4015" placeholder="Tuliskan lainnya" />
+            <div class="mb-4 cariLainnyaInput" style="display: none;">
+                <input type="text" class="form-control" name="f416" placeholder="Tuliskan lainnya" />
             </div>
         </div>
 
@@ -392,8 +392,8 @@
                 <input class="form-check-input" type="checkbox" name="f1613" value="1" id="alasan13">
                 <label class="form-check-label" for="alasan13">Lainnya, tuliskan</label>
             </div>
-            <div class="mb-4" id="alassanf1613" style="display: none;">
-                <input type="text" class="form-control" name="f1613" placeholder="Tuliskan lainnya" />
+            <div class="mb-4 alasanLainnyaInput" style="display: none;">
+                <input type="text" class="form-control" name="f1614" placeholder="Tuliskan lainnya" />
             </div>
         </div>
     </div>
