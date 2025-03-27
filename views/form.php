@@ -67,19 +67,19 @@
                         let isValid = true;
 
                         // Cek semua input yang terlihat di Step 2
-                        // $(".step-2-content input:visible").each(function() {
-                        //     if ($(this).is(":visible") && $(this).val().trim() === "") {
-                        //         isValid = false;
-                        //         $(this).addClass("is-invalid"); // Tambahkan class error
-                        //     } else {
-                        //         $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
-                        //     }
-                        // });
+                        $(".step-2-content input:visible").each(function() {
+                            if ($(this).is(":visible") && $(this).val().trim() === "") {
+                                isValid = false;
+                                $(this).addClass("is-invalid"); // Tambahkan class error
+                            } else {
+                                $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
+                            }
+                        });
 
-                        // if (!isValid) {
-                        //     alert("Mohon isi semua data di Step 2 sebelum melanjutkan!");
-                        //     return false;
-                        // }
+                        if (!isValid) {
+                            alert("Mohon isi semua data di Step 2 sebelum melanjutkan!");
+                            return false;
+                        }
 
                         $(".step-3-content").show(); // Tampilkan Step 3 jika valid
                     }
@@ -95,13 +95,37 @@
 
 
     <script>
+        // jquery untuk menampilkan inputan lainnya
         $(document).ready(function() {
+            // Menagani Radio
             $("input[name='F1201']").on("change", function() {
-                // console.log("Sumber dana berubah:", $(this).val()); // Debugging
                 if ($(this).val() === "7") {
                     $("#sumber_dana_lainnya").show().prop("required", true);
                 } else {
                     $("#sumber_dana_lainnya").hide().val("").prop("required", false);
+                }
+            });
+            $("input[name='f1101']").on("change", function() {
+                if ($(this).val() === "7") {
+                    $("#instansiLainnyaInput").show().prop("required", true);
+                } else {
+                    $("#instansiLainnyaInput").hide().val("").prop("required", false);
+                }
+            });
+
+            // Menangani Checkbox
+            $("input[name='f4015']").on("change", function() {
+                if ($(this).is(":checked")) {
+                    $("#cariLainnyaInput").show().prop("required", true);
+                } else {
+                    $("#cariLainnyaInput").hide().val("").prop("required", false);
+                }
+            });
+            $("input[name='f1613']").on("change", function() {
+                if ($(this).is(":checked")) {
+                    $("#alassanf1613").show().prop("required", true);
+                } else {
+                    $("#alassanf1613").hide().val("").prop("required", false);
                 }
             });
         });
