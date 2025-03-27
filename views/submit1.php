@@ -72,6 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Data berhasil disimpan!";
+        header("Location: halaman_tujuan.php"); // Ganti dengan halaman yang sesuai
+        exit;
     } else {
         echo "Error: " . $stmt->error;
     }

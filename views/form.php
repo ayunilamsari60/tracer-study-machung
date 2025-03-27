@@ -97,12 +97,17 @@
     <script>
         // jquery untuk menampilkan inputan lainnya
         $(document).ready(function() {
-            $("input[name='f1101']").on("change", function() {
-                let container = $(this).closest('.mb-4').find(".instansiLainnyaInput");
-                if ($(this).val() === "7") {
-                    container.show().find("input").prop("required", true);
+            $("input[name='f1101']").on("change", function () {
+                let selectedValue = $(this).val();
+
+                // Menonaktifkan semua input instansi lainnya
+                $(".instansiLainnyaInput input").prop("disabled", true).val("");
+
+                if (selectedValue === "7") {
+                    let container = $(this).closest('.mb-4').find(".instansiLainnyaInput");
+                    container.show().find("input").prop("disabled", false).prop("required", true);
                 } else {
-                    container.hide().find("input").val("").prop("required", false);
+                    $(".instansiLainnyaInput").hide();
                 }
             });
 
