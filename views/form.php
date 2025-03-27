@@ -111,6 +111,25 @@
                 }
             });
 
+            $(document).ready(function() {
+                $("input[name='F1201']").on("change", function () {
+                    let selectedValue = $(this).val();
+                    let lainnyaInput = $(this).closest('.mb-4').find(".danaLainnyaInput");
+
+                    // Menonaktifkan dan menyembunyikan input "Lainnya"
+                    $(".danaLainnyaInput").prop("disabled", true).val("").hide();
+
+                    // Jika "Lainnya" dipilih, tampilkan input dan aktifkan
+                    if (selectedValue === "7") {
+                        let container = $(this).closest('.mb-4').find(".danaLainnyaInput");
+                        container.show().find("input").prop("disabled", false).prop("required", true);
+                    } else {
+                        $(".instansiLainnyaInput").hide();
+                    }
+                });
+            });
+
+
             // Handle input lainnya "cariLainnyaInput"
             $("input[name='f415']").on("change", function () {
                 let container = $(".cariLainnyaInput"); // Ambil div dengan class cariLainnyaInput

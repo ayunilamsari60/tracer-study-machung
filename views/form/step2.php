@@ -672,70 +672,73 @@
 
     <!-- Pendidikan Content Start -->
     <div id="pendidikan-content" class="step-2-content" style="display: none">
-        <div class="mb-3">
-            <label for="sumber_biaya" class="form-label">Sumber Biaya (f18a)</label>
+        <div class="mb-4">
+            <label for="sumber_biaya" class="form-label">Sumber Biaya</label>
             <select id="sumber_biaya" class="form-select" name="F18a">
                 <option selected disabled>Silahkan Pilih...</option>
-                <option value="1">Biaya Sendiri (1)</option>
-                <option value="2">Beasiswa (2)</option>
+                <option value="1">Biaya Sendiri</option>
+                <option value="2">Beasiswa</option>
             </select>
         </div>
-        <div class="mb-3">
-            <label for="perguruan_tinggi">Perguruan Tinggi (f18b)</label>
+
+        <div class="mb-4">
+            <label for="perguruan_tinggi">Perguruan Tinggi</label>
             <input type="text" class="form-control" name="F18b" id="perguruan_tinggi"
                 placeholder="Masukkan nama perguruan tinggi" />
         </div>
-        <div class="mb-3">
-            <label for="program_studi">Program Studi (f18c)</label>
+
+        <div class="mb-4">
+            <label for="program_studi">Program Studi</label>
             <input type="text" class="form-control" name="F18c" id="program_studi"
                 placeholder="Masukkan nama program studi" />
         </div>
-        <div class="mb-3">
-            <label for="tanggal_masuk">Tanggal Masuk (f18d)</label>
+
+        <div class="mb-4">
+            <label for="tanggal_masuk">Tanggal Masuk</label>
             <input type="date" class="form-control" name="F18d" id="tanggal_masuk" />
         </div>
-        <div class="mb-3">
-            <label class="mb-3">Sebutkan sumber dana dalam pembiayaan kuliah?
-                (f1201)</label>
+
+        <div class="mb-4">
+            <label>Sebutkan sumber dana dalam pembiayaan kuliah?</label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="F1201" id="sumber_dana1" value="1" />
-                <label class="form-check-label" for="sumber_dana1">Biaya Sendiri (1)</label>
+                <label class="form-check-label" for="sumber_dana1">Biaya Sendiri</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="F1201" id="sumber_dana2" value="2" />
-                <label class="form-check-label" for="sumber_dana2">Beasiswa ADIK (2)</label>
+                <label class="form-check-label" for="sumber_dana2">Beasiswa ADIK</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="F1201" id="sumber_dana3" value="3" />
-                <label class="form-check-label" for="sumber_dana3">Beasiswa BIDIKMISI (3)</label>
+                <label class="form-check-label" for="sumber_dana3">Beasiswa BIDIKMISI</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="F1201" id="sumber_dana4" value="4" />
-                <label class="form-check-label" for="sumber_dana4">Beasiswa PPA (4)</label>
+                <label class="form-check-label" for="sumber_dana4">Beasiswa PPA</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="F1201" id="sumber_dana5" value="5" />
-                <label class="form-check-label" for="sumber_dana5">Beasiswa AFIRMASI (5)</label>
+                <label class="form-check-label" for="sumber_dana5">Beasiswa AFIRMASI</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="F1201" id="sumber_dana6" value="6" />
-                <label class="form-check-label" for="sumber_dana6">Beasiswa Perusahaan/Swasta (6)</label>
+                <label class="form-check-label" for="sumber_dana6">Beasiswa Perusahaan/Swasta</label>
             </div>
 
             <!-- Opsi Lainnya dengan input text -->
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="F1201" id="sumber_dana7" value="7" />
-                <label class="form-check-label" for="sumber_dana7">Lainnya, tuliskan (7)</label>
+                <label class="form-check-label" for="sumber_dana7">Lainnya, tuliskan</label>
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control mt-2" id="sumber_dana_lainnya" name="f1202"
-                    placeholder="Tulis sumber dana lainnya..." style="display: none" />
+
+            <div  class="mb-4 danaLainnyaInput" style="display: none;">
+                <input type="text" class="form-control" name="f1202" placeholder="Tuliskan lainnya" />
             </div>
         </div>
     </div>
@@ -743,11 +746,162 @@
 
     <!-- Mencari Kerja Content Start -->
     <div id="mencari-kerja-content" class="step-2-content" style="display: none">
-        <label>Bagaimana strategi Anda dalam mencari pekerjaan?</label>
-        <input type="text" class="form-control" name="strategi_mencari" placeholder="Masukkan strategi Anda" />
-    </div>
+        <div class="mb-4">
+            <label class="form-label">Kapan Anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak
+                dimasukkan</label>
 
-    
+            <div class="form-check mb-2 d-flex align-items-center gap-2">
+                <input class="form-check-input" type="radio" name="f301" value="1" id="cariKerja1">
+                <label class="form-check-label" for="cariKerja1">Kira-kira</label>
+                <input type="number" class="form-control form-control-sm w-auto" name="f302" min="0" placeholder="...">
+                Bulan sebelum lulus
+            </div>
+
+            <div class="form-check mb-2 d-flex align-items-center gap-2">
+                <input class="form-check-input" type="radio" name="f301" value="2" id="cariKerja2">
+                <label class="form-check-label" for="cariKerja2">Kira-kira</label>
+                <input type="number" class="form-control form-control-sm w-auto" name="f303" min="0" placeholder="...">
+                Bulan sesudah lulus
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f301" value="3" id="cariKerja3">
+                <label class="form-check-label" for="cariKerja3">Saya tidak mencari kerja</label>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?</label>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1">
+                <label class="form-check-label" for="cari1">Melalui koran/majalah/brosur</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f402" value="1" id="cari2">
+                <label class="form-check-label" for="cari2">Melamar ke perusahaan tanpa mengetahui lowongan yang
+                    ada</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f403" value="1" id="cari3">
+                <label class="form-check-label" for="cari3">Pergi ke bursa/pameran kerja</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f404" value="1" id="cari4">
+                <label class="form-check-label" for="cari4">Mencari lewat internet/iklan online/milis</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f405" value="1" id="cari5">
+                <label class="form-check-label" for="cari5">Dihubungi oleh perusahaan</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f406" value="1" id="cari6">
+                <label class="form-check-label" for="cari6">Menghubungi Kemenakertrans</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f407" value="1" id="cari7">
+                <label class="form-check-label" for="cari7">Menghubungi agen tenaga kerja komersial/swasta</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f408" value="1" id="cari8">
+                <label class="form-check-label" for="cari8">Memeroleh informasi dari pusat/kantor pengembangan karir
+                    fakultas/universitas</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f409" value="1" id="cari9">
+                <label class="form-check-label" for="cari9">Menghubungi kantor kemahasiswaan/hubungan alumni</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f410" value="1" id="cari10">
+                <label class="form-check-label" for="cari10">Membangun jejaring (network) sejak masih kuliah</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f411" value="1" id="cari11">
+                <label class="form-check-label" for="cari11">Melalui relasi (misalnya dosen, orang tua, saudara, teman,
+                    dll.)</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f412" value="1" id="cari12">
+                <label class="form-check-label" for="cari12">Membangun bisnis sendiri</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f413" value="1" id="cari13">
+                <label class="form-check-label" for="cari13">Melalui penempatan kerja atau magang</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="f414" value="1" id="cari14">
+                <label class="form-check-label" for="cari14">Bekerja di tempat yang sama dengan tempat kerja semasa
+                    kuliah</label>
+            </div>
+
+            <div class="form-check mb-2 d-flex align-items-center gap-2">
+                <input class="form-check-input" type="checkbox" name="f415" value="1" id="cari15">
+                <label class="form-check-label" for="cari15">Lainnya, tuliskan</label>
+            </div>
+            <div class="mb-4 cariLainnyaInput" style="display: none;">
+                <input type="text" class="form-control" name="f416" placeholder="Tuliskan lainnya" />
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Berapa perusahaan/instansi/institusi yang sudah Anda lamar (lewat surat/email)
+                sebelum memperoleh pekerjaan pertama?</label>
+            <input type="number" class="form-control" name="f6" placeholder="Masukkan jumlah lamaran" min="0" />
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Berapa banyak perusahaan/instansi/institusi yang merespons lamaran Anda?</label>
+            <input type="number" class="form-control" name="f7" placeholder="Masukkan jumlah respons" min="0" />
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Berapa banyak perusahaan/instansi/institusi yang mengundang Anda untuk
+                wawancara?</label>
+            <input type="number" class="form-control" name="f7a" placeholder="Masukkan jumlah wawancara" min="0" />
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Berapa perusahaan/instansi yang telah Anda masuki untuk bekerja?</label>
+            <input type="number" class="form-control" name="UMC4" placeholder="Masukkan jumlah perusahaan" min="0" />
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Apakah Anda aktif mencari pekerjaan dalam 4 minggu terakhir? Pilihlah satu
+                jawaban</label>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1001" value="1" id="cariKerja1">
+                <label class="form-check-label" for="cariKerja1">Tidak</label>
+            </div>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1001" value="2" id="cariKerja2">
+                <label class="form-check-label" for="cariKerja2">Tidak, tapi saya sedang menunggu hasil lamaran
+                    kerja</label>
+            </div>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1001" value="3" id="cariKerja3">
+                <label class="form-check-label" for="cariKerja3">Ya, saya akan mulai bekerja dalam 2 minggu ke
+                    depan</label>
+            </div>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1001" value="4" id="cariKerja4">
+                <label class="form-check-label" for="cariKerja4">Ya, tapi saya belum pasti akan bekerja dalam 2 minggu
+                    ke depan</label>
+            </div>
+        </div>
+    </div>
     <!-- Mencari Kerja Content End -->
 
     <!-- Tidak Bekerja Content Start -->
