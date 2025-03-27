@@ -84,11 +84,10 @@
                 <input class="form-check-input" type="radio" name="f1101" value="7" id="instansi7">
                 <label class="form-check-label" for="instansi7">Lainnya, tuliskan</label>
             </div>
-            <div class="mb-4" id="instansiLainnyaInput" style="display: none;">
+            <div  class="mb-4 instansiLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f1101" placeholder="Tuliskan lainnya" />
             </div>
         </div>
-
 
         <div class="mb-4">
             <label>Apa nama perusahaan/kantor tempat Anda bekerja?</label>
@@ -268,8 +267,6 @@
             </div>
         </div>
 
-
-
         <div class="mb-4">
             <label class="form-label">Berapa perusahaan/instansi/institusi yang sudah Anda lamar (lewat surat/email)
                 sebelum memperoleh pekerjaan pertama?</label>
@@ -315,7 +312,6 @@
                     ke depan</label>
             </div>
         </div>
-
 
         <div class="mb-4">
             <label class="form-label">Jika menurut Anda pekerjaan Anda saat ini tidak sesuai dengan pendidikan Anda,
@@ -400,8 +396,6 @@
                 <input type="text" class="form-control" name="f1613" placeholder="Tuliskan lainnya" />
             </div>
         </div>
-
-
     </div>
     <!-- Pekerjaan Content End -->
 
@@ -412,9 +406,49 @@
             <input type="number" class="form-control" name="bulan_wiraswasta_pertama"
                 placeholder="Masukkan jumlah bulan" />
         </div>
+
+        <div class="mb-4">
+            <label class="form-label">Apa jenis perusahaan/instansi/institusi tempat Anda bekerja sekarang?</label>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1101" value="1" id="instansi1">
+                <label class="form-check-label" for="instansi1">Instansi Pemerintahan</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1101" value="2" id="instansi2">
+                <label class="form-check-label" for="instansi2">Organisasi non-profit/LSM</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1101" value="3" id="instansi3">
+                <label class="form-check-label" for="instansi3">Perusahaan Swasta</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1101" value="4" id="instansi4">
+                <label class="form-check-label" for="instansi4">Wiraswasta/Perusahaan sendiri</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1101" value="5" id="instansi5">
+                <label class="form-check-label" for="instansi5">BUMN/BUMD</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1101" value="6" id="instansi6">
+                <label class="form-check-label" for="instansi6">Institusi/Organisasi Multilateral</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="f1101" value="7" id="instansi7">
+                <label class="form-check-label" for="instansi7">Lainnya, tuliskan</label>
+            </div>
+            <div  class="mb-4 instansiLainnyaInput" style="display: none;">
+                <input type="text" class="form-control" name="f1101" placeholder="Tuliskan lainnya" />
+            </div>
+        </div>
     </div>
-
-
     <!-- Wiraswasta Content End -->
 
     <!-- Pendidikan Content Start -->

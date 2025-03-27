@@ -97,19 +97,12 @@
     <script>
         // jquery untuk menampilkan inputan lainnya
         $(document).ready(function() {
-            // Menagani Radio
-            $("input[name='F1201']").on("change", function() {
-                if ($(this).val() === "7") {
-                    $("#sumber_dana_lainnya").show().prop("required", true);
-                } else {
-                    $("#sumber_dana_lainnya").hide().val("").prop("required", false);
-                }
-            });
             $("input[name='f1101']").on("change", function() {
+                let container = $(this).closest('.mb-4').find(".instansiLainnyaInput");
                 if ($(this).val() === "7") {
-                    $("#instansiLainnyaInput").show().prop("required", true);
+                    container.show().find("input").prop("required", true);
                 } else {
-                    $("#instansiLainnyaInput").hide().val("").prop("required", false);
+                    container.hide().find("input").val("").prop("required", false);
                 }
             });
 
