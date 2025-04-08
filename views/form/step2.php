@@ -17,7 +17,7 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="provinsi" class="form-label">Provinsi</label>
-                    <select id="provinsi" class="form-select" name="f5a1">
+                    <select id="provinsi" class="form-control select2" name="f5a1">
                         <option value="" selected disabled>Pilih Provinsi</option>
                         <?php include '../backend/ts_data_kode_provinsi.php'; ?>
                         <!-- Tambahkan daftar provinsi lainnya -->

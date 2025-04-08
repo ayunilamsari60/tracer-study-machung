@@ -137,7 +137,7 @@ if (!isset($_SESSION['email'])) {
                     text: '<?php echo $_SESSION['success']; ?>',
                     icon: 'success'
                 }).then(() => {
-                    window.location.href = "dashboard.php"; // Redirect jika sukses
+                    window.location.href = "form.php"; // Redirect jika sukses
                 });
                 <?php unset($_SESSION['success']); ?>
             <?php } ?>

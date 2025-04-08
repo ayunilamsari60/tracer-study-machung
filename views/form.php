@@ -10,6 +10,11 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .alert {
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,6 +23,10 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Form Mahasiswa - Pekerjaan</h4>
                 <form id="job-form-wizard" action="submit1.php" method="POST">
+                    <div id="form-alert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+                        <b><span id="form-alert-text">Pesan error di sini...</span></b>
+                    </div>
+
 
                     <?php include 'form/step1.php'; ?>
 
@@ -36,20 +45,39 @@
     <script src="assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
     <script>
         $(document).ready(function () {
+            function tampilkanAlert(teks) {
+                $("#form-alert-text").text(teks);
+                $("#form-alert").removeClass("d-none"); // tampilkan alert
+            }
+
 
             $("#job-form-wizard").steps({
                 headerTag: "h3",
                 bodyTag: "section",
                 transitionEffect: "slide",
                 autoFocus: true,
+                labels: {
+                    cancel: "Batal",
+                    current: "Langkah saat ini:",
+                    pagination: "Pagination",
+                    finish: "Selesai",
+                    next: "Lanjut",
+                    previous: "Kembali",
+                    loading: "Memuat..."
+
+                },
+
                 onStepChanging: function (event, currentIndex, newIndex) {
                     // **Validasi Step 1 sebelum lanjut ke Step 2**
                     if (currentIndex === 0 && newIndex > currentIndex) {
                         let statusKerja = $("input[name='F8']:checked").val();
                         if (!statusKerja) {
-                            alert("Silakan pilih status kerja sebelum melanjutkan!");
+                            tampilkanAlert("Silahkan pilih status kerja sebelum melanjutkan!");
                             return false;
+                        } else {
+                            $("#form-alert").addClass("d-none"); // sembunyikan alert jika valid
                         }
+
 
                         $(".step-2-content").hide().find("input, select, textarea, button").prop("disabled", true);
 
@@ -81,19 +109,21 @@
                         let isValid = true;
 
                         // Cek semua input yang terlihat di Step 2
-                        // $(".step-2-content input:visible").each(function () {
-                        //     if ($(this).is(":visible") && $(this).val().trim() === "") {
-                        //         isValid = false;
-                        //         $(this).addClass("is-invalid"); // Tambahkan class error
-                        //     } else {
-                        //         $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
-                        //     }
-                        // });
+                        $(".step-2-content input:visible").each(function () {
+                            if ($(this).is(":visible:not(:disabled)") && $(this).val().trim() === "") {
+                                isValid = false;
+                                $(this).addClass("is-invalid"); // Tambahkan class error
+                            } else {
+                                $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
+                            }
+                        });
 
-                        // if (!isValid) {
-                        //     alert("Mohon isi semua data di Step 2 sebelum melanjutkan!");
-                        //     return false;
-                        // }
+                        if (!isValid) {
+                            tampilkanAlert("Mohon isi semua data di Step 2 sebelum melanjutkan!");
+                            return false;
+                        } else {
+                            $("#form-alert").addClass("d-none"); // sembunyikan alert jika valid
+                        }
 
                         $(".step-3-content").show(); // Tampilkan Step 3 jika valid
                     }
@@ -105,29 +135,31 @@
 
                     // Hanya ubah tombol jika di step 1 menuju step 2 dan status tidak bekerja
                     if (currentIndex === 1 && statusKerja === "5") {
-                        $(".actions ul li a[href='#next']").text("Finish");
+                        $(".actions ul li a[href='#next']").text("Selesai");
                     } else {
-                        $(".actions ul li a[href='#next']").text("Next");
+                        $(".actions ul li a[href='#next']").text("Lanjut");
                     }
                 },
 
                 onFinished: function (event, currentIndex) {
-                    // let isValid = true;
+                    let isValid = true;
 
-                    // // Cek semua input di form sebelum submit
-                    // $("#job-form-wizard input:visible").each(function () {
-                    //     if ($(this).is(":visible") && $(this).val().trim() === "") {
-                    //         isValid = false;
-                    //         $(this).addClass("is-invalid"); // Tambahkan class error
-                    //     } else {
-                    //         $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
-                    //     }
-                    // });
+                    // Cek semua input di form sebelum submit
+                    $("#job-form-wizard input:visible").each(function () {
+                        if ($(this).is(":visible") && $(this).val().trim() === "") {
+                            isValid = false;
+                            $(this).addClass("is-invalid"); // Tambahkan class error
+                        } else {
+                            $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
+                        }
+                    });
 
-                    // if (!isValid) {
-                    //     alert("Mohon lengkapi semua data sebelum menyelesaikan!");
-                    //     return false;
-                    // }
+                    if (!isValid) {
+                        tampilkanAlert("Mohon lengkapi semua data sebelum menyelesaikan!");
+                        return false;
+                    } else{
+                        $("#form-alert").addClass("d-none"); // sembunyikan alert jika valid
+                    }
 
                     $("#job-form-wizard").submit();
                 },
@@ -218,13 +250,13 @@
                 const selectedValue = $(this).val();
 
                 // Matikan semua input number dulu
-                $('input[name="f302"], input[name="f303"]').prop('disabled', true).val('');
+                $('input[name="f302"], input[name="f303"]').prop('readonly', true).val('');
 
                 // Aktifkan input sesuai radio yang dipilih
                 if (selectedValue === "1") {
-                    $('input[name="f302"]').prop('disabled', false);
+                    $('input[name="f302"]').prop('readonly', false);
                 } else if (selectedValue === "2") {
-                    $('input[name="f303"]').prop('disabled', false);
+                    $('input[name="f303"]').prop('readonly', false);
                 }
             });
         });
