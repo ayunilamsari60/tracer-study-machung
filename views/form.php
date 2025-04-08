@@ -9,6 +9,7 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -31,9 +32,11 @@
 
     <script src="assets/libs/jquery/jquery.min.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/select2/js/select2.min.js"></script>
     <script src="assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
     <script>
         $(document).ready(function () {
+
             $("#job-form-wizard").steps({
                 headerTag: "h3",
                 bodyTag: "section",
@@ -116,6 +119,23 @@
     <script>
         // jquery untuk menampilkan inputan lainnya
         $(document).ready(function () {
+            $(".select2").select2();
+
+            $('#provinsi').on('change', function () {
+                var kodeProvinsi = $(this).val();
+                var $kota = $('#kota');
+
+                $kota.html('<option>Loading...</option>');
+
+                $.post('../backend/ts_data_kode_kabupaten_kota.php', {
+                    kode_provinsi: kodeProvinsi
+                }, function (data) {
+                    $kota.html(data);
+                }).fail(function () {
+                    $kota.html('<option>Gagal memuat data</option>');
+                });
+            });
+
             $("input[name='f1101']").on("change", function () {
                 let selectedValue = $(this).val();
 
@@ -175,18 +195,18 @@
             });
 
             $('input[name="f301"]').on('change', function () {
-            const selectedValue = $(this).val();
+                const selectedValue = $(this).val();
 
-            // Matikan semua input number dulu
-            $('input[name="f302"], input[name="f303"]').prop('disabled', true).val('');
+                // Matikan semua input number dulu
+                $('input[name="f302"], input[name="f303"]').prop('disabled', true).val('');
 
-            // Aktifkan input sesuai radio yang dipilih
-            if (selectedValue === "1") {
-                $('input[name="f302"]').prop('disabled', false);
-            } else if (selectedValue === "2") {
-                $('input[name="f303"]').prop('disabled', false);
-            }
-        });
+                // Aktifkan input sesuai radio yang dipilih
+                if (selectedValue === "1") {
+                    $('input[name="f302"]').prop('disabled', false);
+                } else if (selectedValue === "2") {
+                    $('input[name="f303"]').prop('disabled', false);
+                }
+            });
         });
     </script>
 </body>

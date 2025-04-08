@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="kota" class="form-label">Kota/Kabupaten</label>
-                    <select id="kota" class="form-select" name="f5a2">
+                    <select id="kota" class="form-control select2" name="f5a2">
                         <option value="" selected disabled>Pilih Kota/Kabupaten</option>
                         <!-- Opsi kota/kabupaten akan dimuat berdasarkan provinsi yang dipilih -->
                     </select>
