@@ -15,22 +15,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($F1101 !== "7") {
         $F1102 = '';
     }
-    // Step 2 data General end
-
-    // Step 2 data : Bekerja Start
-    $f502 = isset($_POST['f502']) ? $_POST['f502'] : '';
-    $f505 = isset($_POST['f505']) ? $_POST['f505'] : '';
-    $f5a1 = isset($_POST['f5a1']) ? $_POST['f5a1'] : '';
-    $f5a2 = isset($_POST['f5a2']) ? $_POST['f5a2'] : '';
-    $f5b = isset($_POST['f5b']) ? $_POST['f5b'] : '';
-    $f5d = isset($_POST['f5d']) ? $_POST['f5d'] : '';
-    $f14 = isset($_POST['f14']) ? $_POST['f14'] : '';
-    $f15 = isset($_POST['f15']) ? $_POST['f15'] : '';
 
     $f301 = isset($_POST['f301']) ? $_POST['f301'] : '';
-    $f302 = isset($_POST['f302']) ? $_POST['f302'] : '';
-    $f303 = isset($_POST['f303']) ? $_POST['f303'] : '';
-    
+    if ($f301 == "1") {
+        $f302 = isset($_POST['f302']) ? $_POST['f302'] : '';
+    } else if ($f301 == "2") {
+        $f303 = isset($_POST['f303']) ? $_POST['f303'] : '';
+    }
+
+    $f502 = isset($_POST['f502']) ? $_POST['f502'] : '';
+
+    $f14 = isset($_POST['f14']) ? $_POST['f14'] : '';
+
     $f401 = isset($_POST['f401']) ? $_POST['f401'] : '';
     $f402 = isset($_POST['f402']) ? $_POST['f402'] : '';
     $f403 = isset($_POST['f403']) ? $_POST['f403'] : '';
@@ -40,14 +36,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $f407 = isset($_POST['f407']) ? $_POST['f407'] : '';
     $f408 = isset($_POST['f408']) ? $_POST['f408'] : '';
     $f409 = isset($_POST['f409']) ? $_POST['f409'] : '';
-    $f4010 = isset($_POST['f4010']) ? $_POST['f4010'] : '';
-    $f4011 = isset($_POST['f4011']) ? $_POST['f4011'] : '';
-    $f4012 = isset($_POST['f4012']) ? $_POST['f4012'] : '';
-    $f4013 = isset($_POST['f4013']) ? $_POST['f4013'] : '';
-    $f4014 = isset($_POST['f4014']) ? $_POST['f4014'] : '';
-    $f4015 = isset($_POST['f4015']) ? $_POST['f4015'] : '';
+    $f410 = isset($_POST['f410']) ? $_POST['f410'] : '';
+    $f411 = isset($_POST['f411']) ? $_POST['f411'] : '';
+    $f412 = isset($_POST['f412']) ? $_POST['f412'] : '';
+    $f413 = isset($_POST['f413']) ? $_POST['f413'] : '';
+    $f414 = isset($_POST['f414']) ? $_POST['f414'] : '';
+    $f415 = isset($_POST['f415']) ? $_POST['f415'] : '';
 
+    $f5d = isset($_POST['f5d']) ? $_POST['f5d'] : '';
+
+    $f1601 = isset($_POST['f1601']) ? $_POST['f1601'] : '';
+    $f1602 = isset($_POST['f1602']) ? $_POST['f1602'] : '';
+    $f1603 = isset($_POST['f1603']) ? $_POST['f1603'] : '';
+    $f1604 = isset($_POST['f1604']) ? $_POST['f1604'] : '';
+    $f1605 = isset($_POST['f1605']) ? $_POST['f1605'] : '';
+    $f1606 = isset($_POST['f1606']) ? $_POST['f1606'] : '';
+    $f1607 = isset($_POST['f1607']) ? $_POST['f1607'] : '';
+    $f1608 = isset($_POST['f1608']) ? $_POST['f1608'] : '';
+    $f1609 = isset($_POST['f1609']) ? $_POST['f1609'] : '';
+    $f1610 = isset($_POST['f1610']) ? $_POST['f1610'] : '';
+    $f1611 = isset($_POST['f1611']) ? $_POST['f1611'] : '';
+    $f1612 = isset($_POST['f1612']) ? $_POST['f1612'] : '';
+    $f1613 = isset($_POST['f1613']) ? $_POST['f1613'] : '';
+    $f1614 = isset($_POST['f1614']) ? $_POST['f1614'] : '';
+    // Step 2 data General end
+
+    // Step 2 data : Bekerja Start
+    $f505 = isset($_POST['f505']) ? $_POST['f505'] : '';
+    $f5a1 = isset($_POST['f5a1']) ? $_POST['f5a1'] : '';
+    $f5a2 = isset($_POST['f5a2']) ? $_POST['f5a2'] : '';
+    $f5b = isset($_POST['f5b']) ? $_POST['f5b'] : '';
+    $f15 = isset($_POST['f15']) ? $_POST['f15'] : '';
     // Step 2 data : Bekerja End
+
+    // Step 2 data : Wiraswasta Start
+    $f5c = isset($_POST['f5c']) ? $_POST['f5c'] : '';
+    // Step 2 data : Wiraswasta End
 
     // Step 2 data : Pendidikan Start
     $F18a = isset($_POST['F18a']) ? $_POST['F18a'] : '';
