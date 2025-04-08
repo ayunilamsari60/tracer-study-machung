@@ -48,18 +48,20 @@
                             return false;
                         }
 
-                        $(".step-2-content").hide();
+                        $(".step-2-content").hide().find("input, select, textarea, button").prop("disabled", true);
+
                         if (statusKerja === "1") {
-                            $("#bekerja-content").show();
+                            $("#bekerja-content").show().find("input, select, textarea, button").prop("disabled", false);
                         } else if (statusKerja === "2") {
-                            $("#wiraswasta-content").show();
+                            $("#wiraswasta-content").show().find("input, select, textarea, button").prop("disabled", false);
                         } else if (statusKerja === "3") {
-                            $("#pendidikan-content").show();
+                            $("#pendidikan-content").show().find("input, select, textarea, button").prop("disabled", false);
                         } else if (statusKerja === "4") {
-                            $("#mencari-kerja-content").show();
+                            $("#mencari-kerja-content").show().find("input, select, textarea, button").prop("disabled", false);
                         } else {
-                            $("#tidak-bekerja-content").show();
+                            $("#tidak-bekerja-content").show().find("input, select, textarea, button").prop("disabled", false);
                         }
+
                     }
 
                     // **Validasi Step 2 sebelum lanjut ke Step 3 (HANYA saat Next)**
@@ -171,6 +173,20 @@
                     container.hide().find("input").val("").prop("required", false);
                 }
             });
+
+            $('input[name="f301"]').on('change', function () {
+            const selectedValue = $(this).val();
+
+            // Matikan semua input number dulu
+            $('input[name="f302"], input[name="f303"]').prop('disabled', true).val('');
+
+            // Aktifkan input sesuai radio yang dipilih
+            if (selectedValue === "1") {
+                $('input[name="f302"]').prop('disabled', false);
+            } else if (selectedValue === "2") {
+                $('input[name="f303"]').prop('disabled', false);
+            }
+        });
         });
     </script>
 </body>
