@@ -61,10 +61,19 @@
                             $("#pendidikan-content").show().find("input, select, textarea, button").prop("disabled", false);
                         } else if (statusKerja === "4") {
                             $("#mencari-kerja-content").show().find("input, select, textarea, button").prop("disabled", false);
-                        } else {
+                        } else if (statusKerja === "5") {
                             $("#tidak-bekerja-content").show().find("input, select, textarea, button").prop("disabled", false);
                         }
 
+                        // Simpan status kerja ke global variable (supaya bisa diakses nanti)
+                        window.statusKerja = statusKerja;
+
+                    }
+
+                    // Di Step 2, kalau status "tidak bekerja", klik next langsung trigger finish
+                    if (currentIndex === 1 && window.statusKerja === "5" && newIndex > currentIndex) {
+                        $("#job-form-wizard").steps("finish");
+                        return false; // cegah ke step 3
                     }
 
                     // **Validasi Step 2 sebelum lanjut ke Step 3 (HANYA saat Next)**
@@ -91,6 +100,17 @@
 
                     return true;
                 },
+                onStepChanged: function (event, currentIndex, priorIndex) {
+                    let statusKerja = $("input[name='F8']:checked").val();
+
+                    // Hanya ubah tombol jika di step 1 menuju step 2 dan status tidak bekerja
+                    if (currentIndex === 1 && statusKerja === "5") {
+                        $(".actions ul li a[href='#next']").text("Finish");
+                    } else {
+                        $(".actions ul li a[href='#next']").text("Next");
+                    }
+                },
+
                 onFinished: function (event, currentIndex) {
                     // let isValid = true;
 

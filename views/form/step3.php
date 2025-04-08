@@ -30,7 +30,7 @@ $opsi = [
 ];
 ?>
 
-<h3>Informasi Tambahan</h3>
+<h3>Step 3: Kemampuan</h3>
 <section>
     <div id="kemampuan-content" class="step-3-content" style="display: none">
         <!-- Kompetensi Content Start -->
