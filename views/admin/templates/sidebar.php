@@ -16,14 +16,10 @@ $current_page = basename($_SERVER['SCRIPT_NAME']); // Ambil nama file dari URL
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fas fa-database"></i>
-                        <span key="t-tables">Master Data</span>
+                    <a href="pertanyaan.php" class="<?= ($current_page == 'pertanyaan.php') ? 'mm-active' : '' ?>">
+                        <i class="fas fa-list-alt"></i>
+                        <span key="t-dashboards">Pertanyaan</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="master-kategori.php" class="<?= ($current_page == 'master-kategori.php') ? 'active' : '' ?>" key="t-basic-tables">Master Kategori</a></li>
-                        <li><a href="master-ukuran.php" class="<?= ($current_page == 'master-ukuran.php') ? 'active' : '' ?>" key="t-data-tables">Master Ukuran</a></li>
-                    </ul>
                 </li>
 
                 <li>
