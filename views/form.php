@@ -51,7 +51,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Form Mahasiswa - Pekerjaan</h4>
-                <form id="job-form-wizard" action="submit1.php" method="POST">
+                <form id="job-form-wizard" action="submit.php" method="POST">
                     <div id="form-alert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
                         <b><span id="form-alert-text">Pesan error di sini...</span></b>
                     </div>
@@ -206,12 +206,6 @@
                             }
                         });
 
-                        // Debug log jika invalid
-                        console.log("isValid:", isValid);
-                        $(".step-2-content input.is-invalid, .step-2-content select.is-invalid").each(function () {
-                            console.log("Invalid element:", this);
-                        });
-
                         if (!isValid) {
                             tampilkanAlert("Mohon isi semua data di Step 2 sebelum melanjutkan!");
                             return false;
@@ -238,23 +232,27 @@
                 onFinished: function (event, currentIndex) {
                     let isValid = true;
 
-                    // Cek semua input di form sebelum submit
-                    $("#job-form-wizard input:visible").each(function () {
-                        if ($(this).is(":visible") && $(this).val().trim() === "") {
+                    // Reset error
+                    $(".is-invalid").removeClass("is-invalid");
+
+                    // Validasi semua radio group di step-3-content
+                    $(".step-3-content").find("input[type=radio]").each(function () {
+                        let name = $(this).attr("name");
+                        if ($(".step-3-content input[name='" + name + "']:checked").length === 0) {
+                            // Jika belum ada yang dipilih, tandai semua radio dalam group sebagai error
+                            $(".step-3-content input[name='" + name + "']").addClass("is-invalid");
                             isValid = false;
-                            $(this).addClass("is-invalid"); // Tambahkan class error
                         } else {
-                            $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
+                            $(".step-3-content input[name='" + name + "']").removeClass("is-invalid");
                         }
                     });
 
                     if (!isValid) {
-                        tampilkanAlert("Mohon lengkapi semua data sebelum menyelesaikan!");
+                        tampilkanAlert("Mohon isi semua pertanyaan di step 3 sebelum menyelesaikan!");
                         return false;
-                    } else {
-                        $("#form-alert").addClass("d-none"); // sembunyikan alert jika valid
                     }
 
+                    $("#form-alert").addClass("d-none");
                     $("#job-form-wizard").submit();
                 },
             });
@@ -272,6 +270,11 @@
                     $(this).removeClass("is-invalid");
                 }
             });
+            $("input[type=radio]").on("change", function () {
+                let name = $(this).attr("name");
+                $("input[name='" + name + "']").removeClass("is-invalid").closest("label").removeClass("text-danger");
+            });
+
 
             $(".step-2-content select:not(:disabled)").on("change", function () {
                 if ($(this).val() !== "" && $(this).val() !== null) {
@@ -323,10 +326,10 @@
                     $(".instansiLainnyaInput").hide();
                 }
             });
-            $("input[name='f1101']").on("input", function () {
-                let selectedValue = $(this).val();
-                console.log("Real-time input: " + selectedValue);
-            });
+            // $("input[name='f1101']").on("input", function () {
+            //     let selectedValue = $(this).val();
+            //     console.log("Real-time input: " + selectedValue);
+            // });
 
 
             $(document).ready(function () {
