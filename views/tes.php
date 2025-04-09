@@ -1,103 +1,127 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Wizard dengan Redirect</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
-    <style>
-        .is-invalid {
-            border: 1px solid red;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Form Validasi Bootstrap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<body class="p-4">
 
-<body>
-
-    <div id="job-form-wizard">
-        <h3>Step 1</h3>
-        <section>
-            <form id="form-step-1">
-                <label>Status Kerja:</label><br>
-                <input type="radio" name="F8" value="1"> Bekerja<br>
-                <input type="radio" name="F8" value="2"> Wiraswasta<br>
-                <input type="radio" name="F8" value="3"> Pendidikan<br>
-                <input type="radio" name="F8" value="4"> Mencari Kerja<br>
-            </form>
-        </section>
-
-        <h3>Step 2</h3>
-        <section>
-            <form id="form-step-2">
-                <label>Nama Perusahaan:</label>
-                <input type="text" name="company_name">
-            </form>
-        </section>
-
-        <h3>Step 3</h3>
-        <section>
-            <form id="form-step-3">
-                <label>Gaji Bulanan:</label>
-                <input type="number" name="salary">
-            </form>
-        </section>
+  <form id="myForm" novalidate>
+    <!-- Input Teks -->
+    <div class="mb-3">
+      <label for="nama" class="form-label">Nama Lengkap</label>
+      <input type="text" class="form-control" id="nama" required>
+      <div class="invalid-feedback">
+        Nama wajib diisi.
+      </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $("#job-form-wizard").steps({
-                headerTag: "h3",
-                bodyTag: "section",
-                transitionEffect: "slide",
-                autoFocus: true,
-                onStepChanging: function (event, currentIndex, newIndex) {
-                    if (currentIndex === 0 && newIndex > currentIndex) {
-                        let statusKerja = $("input[name='F8']:checked").val();
-                        if (!statusKerja) {
-                            alert("Silakan pilih status kerja sebelum melanjutkan!");
-                            return false;
-                        }
-                    }
+    <!-- Radio -->
+    <div class="mb-3">
+      <label class="form-label">Jenis Kelamin</label><br>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="laki" value="L" required>
+        <label class="form-check-label" for="laki">Laki-laki</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="perempuan" value="P" required>
+        <label class="form-check-label" for="perempuan">Perempuan</label>
+      </div>
+      <div class="invalid-feedback d-block">
+        Silakan pilih jenis kelamin.
+      </div>
+    </div>
 
-                    if (currentIndex === 1 && newIndex > currentIndex) {
-                        let companyName = $("#form-step-2 input[name='company_name']").val().trim();
-                        if (companyName === "") {
-                            alert("Mohon isi nama perusahaan sebelum melanjutkan!");
-                            return false;
-                        }
-                    }
+    <!-- Checkbox -->
+    <div class="mb-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="setuju" required>
+        <label class="form-check-label" for="setuju">
+          Saya menyetujui syarat dan ketentuan
+        </label>
+        <div class="invalid-feedback">
+          Anda harus menyetujui sebelum melanjutkan.
+        </div>
+      </div>
+    </div>
 
-                    return true;
-                },
-                onFinished: function (event, currentIndex) {
-                    let formData = {
-                        F8: $("input[name='F8']:checked").val(),
-                        company_name: $("#form-step-2 input[name='company_name']").val(),
-                        salary: $("#form-step-3 input[name='salary']").val(),
-                    };
+    <button type="submit" class="btn btn-primary">Kirim</button>
+  </form>
 
-                    // Kirim data dengan AJAX
-                    $.ajax({
-                        url: "submit.php",
-                        method: "POST",
-                        data: formData, // Kirim semua data di form
-                        success: function (response) {
-                            alert("Data berhasil dikirim!");
-                            window.location.href = "submit.php"; // Pindah ke halaman submit.php
-                        },
-                        error: function () {
-                            alert("Terjadi kesalahan saat mengirim data.");
-                        }
-                    });
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('myForm');
 
-                }
-            });
-        });
-    </script>
+  // Hapus error saat user mulai mengetik di input text
+  document.getElementById('nama').addEventListener('input', function () {
+    if (this.value.trim() !== "") {
+      this.classList.remove('is-invalid');
+      this.classList.add('is-valid');
+    } else {
+      this.classList.remove('is-valid');
+      this.classList.add('is-invalid');
+    }
+  });
+
+  // Hapus error saat user pilih radio
+  document.querySelectorAll('input[name="gender"]').forEach(radio => {
+    radio.addEventListener('change', function () {
+      document.querySelectorAll('input[name="gender"]').forEach(r => {
+        r.classList.remove('is-invalid');
+        r.classList.add('is-valid');
+      });
+    });
+  });
+
+  // Hapus error saat user centang checkbox
+  document.getElementById('setuju').addEventListener('change', function () {
+    if (this.checked) {
+      this.classList.remove('is-invalid');
+      this.classList.add('is-valid');
+    } else {
+      this.classList.remove('is-valid');
+      this.classList.add('is-invalid');
+    }
+  });
+
+  // Validasi saat submit
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let isValid = true;
+
+    // Validasi nama
+    const namaInput = document.getElementById('nama');
+    if (namaInput.value.trim() === "") {
+      namaInput.classList.add('is-invalid');
+      isValid = false;
+    }
+
+    // Validasi radio
+    const radios = document.querySelectorAll('input[name="gender"]');
+    const radioChecked = Array.from(radios).some(r => r.checked);
+    if (!radioChecked) {
+      radios.forEach(r => r.classList.add('is-invalid'));
+      isValid = false;
+    }
+
+    // Validasi checkbox
+    const checkbox = document.getElementById('setuju');
+    if (!checkbox.checked) {
+      checkbox.classList.add('is-invalid');
+      isValid = false;
+    }
+
+    if (isValid) {
+      alert("Form valid dan siap dikirim!");
+      // form.submit(); // kirim form ke server kalau mau
+    }
+  });
+});
+</script>
+
 
 </body>
-
 </html>

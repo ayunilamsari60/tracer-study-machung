@@ -14,6 +14,35 @@
         .alert {
             margin-bottom: 0;
         }
+
+        /* Border merah untuk Select2 ketika invalid */
+        .select2-container--default.is-invalid .select2-selection {
+            border: 1px solid #dc3545;
+            /* warna merah ala Bootstrap */
+            border-radius: 0.375rem;
+            /* agar sama dengan .form-control */
+        }
+
+        /* Feedback di bawah Select2 */
+        .select2-container--default.is-invalid~.invalid-feedback {
+            display: block;
+        }
+
+        /* Efek glow merah saat invalid */
+        .select2-container--default.is-invalid .select2-selection--single:focus {
+            border-color: #dc3545 !important;
+            /* merah seperti Bootstrap error */
+            box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.25) !important;
+            /* glow merah */
+        }
+
+        /* Efek glow merah saat invalid */
+        .select2-container.is-invalid .select2-selection--single {
+            border-color: #dc3545 !important;
+            /* merah seperti Bootstrap error */
+            box-shadow: none !important;
+            /* glow merah */
+        }
     </style>
 </head>
 
@@ -101,31 +130,96 @@
                     // Di Step 2, kalau status "tidak bekerja", klik next langsung trigger finish
                     if (currentIndex === 1 && window.statusKerja === "5" && newIndex > currentIndex) {
                         $("#job-form-wizard").steps("finish");
-                        return false; // cegah ke step 3
+                        return false; // Cegah ke step 3
                     }
 
-                    // **Validasi Step 2 sebelum lanjut ke Step 3 (HANYA saat Next)**
+                    // Validasi Step 2 sebelum lanjut ke Step 3 (HANYA saat Next)
                     if (currentIndex === 1 && newIndex > currentIndex) {
                         let isValid = true;
 
-                        // Cek semua input yang terlihat di Step 2
-                        $(".step-2-content input:visible").each(function () {
-                            if ($(this).is(":visible:not(:disabled)") && $(this).val().trim() === "") {
-                                isValid = false;
-                                $(this).addClass("is-invalid"); // Tambahkan class error
+                        // Validasi input
+                        $(".step-2-content input:visible:not(:disabled)").each(function () {
+                            const type = $(this).attr("type");
+
+                            if (type === "radio") {
+                                const name = $(this).attr("name");
+                                if ($(`input[name='${name}']:checked`).length === 0) {
+                                    $(`input[name='${name}']`).addClass("is-invalid");
+                                    isValid = false;
+                                } else {
+                                    $(`input[name='${name}']`).removeClass("is-invalid");
+                                }
                             } else {
-                                $(this).removeClass("is-invalid"); // Hilangkan class error jika sudah diisi
+                                if (!$(this).is("[readonly]") && $(this).val().trim() === "") {
+                                    $(this).addClass("is-invalid");
+                                    isValid = false;
+                                } else {
+                                    $(this).removeClass("is-invalid");
+                                }
                             }
+                        });
+
+                        // ✅ 2. Validasi checkbox group (minimal 1 per group)
+                        let groupNames = [];
+                        $(".step-2-content input[type='checkbox']:visible").each(function () {
+                            const group = $(this).data("group");
+                            if (group && !groupNames.includes(group)) {
+                                groupNames.push(group);
+                            }
+                        });
+
+                        groupNames.forEach(group => {
+                            const checkboxes = $(`input[type='checkbox'][data-group='${group}']:visible`);
+                            const isChecked = checkboxes.is(":checked");
+
+                            if (!isChecked) {
+                                isValid = false;
+                                checkboxes.addClass("is-invalid");
+                            } else {
+                                checkboxes.removeClass("is-invalid");
+                            }
+                        });
+                        // Hilangkan class is-invalid jika sudah ada minimal satu tercentang di grup
+                        $(".step-2-content input[type='checkbox']").on("change", function () {
+                            const group = $(this).data("group");
+
+                            if (group) {
+                                const groupCheckboxes = $(`input[type='checkbox'][data-group='${group}']`);
+                                const isChecked = groupCheckboxes.is(":checked");
+
+                                if (isChecked) {
+                                    groupCheckboxes.removeClass("is-invalid");
+                                }
+                            }
+                        });
+
+
+                        // Validasi select
+                        $(".step-2-content select:not(:disabled)").each(function () {
+                            if ($(this).val() === "" || $(this).val() === null) {
+                                $(this).addClass("is-invalid");
+                                $(this).next(".select2-container").addClass("is-invalid");
+                                isValid = false;
+                            } else {
+                                $(this).removeClass("is-invalid");
+                                $(this).next(".select2-container").removeClass("is-invalid");
+                            }
+                        });
+
+                        // Debug log jika invalid
+                        console.log("isValid:", isValid);
+                        $(".step-2-content input.is-invalid, .step-2-content select.is-invalid").each(function () {
+                            console.log("Invalid element:", this);
                         });
 
                         if (!isValid) {
                             tampilkanAlert("Mohon isi semua data di Step 2 sebelum melanjutkan!");
                             return false;
                         } else {
-                            $("#form-alert").addClass("d-none"); // sembunyikan alert jika valid
+                            $("#form-alert").addClass("d-none");
                         }
 
-                        $(".step-3-content").show(); // Tampilkan Step 3 jika valid
+                        $(".step-3-content").show();
                     }
 
                     return true;
@@ -157,7 +251,7 @@
                     if (!isValid) {
                         tampilkanAlert("Mohon lengkapi semua data sebelum menyelesaikan!");
                         return false;
-                    } else{
+                    } else {
                         $("#form-alert").addClass("d-none"); // sembunyikan alert jika valid
                     }
 
@@ -172,6 +266,34 @@
         // jquery untuk menampilkan inputan lainnya
         $(document).ready(function () {
             $(".select2").select2();
+            // Hilangkan is-invalid ketika user mulai mengisi atau memilih
+            $(".step-2-content input, .step-2-content textarea").on("input", function () {
+                if ($(this).val().trim() !== "") {
+                    $(this).removeClass("is-invalid");
+                }
+            });
+
+            $(".step-2-content select:not(:disabled)").on("change", function () {
+                if ($(this).val() !== "" && $(this).val() !== null) {
+                    $(this).removeClass("is-invalid");
+                    $(this).next(".select2-container").removeClass("is-invalid");
+                }
+            });
+
+            $(".step-2-content input[type='checkbox'], .step-2-content input[type='radio']").on("change", function () {
+                const name = $(this).attr("name");
+                if ($(`input[name='${name}']:checked`).length > 0) {
+                    $(`input[name='${name}']`).removeClass("is-invalid");
+                }
+            });
+
+            $(".select2").on("select2:select select2:unselect", function () {
+                if ($(this).val() !== "" && $(this).val() !== null) {
+                    $(this).removeClass("is-invalid");
+                    $(this).next(".select2-container").removeClass("is-invalid");
+                }
+            });
+
 
             $('#provinsi').on('change', function () {
                 var kodeProvinsi = $(this).val();
