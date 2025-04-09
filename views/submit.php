@@ -17,6 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $f301 = isset($_POST['f301']) ? $_POST['f301'] : '';
+    $f302 = '';
+    $f303 = '';
     if ($f301 == "1") {
         $f302 = isset($_POST['f302']) ? $_POST['f302'] : '';
     } else if ($f301 == "2") {
@@ -42,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $f413 = isset($_POST['f413']) ? $_POST['f413'] : '';
     $f414 = isset($_POST['f414']) ? $_POST['f414'] : '';
     $f415 = isset($_POST['f415']) ? $_POST['f415'] : '';
+    $f416 = isset($_POST['f416']) ? $_POST['f416'] : '';
 
     $f5d = isset($_POST['f5d']) ? $_POST['f5d'] : '';
 
@@ -59,6 +62,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $f1612 = isset($_POST['f1612']) ? $_POST['f1612'] : '';
     $f1613 = isset($_POST['f1613']) ? $_POST['f1613'] : '';
     $f1614 = isset($_POST['f1614']) ? $_POST['f1614'] : '';
+
+    $f6 = isset($_POST['f6']) ? $_POST['f6'] : '';
+    $f7 = isset($_POST['f7']) ? $_POST['f7'] : '';
+    $f7a = isset($_POST['f7a']) ? $_POST['f7a'] : '';
+
+    $f1001 = isset($_POST['f1001']) ? $_POST['f1001'] : '';
+    $f1002 = isset($_POST['f1002']) ? $_POST['f1002'] : '';
+
     // Step 2 data General end
 
     // Step 2 data : Bekerja Start
@@ -87,6 +98,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $f1202 = '';
     }
     // Step 2 data : Pendidikan End
+
+    // Step 2 data : Mencari Kerja Start
+    // Step 2 data : Mencari Kerja End
 
     // Step 3 data Start
     $F1761 = isset($_POST['F1761']) ? $_POST['F1761'] : '';
@@ -121,10 +135,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Query untuk menyimpan data
     $sql = "INSERT INTO data_table 
-            (F8, F18a, F18b, F18c, F18d, F1101, F1102, F1201, F1202, F1761, F1762, F1763, F1764, F1765, F1766, F1767, F1768, F1769, F1770, F1771, F1772, F1773, F1774, f21, f22, f23, f24, f25, f26, f27) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            (F8, F18a, F18b, F18c, F18d, F1101, F1102, F1201, F1202, 
+            F1761, F1762, F1763, F1764, F1765, F1766, F1767, F1768, F1769, F1770, F1771, F1772, F1773, F1774, 
+            f21, f22, f23, f24, f25, f26, f27, 
+            f301, f302, f303, f401, f402, f403, f404, f405, f406, f407, f408, f409, f410, f411, f412, f413, f414, f415, f416,
+            f505, f5a1, f5a2, f5b, f15, f5c, f5d, f502,
+            f1601, f1602, f1603, f1604, f1605, f1606, f1607, f1608, f1609, f1610, f1611, f1612, f1613, f1614, f14, f6, f7, f7a, f1001, f1002)
+            VALUES (" . implode(',', array_fill(0, 77, '?')) . ")";
+
+
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssssssssssssssssssssssss", $F8, $F18a, $F18b, $F18c, $F18d, $F1101, $F1102, $f1201, $f1202, $F1761, $F1762, $F1763, $F1764, $F1765, $F1766, $F1767, $F1768, $F1769, $F1770, $F1771, $F1772, $F1773, $F1774, $f21, $f22, $f23, $f24, $f25, $f26, $f27);
+    $stmt->bind_param(
+        str_repeat("s", 77), 
+        $F8, $F18a, $F18b, $F18c, $F18d, $F1101, $F1102, $f1201, $f1202,
+        $F1761, $F1762, $F1763, $F1764, $F1765, $F1766, $F1767, $F1768, $F1769, $F1770, $F1771, $F1772, $F1773, $F1774,
+        $f21, $f22, $f23, $f24, $f25, $f26, $f27,
+        $f301, $f302, $f303, $f401, $f402, $f403, $f404, $f405, $f406, $f407, $f408, $f409, $f410, $f411, $f412, $f413, $f414, $f415, $f416,
+        $f505, $f5a1, $f5a2, $f5b, $f15, $f5c, $f5d, $f502,
+        $f1601, $f1602, $f1603, $f1604, $f1605, $f1606, $f1607, $f1608, $f1609, $f1610, $f1611, $f1612, $f1613, $f1614, $f14, $f6, $f7, $f7a, $f1001, $f1002
+    );
 
     if ($stmt->execute()) {
         echo "Data berhasil disimpan!";
