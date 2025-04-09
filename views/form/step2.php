@@ -4,7 +4,7 @@
     <div id="bekerja-content" class="step-2-content" style="display: none">
         <div class="mb-4">
             <label>Dalam berapa bulan Anda mendapatkan pekerjaan pertama?</label>
-            <input type="number" class="form-control" name="f502" placeholder="Masukkan jumlah bulan" />
+            <input type="number" class="form-control" name="f502" placeholder="Masukkan jumlah bulan"/>
         </div>
 
         <div class="mb-4">
@@ -17,14 +17,15 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="provinsi" class="form-label">Provinsi</label>
-                    <select id="provinsi" class="form-select" name="f5a1">
+                    <select id="provinsi" class="form-control select2" name="f5a1">
                         <option value="" selected disabled>Pilih Provinsi</option>
+                        <?php include '../backend/ts_data_kode_provinsi.php'; ?>
                         <!-- Tambahkan daftar provinsi lainnya -->
                     </select>
                 </div>
                 <div class="col-md-6">
                     <label for="kota" class="form-label">Kota/Kabupaten</label>
-                    <select id="kota" class="form-select" name="f5a2">
+                    <select id="kota" class="form-control select2" name="f5a2">
                         <option value="" selected disabled>Pilih Kota/Kabupaten</option>
                         <!-- Opsi kota/kabupaten akan dimuat berdasarkan provinsi yang dipilih -->
                     </select>
@@ -84,7 +85,7 @@
                 <input class="form-check-input" type="radio" name="f1101" value="7" id="instansi7">
                 <label class="form-check-label" for="instansi7">Lainnya, tuliskan</label>
             </div>
-            <div  class="mb-4 instansiLainnyaInput" style="display: none;">
+            <div class="mb-4 instansiLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f1102" placeholder="Tuliskan lainnya" />
             </div>
         </div>
@@ -185,81 +186,81 @@
             <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?</label>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1">
+                <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari1">Melalui koran/majalah/brosur</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f402" value="1" id="cari2">
+                <input class="form-check-input" type="checkbox" name="f402" value="1" id="cari2" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari2">Melamar ke perusahaan tanpa mengetahui lowongan yang
                     ada</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f403" value="1" id="cari3">
+                <input class="form-check-input" type="checkbox" name="f403" value="1" id="cari3" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari3">Pergi ke bursa/pameran kerja</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f404" value="1" id="cari4">
+                <input class="form-check-input" type="checkbox" name="f404" value="1" id="cari4" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari4">Mencari lewat internet/iklan online/milis</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f405" value="1" id="cari5">
+                <input class="form-check-input" type="checkbox" name="f405" value="1" id="cari5" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari5">Dihubungi oleh perusahaan</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f406" value="1" id="cari6">
+                <input class="form-check-input" type="checkbox" name="f406" value="1" id="cari6" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari6">Menghubungi Kemenakertrans</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f407" value="1" id="cari7">
+                <input class="form-check-input" type="checkbox" name="f407" value="1" id="cari7" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari7">Menghubungi agen tenaga kerja komersial/swasta</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f408" value="1" id="cari8">
+                <input class="form-check-input" type="checkbox" name="f408" value="1" id="cari8" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari8">Memeroleh informasi dari pusat/kantor pengembangan karir
                     fakultas/universitas</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f409" value="1" id="cari9">
+                <input class="form-check-input" type="checkbox" name="f409" value="1" id="cari9" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari9">Menghubungi kantor kemahasiswaan/hubungan alumni</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f410" value="1" id="cari10">
+                <input class="form-check-input" type="checkbox" name="f410" value="1" id="cari10" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari10">Membangun jejaring (network) sejak masih kuliah</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f411" value="1" id="cari11">
+                <input class="form-check-input" type="checkbox" name="f411" value="1" id="cari11" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari11">Melalui relasi (misalnya dosen, orang tua, saudara, teman,
                     dll.)</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f412" value="1" id="cari12">
+                <input class="form-check-input" type="checkbox" name="f412" value="1" id="cari12" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari12">Membangun bisnis sendiri</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f413" value="1" id="cari13">
+                <input class="form-check-input" type="checkbox" name="f413" value="1" id="cari13" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari13">Melalui penempatan kerja atau magang</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f414" value="1" id="cari14">
+                <input class="form-check-input" type="checkbox" name="f414" value="1" id="cari14" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari14">Bekerja di tempat yang sama dengan tempat kerja semasa
                     kuliah</label>
             </div>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
-                <input class="form-check-input" type="checkbox" name="f415" value="1" id="cari15">
+                <input class="form-check-input" type="checkbox" name="f415" value="1" id="cari15" data-group="mencari-pekerjaan">
                 <label class="form-check-label" for="cari15">Lainnya, tuliskan</label>
             </div>
             <div class="mb-4 cariLainnyaInput" style="display: none;">
@@ -293,22 +294,22 @@
             <label class="form-label">Apakah Anda aktif mencari pekerjaan dalam 4 minggu terakhir? Pilihlah satu
                 jawaban</label>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1001" value="1" id="cariKerja1">
-                <label class="form-check-label" for="cariKerja1">Tidak</label>
+                <input class="form-check-input" type="radio" name="f1001" value="1" id="Kerja1">
+                <label class="form-check-label" for="Kerja1">Tidak</label>
             </div>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1001" value="2" id="cariKerja2">
-                <label class="form-check-label" for="cariKerja2">Tidak, tapi saya sedang menunggu hasil lamaran
+                <input class="form-check-input" type="radio" name="f1001" value="2" id="Kerja2">
+                <label class="form-check-label" for="Kerja2">Tidak, tapi saya sedang menunggu hasil lamaran
                     kerja</label>
             </div>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1001" value="3" id="cariKerja3">
-                <label class="form-check-label" for="cariKerja3">Ya, saya akan mulai bekerja dalam 2 minggu ke
+                <input class="form-check-input" type="radio" name="f1001" value="3" id="Kerja3">
+                <label class="form-check-label" for="Kerja3">Ya, saya akan mulai bekerja dalam 2 minggu ke
                     depan</label>
             </div>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1001" value="4" id="cariKerja4">
-                <label class="form-check-label" for="cariKerja4">Ya, tapi saya belum pasti akan bekerja dalam 2 minggu
+                <input class="form-check-input" type="radio" name="f1001" value="4" id="Kerja4">
+                <label class="form-check-label" for="Kerja4">Ya, tapi saya belum pasti akan bekerja dalam 2 minggu
                     ke depan</label>
             </div>
         </div>
@@ -318,78 +319,78 @@
                 mengapa Anda mengambilnya? Jawaban bisa lebih dari satu.</label>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1601" value="1" id="alasan1">
+                <input class="form-check-input" type="checkbox" name="f1601" value="1" id="alasan1" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan1">Pertanyaan tidak sesuai; pekerjaan saya sekarang sudah
                     sesuai dengan pendidikan saya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1602" value="1" id="alasan2">
+                <input class="form-check-input" type="checkbox" name="f1602" value="1" id="alasan2" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan2">Saya belum mendapatkan pekerjaan yang lebih
                     sesuai.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1603" value="1" id="alasan3">
+                <input class="form-check-input" type="checkbox" name="f1603" value="1" id="alasan3" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan3">Di pekerjaan ini saya memeroleh prospek karir yang
                     baik.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1604" value="1" id="alasan4">
+                <input class="form-check-input" type="checkbox" name="f1604" value="1" id="alasan4" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan4">Saya lebih suka bekerja di area pekerjaan yang tidak ada
                     hubungannya dengan pendidikan saya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1605" value="1" id="alasan5">
+                <input class="form-check-input" type="checkbox" name="f1605" value="1" id="alasan5" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan5">Saya dipromosikan ke posisi yang kurang berhubungan dengan
                     pendidikan saya dibanding posisi sebelumnya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1606" value="1" id="alasan6">
+                <input class="form-check-input" type="checkbox" name="f1606" value="1" id="alasan6" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan6">Saya dapat memeroleh pendapatan yang lebih tinggi di
                     pekerjaan ini.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1607" value="1" id="alasan7">
+                <input class="form-check-input" type="checkbox" name="f1607" value="1" id="alasan7" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan7">Pekerjaan saya saat ini lebih
                     aman/terjamin/secure.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1608" value="1" id="alasan8">
+                <input class="form-check-input" type="checkbox" name="f1608" value="1" id="alasan8" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan8">Pekerjaan saya saat ini lebih menarik.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1609" value="1" id="alasan9">
+                <input class="form-check-input" type="checkbox" name="f1609" value="1" id="alasan9" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan9">Pekerjaan saya saat ini lebih memungkinkan saya mengambil
                     pekerjaan tambahan/jadwal yang fleksibel, dll.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1610" value="1" id="alasan10">
+                <input class="form-check-input" type="checkbox" name="f1610" value="1" id="alasan10" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan10">Pekerjaan saya saat ini lokasinya lebih dekat dari rumah
                     saya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1611" value="1" id="alasan11">
+                <input class="form-check-input" type="checkbox" name="f1611" value="1" id="alasan11" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan11">Pekerjaan saya saat ini dapat lebih menjamin kebutuhan
                     keluarga saya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1612" value="1" id="alasan12">
+                <input class="form-check-input" type="checkbox" name="f1612" value="1" id="alasan12" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan12">Pada awal meniti karir ini, saya harus menerima pekerjaan
                     yang tidak berhubungan dengan pendidikan saya.</label>
             </div>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
-                <input class="form-check-input" type="checkbox" name="f1613" value="1" id="alasan13">
+                <input class="form-check-input" type="checkbox" name="f1613" value="1" id="alasan13" data-group="penyesuaian-pekerjaan">
                 <label class="form-check-label" for="alasan13">Lainnya, tuliskan</label>
             </div>
             <div class="mb-4 alasanLainnyaInput" style="display: none;">
@@ -403,8 +404,7 @@
     <div id="wiraswasta-content" class="step-2-content" style="display: none">
         <div class="mb-4">
             <label>Dalam berapa bulan Anda memulai wiraswasta?</label>
-            <input type="number" class="form-control" name="f502"
-                placeholder="Masukkan jumlah bulan" />
+            <input type="number" class="form-control" name="f502" placeholder="Masukkan jumlah bulan" />
         </div>
 
         <div class="mb-4">
@@ -444,13 +444,14 @@
                 <input class="form-check-input" type="radio" name="f1101" value="7" id="instansi7w">
                 <label class="form-check-label" for="instansi7w">Lainnya, tuliskan</label>
             </div>
-            <div  class="mb-4 instansiLainnyaInput" style="display: none;">
+            <div class="mb-4 instansiLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f1102" placeholder="Tuliskan lainnya" />
             </div>
         </div>
 
         <div class="mb-4">
-            <label for="posisi_wiraswasta" class="form-label">Bila berwiraswasta, apa posisi/jabatan Anda saat ini?</label>
+            <label for="posisi_wiraswasta" class="form-label">Bila berwiraswasta, apa posisi/jabatan Anda saat
+                ini?</label>
             <select id="posisi_wiraswasta" class="form-select" name="f5c">
                 <option selected disabled>Silahkan Pilih...</option>
                 <option value="1">Founder</option>
@@ -473,28 +474,28 @@
         <div class="mb-4">
             <label class="form-label">Seberapa erat hubungan bidang studi dengan pekerjaan Anda?</label>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="1" id="hubungan1">
-                <label class="form-check-label" for="hubungan1">Sangat erat</label>
+                <input class="form-check-input" type="radio" name="f14" value="1" id="hubungan1w">
+                <label class="form-check-label" for="hubungan1w">Sangat erat</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="2" id="hubungan2">
-                <label class="form-check-label" for="hubungan2">Erat</label>
+                <input class="form-check-input" type="radio" name="f14" value="2" id="hubungan2w">
+                <label class="form-check-label" for="hubungan2w">Erat</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="3" id="hubungan3">
-                <label class="form-check-label" for="hubungan3">Cukup Erat</label>
+                <input class="form-check-input" type="radio" name="f14" value="3" id="hubungan3w">
+                <label class="form-check-label" for="hubungan3w">Cukup Erat</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="4" id="hubungan4">
-                <label class="form-check-label" for="hubungan4">Kurang Erat</label>
+                <input class="form-check-input" type="radio" name="f14" value="4" id="hubungan4w">
+                <label class="form-check-label" for="hubungan4w">Kurang Erat</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f14" value="5" id="hubungan5">
-                <label class="form-check-label" for="hubungan5">Tidak Sama Sekali</label>
+                <input class="form-check-input" type="radio" name="f14" value="5" id="hubungan5w">
+                <label class="form-check-label" for="hubungan5w">Tidak Sama Sekali</label>
             </div>
         </div>
 
@@ -502,82 +503,82 @@
             <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?</label>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1">
-                <label class="form-check-label" for="cari1">Melalui koran/majalah/brosur</label>
+                <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1-w">
+                <label class="form-check-label" for="cari1-w">Melalui koran/majalah/brosur</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f402" value="1" id="cari2">
-                <label class="form-check-label" for="cari2">Melamar ke perusahaan tanpa mengetahui lowongan yang
+                <input class="form-check-input" type="checkbox" name="f402" value="1" id="cari2-w">
+                <label class="form-check-label" for="cari2-w">Melamar ke perusahaan tanpa mengetahui lowongan yang
                     ada</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f403" value="1" id="cari3">
-                <label class="form-check-label" for="cari3">Pergi ke bursa/pameran kerja</label>
+                <input class="form-check-input" type="checkbox" name="f403" value="1" id="cari3-w">
+                <label class="form-check-label" for="cari3-w">Pergi ke bursa/pameran kerja</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f404" value="1" id="cari4">
-                <label class="form-check-label" for="cari4">Mencari lewat internet/iklan online/milis</label>
+                <input class="form-check-input" type="checkbox" name="f404" value="1" id="cari4-w">
+                <label class="form-check-label" for="cari4-w">Mencari lewat internet/iklan online/milis</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f405" value="1" id="cari5">
-                <label class="form-check-label" for="cari5">Dihubungi oleh perusahaan</label>
+                <input class="form-check-input" type="checkbox" name="f405" value="1" id="cari5-w">
+                <label class="form-check-label" for="cari5-w">Dihubungi oleh perusahaan</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f406" value="1" id="cari6">
-                <label class="form-check-label" for="cari6">Menghubungi Kemenakertrans</label>
+                <input class="form-check-input" type="checkbox" name="f406" value="1" id="cari6-w">
+                <label class="form-check-label" for="cari6-w">Menghubungi Kemenakertrans</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f407" value="1" id="cari7">
-                <label class="form-check-label" for="cari7">Menghubungi agen tenaga kerja komersial/swasta</label>
+                <input class="form-check-input" type="checkbox" name="f407" value="1" id="cari7-w">
+                <label class="form-check-label" for="cari7-w">Menghubungi agen tenaga kerja komersial/swasta</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f408" value="1" id="cari8">
-                <label class="form-check-label" for="cari8">Memeroleh informasi dari pusat/kantor pengembangan karir
+                <input class="form-check-input" type="checkbox" name="f408" value="1" id="cari8-w">
+                <label class="form-check-label" for="cari8-w">Memeroleh informasi dari pusat/kantor pengembangan karir
                     fakultas/universitas</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f409" value="1" id="cari9">
-                <label class="form-check-label" for="cari9">Menghubungi kantor kemahasiswaan/hubungan alumni</label>
+                <input class="form-check-input" type="checkbox" name="f409" value="1" id="cari9-w">
+                <label class="form-check-label" for="cari9-w">Menghubungi kantor kemahasiswaan/hubungan alumni</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f410" value="1" id="cari10">
-                <label class="form-check-label" for="cari10">Membangun jejaring (network) sejak masih kuliah</label>
+                <input class="form-check-input" type="checkbox" name="f410" value="1" id="cari10-w">
+                <label class="form-check-label" for="cari10-w">Membangun jejaring (network) sejak masih kuliah</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f411" value="1" id="cari11">
-                <label class="form-check-label" for="cari11">Melalui relasi (misalnya dosen, orang tua, saudara, teman,
+                <input class="form-check-input" type="checkbox" name="f411" value="1" id="cari11-w">
+                <label class="form-check-label" for="cari11-w">Melalui relasi (misalnya dosen, orang tua, saudara, teman,
                     dll.)</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f412" value="1" id="cari12">
-                <label class="form-check-label" for="cari12">Membangun bisnis sendiri</label>
+                <input class="form-check-input" type="checkbox" name="f412" value="1" id="cari12-w">
+                <label class="form-check-label" for="cari12-w">Membangun bisnis sendiri</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f413" value="1" id="cari13">
-                <label class="form-check-label" for="cari13">Melalui penempatan kerja atau magang</label>
+                <input class="form-check-input" type="checkbox" name="f413" value="1" id="cari13-w">
+                <label class="form-check-label" for="cari13-w">Melalui penempatan kerja atau magang</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f414" value="1" id="cari14">
-                <label class="form-check-label" for="cari14">Bekerja di tempat yang sama dengan tempat kerja semasa
+                <input class="form-check-input" type="checkbox" name="f414" value="1" id="cari14-w">
+                <label class="form-check-label" for="cari14-w">Bekerja di tempat yang sama dengan tempat kerja semasa
                     kuliah</label>
             </div>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
-                <input class="form-check-input" type="checkbox" name="f415" value="1" id="cari15">
-                <label class="form-check-label" for="cari15">Lainnya, tuliskan</label>
+                <input class="form-check-input" type="checkbox" name="f415" value="1" id="cari15-w">
+                <label class="form-check-label" for="cari15-w">Lainnya, tuliskan</label>
             </div>
             <div class="mb-4 cariLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f416" placeholder="Tuliskan lainnya" />
@@ -589,79 +590,79 @@
                 mengapa Anda mengambilnya? Jawaban bisa lebih dari satu.</label>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1601" value="1" id="alasan1">
-                <label class="form-check-label" for="alasan1">Pertanyaan tidak sesuai; pekerjaan saya sekarang sudah
+                <input class="form-check-input" type="checkbox" name="f1601" value="1" id="alasan1-w">
+                <label class="form-check-label" for="alasan1-w">Pertanyaan tidak sesuai; pekerjaan saya sekarang sudah
                     sesuai dengan pendidikan saya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1602" value="1" id="alasan2">
-                <label class="form-check-label" for="alasan2">Saya belum mendapatkan pekerjaan yang lebih
+                <input class="form-check-input" type="checkbox" name="f1602" value="1" id="alasan2-w">
+                <label class="form-check-label" for="alasan2-w">Saya belum mendapatkan pekerjaan yang lebih
                     sesuai.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1603" value="1" id="alasan3">
-                <label class="form-check-label" for="alasan3">Di pekerjaan ini saya memeroleh prospek karir yang
+                <input class="form-check-input" type="checkbox" name="f1603" value="1" id="alasan3-w">
+                <label class="form-check-label" for="alasan3-w">Di pekerjaan ini saya memeroleh prospek karir yang
                     baik.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1604" value="1" id="alasan4">
-                <label class="form-check-label" for="alasan4">Saya lebih suka bekerja di area pekerjaan yang tidak ada
+                <input class="form-check-input" type="checkbox" name="f1604" value="1" id="alasan4-w">
+                <label class="form-check-label" for="alasan4-w">Saya lebih suka bekerja di area pekerjaan yang tidak ada
                     hubungannya dengan pendidikan saya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1605" value="1" id="alasan5">
-                <label class="form-check-label" for="alasan5">Saya dipromosikan ke posisi yang kurang berhubungan dengan
+                <input class="form-check-input" type="checkbox" name="f1605" value="1" id="alasan5-w">
+                <label class="form-check-label" for="alasan5-w">Saya dipromosikan ke posisi yang kurang berhubungan dengan
                     pendidikan saya dibanding posisi sebelumnya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1606" value="1" id="alasan6">
-                <label class="form-check-label" for="alasan6">Saya dapat memeroleh pendapatan yang lebih tinggi di
+                <input class="form-check-input" type="checkbox" name="f1606" value="1" id="alasan6-w">
+                <label class="form-check-label" for="alasan6-w">Saya dapat memeroleh pendapatan yang lebih tinggi di
                     pekerjaan ini.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1607" value="1" id="alasan7">
-                <label class="form-check-label" for="alasan7">Pekerjaan saya saat ini lebih
+                <input class="form-check-input" type="checkbox" name="f1607" value="1" id="alasan7-w">
+                <label class="form-check-label" for="alasan7-w">Pekerjaan saya saat ini lebih
                     aman/terjamin/secure.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1608" value="1" id="alasan8">
-                <label class="form-check-label" for="alasan8">Pekerjaan saya saat ini lebih menarik.</label>
+                <input class="form-check-input" type="checkbox" name="f1608" value="1" id="alasan8-w">
+                <label class="form-check-label" for="alasan8-w">Pekerjaan saya saat ini lebih menarik.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1609" value="1" id="alasan9">
-                <label class="form-check-label" for="alasan9">Pekerjaan saya saat ini lebih memungkinkan saya mengambil
+                <input class="form-check-input" type="checkbox" name="f1609" value="1" id="alasan9-w">
+                <label class="form-check-label" for="alasan9-w">Pekerjaan saya saat ini lebih memungkinkan saya mengambil
                     pekerjaan tambahan/jadwal yang fleksibel, dll.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1610" value="1" id="alasan10">
-                <label class="form-check-label" for="alasan10">Pekerjaan saya saat ini lokasinya lebih dekat dari rumah
+                <input class="form-check-input" type="checkbox" name="f1610" value="1" id="alasan10-w">
+                <label class="form-check-label" for="alasan10-w">Pekerjaan saya saat ini lokasinya lebih dekat dari rumah
                     saya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1611" value="1" id="alasan11">
-                <label class="form-check-label" for="alasan11">Pekerjaan saya saat ini dapat lebih menjamin kebutuhan
+                <input class="form-check-input" type="checkbox" name="f1611" value="1" id="alasan11-w">
+                <label class="form-check-label" for="alasan11-w">Pekerjaan saya saat ini dapat lebih menjamin kebutuhan
                     keluarga saya.</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f1612" value="1" id="alasan12">
-                <label class="form-check-label" for="alasan12">Pada awal meniti karir ini, saya harus menerima pekerjaan
+                <input class="form-check-input" type="checkbox" name="f1612" value="1" id="alasan12-w">
+                <label class="form-check-label" for="alasan12-w">Pada awal meniti karir ini, saya harus menerima pekerjaan
                     yang tidak berhubungan dengan pendidikan saya.</label>
             </div>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
-                <input class="form-check-input" type="checkbox" name="f1613" value="1" id="alasan13">
-                <label class="form-check-label" for="alasan13">Lainnya, tuliskan</label>
+                <input class="form-check-input" type="checkbox" name="f1613" value="1" id="alasan13-w">
+                <label class="form-check-label" for="alasan13-w">Lainnya, tuliskan</label>
             </div>
             <div class="mb-4 alasanLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f1614" placeholder="Tuliskan lainnya" />
@@ -737,7 +738,7 @@
                 <label class="form-check-label" for="sumber_dana7">Lainnya, tuliskan</label>
             </div>
 
-            <div  class="mb-4 danaLainnyaInput" style="display: none;">
+            <div class="mb-4 danaLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f1202" placeholder="Tuliskan lainnya" />
             </div>
         </div>
@@ -751,15 +752,15 @@
                 dimasukkan</label>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
-                <input class="form-check-input" type="radio" name="f301" value="1" id="cariKerja1">
-                <label class="form-check-label" for="cariKerja1">Kira-kira</label>
+                <input class="form-check-input" type="radio" name="f301" value="1" id="cariKerja1-mk">
+                <label class="form-check-label" for="cariKerja1-mk">Kira-kira</label>
                 <input type="number" class="form-control form-control-sm w-auto" name="f302" min="0" placeholder="...">
                 Bulan sebelum lulus
             </div>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
-                <input class="form-check-input" type="radio" name="f301" value="2" id="cariKerja2">
-                <label class="form-check-label" for="cariKerja2">Kira-kira</label>
+                <input class="form-check-input" type="radio" name="f301" value="2" id="cariKerja2-mk">
+                <label class="form-check-label" for="cariKerja2-mk">Kira-kira</label>
                 <input type="number" class="form-control form-control-sm w-auto" name="f303" min="0" placeholder="...">
                 Bulan sesudah lulus
             </div>
@@ -774,82 +775,82 @@
             <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?</label>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1">
-                <label class="form-check-label" for="cari1">Melalui koran/majalah/brosur</label>
+                <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1-mk">
+                <label class="form-check-label" for="cari1-mk">Melalui koran/majalah/brosur</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f402" value="1" id="cari2">
-                <label class="form-check-label" for="cari2">Melamar ke perusahaan tanpa mengetahui lowongan yang
+                <input class="form-check-input" type="checkbox" name="f402" value="1" id="cari2-mk">
+                <label class="form-check-label" for="cari2-mk">Melamar ke perusahaan tanpa mengetahui lowongan yang
                     ada</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f403" value="1" id="cari3">
-                <label class="form-check-label" for="cari3">Pergi ke bursa/pameran kerja</label>
+                <input class="form-check-input" type="checkbox" name="f403" value="1" id="cari3-mk">
+                <label class="form-check-label" for="cari3-mk">Pergi ke bursa/pameran kerja</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f404" value="1" id="cari4">
-                <label class="form-check-label" for="cari4">Mencari lewat internet/iklan online/milis</label>
+                <input class="form-check-input" type="checkbox" name="f404" value="1" id="cari4-mk">
+                <label class="form-check-label" for="cari4-mk">Mencari lewat internet/iklan online/milis</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f405" value="1" id="cari5">
-                <label class="form-check-label" for="cari5">Dihubungi oleh perusahaan</label>
+                <input class="form-check-input" type="checkbox" name="f405" value="1" id="cari5-mk">
+                <label class="form-check-label" for="cari5-mk">Dihubungi oleh perusahaan</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f406" value="1" id="cari6">
-                <label class="form-check-label" for="cari6">Menghubungi Kemenakertrans</label>
+                <input class="form-check-input" type="checkbox" name="f406" value="1" id="cari6-mk">
+                <label class="form-check-label" for="cari6-mk">Menghubungi Kemenakertrans</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f407" value="1" id="cari7">
-                <label class="form-check-label" for="cari7">Menghubungi agen tenaga kerja komersial/swasta</label>
+                <input class="form-check-input" type="checkbox" name="f407" value="1" id="cari7-mk">
+                <label class="form-check-label" for="cari7-mk">Menghubungi agen tenaga kerja komersial/swasta</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f408" value="1" id="cari8">
-                <label class="form-check-label" for="cari8">Memeroleh informasi dari pusat/kantor pengembangan karir
+                <input class="form-check-input" type="checkbox" name="f408" value="1" id="cari8-mk">
+                <label class="form-check-label" for="cari8-mk">Memeroleh informasi dari pusat/kantor pengembangan karir
                     fakultas/universitas</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f409" value="1" id="cari9">
-                <label class="form-check-label" for="cari9">Menghubungi kantor kemahasiswaan/hubungan alumni</label>
+                <input class="form-check-input" type="checkbox" name="f409" value="1" id="cari9-mk">
+                <label class="form-check-label" for="cari9-mk">Menghubungi kantor kemahasiswaan/hubungan alumni</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f410" value="1" id="cari10">
-                <label class="form-check-label" for="cari10">Membangun jejaring (network) sejak masih kuliah</label>
+                <input class="form-check-input" type="checkbox" name="f410" value="1" id="cari10-mk">
+                <label class="form-check-label" for="cari10-mk">Membangun jejaring (network) sejak masih kuliah</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f411" value="1" id="cari11">
-                <label class="form-check-label" for="cari11">Melalui relasi (misalnya dosen, orang tua, saudara, teman,
+                <input class="form-check-input" type="checkbox" name="f411" value="1" id="cari11-mk">
+                <label class="form-check-label" for="cari11-mk">Melalui relasi (misalnya dosen, orang tua, saudara, teman,
                     dll.)</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f412" value="1" id="cari12">
-                <label class="form-check-label" for="cari12">Membangun bisnis sendiri</label>
+                <input class="form-check-input" type="checkbox" name="f412" value="1" id="cari12-mk">
+                <label class="form-check-label" for="cari12-mk">Membangun bisnis sendiri</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f413" value="1" id="cari13">
-                <label class="form-check-label" for="cari13">Melalui penempatan kerja atau magang</label>
+                <input class="form-check-input" type="checkbox" name="f413" value="1" id="cari13-mk">
+                <label class="form-check-label" for="cari13-mk">Melalui penempatan kerja atau magang</label>
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="f414" value="1" id="cari14">
-                <label class="form-check-label" for="cari14">Bekerja di tempat yang sama dengan tempat kerja semasa
+                <input class="form-check-input" type="checkbox" name="f414" value="1" id="cari14-mk">
+                <label class="form-check-label" for="cari14-mk">Bekerja di tempat yang sama dengan tempat kerja semasa
                     kuliah</label>
             </div>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
-                <input class="form-check-input" type="checkbox" name="f415" value="1" id="cari15">
-                <label class="form-check-label" for="cari15">Lainnya, tuliskan</label>
+                <input class="form-check-input" type="checkbox" name="f415" value="1" id="cari15-mk">
+                <label class="form-check-label" for="cari15-mk">Lainnya, tuliskan</label>
             </div>
             <div class="mb-4 cariLainnyaInput" style="display: none;">
                 <input type="text" class="form-control" name="f416" placeholder="Tuliskan lainnya" />
@@ -882,22 +883,22 @@
             <label class="form-label">Apakah Anda aktif mencari pekerjaan dalam 4 minggu terakhir? Pilihlah satu
                 jawaban</label>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1001" value="1" id="cariKerja1">
-                <label class="form-check-label" for="cariKerja1">Tidak</label>
+                <input class="form-check-input" type="radio" name="f1001" value="1" id="Kerja1-mk">
+                <label class="form-check-label" for="Kerja1-mk">Tidak</label>
             </div>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1001" value="2" id="cariKerja2">
-                <label class="form-check-label" for="cariKerja2">Tidak, tapi saya sedang menunggu hasil lamaran
+                <input class="form-check-input" type="radio" name="f1001" value="2" id="Kerja2-mk">
+                <label class="form-check-label" for="Kerja2-mk">Tidak, tapi saya sedang menunggu hasil lamaran
                     kerja</label>
             </div>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1001" value="3" id="cariKerja3">
-                <label class="form-check-label" for="cariKerja3">Ya, saya akan mulai bekerja dalam 2 minggu ke
+                <input class="form-check-input" type="radio" name="f1001" value="3" id="Kerja3-mk">
+                <label class="form-check-label" for="Kerja3-mk">Ya, saya akan mulai bekerja dalam 2 minggu ke
                     depan</label>
             </div>
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f1001" value="4" id="cariKerja4">
-                <label class="form-check-label" for="cariKerja4">Ya, tapi saya belum pasti akan bekerja dalam 2 minggu
+                <input class="form-check-input" type="radio" name="f1001" value="4" id="Kerja4-mk">
+                <label class="form-check-label" for="Kerja4-mk">Ya, tapi saya belum pasti akan bekerja dalam 2 minggu
                     ke depan</label>
             </div>
         </div>

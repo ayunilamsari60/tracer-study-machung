@@ -30,7 +30,7 @@ $opsi = [
 ];
 ?>
 
-<h3>Informasi Tambahan</h3>
+<h3>Step 3: Kemampuan</h3>
 <section>
     <div id="kemampuan-content" class="step-3-content" style="display: none">
         <!-- Kompetensi Content Start -->
@@ -76,7 +76,7 @@ $opsi = [
                             <tr>
                                 <!-- Kolom A -->
                                 <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                    <td><label><input type="radio" name="<?= $kodeA ?>" value="<?= $i ?>"> </label></td>
+                                    <td><label><input type="radio" class="form-check-input" name="<?= $kodeA ?>" value="<?= $i ?>"> </label></td>
                                 <?php endfor; ?>
 
                                 <!-- Kompetensi -->
@@ -84,7 +84,7 @@ $opsi = [
 
                                 <!-- Kolom B -->
                                 <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                    <td><label><input type="radio" name="<?= $kodeB ?>" value="<?= $i ?>"> </label></td>
+                                    <td><label><input type="radio" class="form-check-input" name="<?= $kodeB ?>" value="<?= $i ?>"> </label></td>
                                 <?php endfor; ?>
                             </tr>
                         <?php endforeach; ?>
