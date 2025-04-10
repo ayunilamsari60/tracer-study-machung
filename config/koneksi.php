@@ -1,8 +1,8 @@
 <?php
 // include __DIR__ . '/read_env.php';
-$host = 'localhost';
+$host = '10.50.3.43';
 $dbname = 'tracer_study';
-$username = 'root';
+$username = 'Farrel';
 $password = '';
 
 // $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
