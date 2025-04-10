@@ -1,8 +1,8 @@
 <?php
 // include __DIR__ . '/read_env.php';
-$host = '10.50.3.43';
+$host = 'localhost';
 $dbname = 'tracer_study';
-$username = 'Farrel';
+$username = 'root';
 $password = '';
 
 // $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -16,7 +16,7 @@ try {
     include __DIR__ . '/read_env.php';
 } catch (Exception $e) {
     // Optional: log error
-    echo($e->getMessage());
+    error_log($e->getMessage());
 }
 
 
