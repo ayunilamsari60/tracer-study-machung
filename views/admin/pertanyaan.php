@@ -3,13 +3,13 @@
 $title = "Dashboard";
 $custom_css = '
     <!-- tui charts Css -->
-    <link href="../assets/libs/tui-chart/tui-chart.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/tui-chart/tui-chart.min.css" rel="stylesheet" type="text/css" />
 ';
 $custom_js = '
     <!-- tui charts plugins -->
-    <script src="../assets/libs/tui-chart/tui-chart-all.min.js"></script>
-    <script src="../assets/libs/tui-chart/maps/usa.js"></script>
-    <script src="../assets/js/pages/tui-charts.init.js"></script>
+    <script src="assets/libs/tui-chart/tui-chart-all.min.js"></script>
+    <script src="assets/libs/tui-chart/maps/usa.js"></script>
+    <script src="assets/js/pages/tui-charts.init.js"></script>
 ';
 
 ob_start();

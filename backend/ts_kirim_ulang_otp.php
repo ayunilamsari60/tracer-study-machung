@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../config/koneksi.php';
-require '../vendor/autoload.php';
+require 'config/koneksi.php';
+require 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         // Batasi pengiriman OTP maksimal 2 kali sehari
         if ($otp_attempts > 2) {
             echo "Maaf, Anda hanya bisa meminta OTP sebanyak 2 kali dalam sehari.";
-            header("Location: ../views/verifikasi_otp.php?kirim_ulang=limit");
+            header("Location: /tracer-study-machung/verifikasi-otp/limit");
 
             exit();
         }
@@ -98,12 +98,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $mail->send();
 
         // Redirect dengan status sukses
-        header("Location: ../views/verifikasi_otp.php?kirim_ulang=success");
+        header("Location: /tracer-study-machung/verifikasi-otp/success");
         exit();
     } catch (Exception $e) {
         $conn->rollBack(); // Batalkan transaksi jika ada error
         error_log("Error: " . $e->getMessage()); // Logging error
-        header("Location: ../views/verifikasi_otp.php?kirim_ulang=error");
+        header("Location: /tracer-study-machung/verifikasi-otp/error");
         exit();
     }
 }

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../config/koneksi.php';
-require '../vendor/autoload.php'; // Pastikan PHPMailer sudah diinstal
+require 'config/koneksi.php';
+require 'vendor/autoload.php'; // Pastikan PHPMailer sudah diinstal
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$tahun_kelulusan || !$nama || !$email || !$no_telepon) {
         $_SESSION['error'] = "Semua data wajib diisi!";
-        header("Location: ../views/auth-register.php");
+        header("Location: /tracer-study-machung");
         exit;
     }
 
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($existingUser && $existingUser['otp_verifikasi'] == 1) {
             $_SESSION['error'] = "Email sudah terdaftar!";
-            header("Location: ../views/auth-register.php");
+            header("Location: /tracer-study-machung");
             exit;
         }
 
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Batasi pengiriman OTP maksimal 2 kali sehari
             if ($otp_attempts > 2) {
                 $_SESSION['error'] = "Email ini sudah meminta kode OTP sebanyak 2 kali dalam sehari";
-                header("Location: ../views/auth-register.php");
+                header("Location: /tracer-study-machung");
                 exit();
             }
         } else {
@@ -127,16 +127,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $conn->commit(); // Commit transaksi
 
-        header("Location: ../views/verifikasi_otp.php");
+        header("Location: /tracer-study-machung/verifikasi-otp");
         exit;
     } catch (mysqli_sql_exception $e) {
         $conn->rollback(); // Rollback jika ada error database
         $_SESSION['error'] = "Gagal menyimpan data: " . $e->getMessage();
-        header("Location: ../views/auth-register.php");
+        header("Location: /tracer-study-machung");
         exit;
     } catch (Exception $e) {
         $_SESSION['error'] = "Gagal mengirim email: " . $mail->ErrorInfo;
-        header("Location: ../views/auth-register.php");
+        header("Location: /tracer-study-machung");
         exit;
     }
 }

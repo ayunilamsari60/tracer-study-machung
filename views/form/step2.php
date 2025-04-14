@@ -21,7 +21,8 @@
                         <option value="" selected disabled>Pilih Provinsi</option>
                         <?php
                         try {
-                            include '../backend/ts_data_kode_provinsi.php';
+                            include 'backend/ts_data_kode_provinsi.php';
+
                         } catch (Exception $e) {
                             echo "Terjadi error: " . $e->getMessage();
                         }

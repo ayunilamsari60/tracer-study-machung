@@ -1,1 +1,5 @@
-config/koneksi.php
+config/
+.env
+*.log
+*.bak
+*.txt

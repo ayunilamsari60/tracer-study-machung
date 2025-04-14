@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['email'])) {
     $_SESSION['error'] = "Session expired. Silakan register ulang.";
-    header("Location: ../views/auth-register.php");
+    header("Location: /tracer-study-machung/");
     exit();
 }
 ?>
@@ -17,15 +17,15 @@ if (!isset($_SESSION['email'])) {
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/tracer-study-machung/assets/images/favicon.ico">
 
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="/tracer-study-machung/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/tracer-study-machung/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/tracer-study-machung/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="/tracer-study-machung/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
 
 </head>
@@ -36,11 +36,11 @@ if (!isset($_SESSION['email'])) {
         <div class="container">
             <div class="row">
                 <!-- Tempat menampilkan pesan sukses -->
-                <?php if (isset($_GET['kirim_ulang']) && $_GET['kirim_ulang'] == 'success'): ?>
+                <?php if (isset($_GET['status']) && $_GET['status'] == 'success'): ?>
                     <h4 class="alert alert-success text-center otp-alert">OTP baru telah dikirim ke email Anda</h4>
-                <?php elseif (isset($_GET['kirim_ulang']) && $_GET['kirim_ulang'] == 'error'): ?>
+                <?php elseif (isset($_GET['status']) && $_GET['status'] == 'error'): ?>
                     <h4 class="alert alert-danger text-center otp-alert">Gagal mengirim OTP. Silakan coba lagi!</h4>
-                <?php elseif (isset($_GET['kirim_ulang']) && $_GET['kirim_ulang'] == 'limit'): ?>
+                <?php elseif (isset($_GET['status']) && $_GET['status'] == 'limit'): ?>
                     <h4 class="alert alert-warning text-center otp-alert">Maaf, Anda hanya bisa meminta OTP sebanyak 2 kali dalam sehari.</h4>
                 <?php endif; ?>
 
@@ -73,7 +73,7 @@ if (!isset($_SESSION['email'])) {
                                                 <span class="fw-semibold"><?php echo $_SESSION['email']; ?></span>
                                             </p>
 
-                                            <form action="../backend/ts_verifikasi_otp.php" method="POST">
+                                            <form action="/tracer-study-machung/verifikasi-otp/post" method="POST">
                                                 <div class="mb-3">
                                                     <input type="text" class="form-control form-control-lg text-center" maxLength="4" id="otp-input" name="otp_kode" id="otp_kode" placeholder="Masukkan Kode OTP" required />
                                                 </div>
@@ -91,7 +91,7 @@ if (!isset($_SESSION['email'])) {
                         </div>
 
                         <div class="mt-5 text-center">
-                            <form action="../backend/ts_kirim_ulang_otp.php" method="POST">
+                            <form action="/tracer-study-machung/kirim-ulang/post" method="POST">
                                 <p>Tidak mendapatkan OTP?
                                     <button type="submit" name="resendOtp" class="fw-medium text-primary" style="border: none; background: none; cursor: pointer; color: blue;">Kirim Ulang</button>
                                 </p>
@@ -107,19 +107,19 @@ if (!isset($_SESSION['email'])) {
 
 
         <!-- JAVASCRIPT -->
-        <script src="assets/libs/jquery/jquery.min.js"></script>
-        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="assets/libs/node-waves/waves.min.js"></script>
-        <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+        <script src="/tracer-study-machung/assets/libs/jquery/jquery.min.js"></script>
+        <script src="/tracer-study-machung/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/tracer-study-machung/assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="/tracer-study-machung/assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="/tracer-study-machung/assets/libs/node-waves/waves.min.js"></script>
+        <script src="/tracer-study-machung/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
 
         <!-- two-step-verification js -->
-        <script src="assets/js/pages/two-step-verification.init.js"></script>
+        <script src="/tracer-study-machung/assets/js/pages/two-step-verification.init.js"></script>
 
         <!-- App js -->
-        <script src="assets/js/app.js"></script>
+        <script src="/tracer-study-machung/assets/js/app.js"></script>
 
         <script>
             <?php if (isset($_SESSION['error'])) { ?>

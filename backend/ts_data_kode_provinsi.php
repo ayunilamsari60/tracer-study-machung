@@ -1,5 +1,5 @@
 <?php
-require '../config/koneksi.php'; // Panggil koneksi database
+require 'config/koneksi.php'; // Panggil koneksi database
 
 $query = "SELECT * FROM ts_master_provinsi";
 $result = $conn->query($query);

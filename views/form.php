@@ -46,9 +46,12 @@
             box-shadow: none !important;
             /* glow merah */
         }
-        body, html, .container {
-  overflow-x: hidden !important;
-}
+
+        body,
+        html,
+        .container {
+            overflow-x: hidden !important;
+        }
     </style>
 </head>
 
@@ -57,17 +60,16 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Form Mahasiswa - Pekerjaan</h4>
-                <form id="job-form-wizard" action="submit.php" method="POST">
+                <form id="job-form-wizard" action="form/submit" method="POST">
                     <div id="form-alert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
                         <b><span id="form-alert-text">Pesan error di sini...</span></b>
                     </div>
-
-
-                    <?php include 'form/step1.php'; ?>
-
-                    <?php include 'form/step2.php'; ?>
-
-                    <?php include 'form/step3.php'; ?>
+                    <?php
+                    // Melanjutkan kode lain di form.php
+                    include 'form/step1.php';
+                    include 'form/step2.php';
+                    include 'form/step3.php'; 
+                    ?>
 
                 </form>
             </div>
@@ -251,31 +253,50 @@
                 },
 
                 onFinished: function (event, currentIndex) {
-                    // let isValid = true;
+                    let isValid = true;
 
-                    // // Reset error
-                    // $(".is-invalid").removeClass("is-invalid");
+                    // Reset error
+                    $(".is-invalid").removeClass("is-invalid");
 
-                    // // Validasi semua radio group di step-3-content
-                    // $(".step-3-content").find("input[type=radio]").each(function () {
-                    //     let name = $(this).attr("name");
-                    //     if ($(".step-3-content input[name='" + name + "']:checked").length === 0) {
-                    //         // Jika belum ada yang dipilih, tandai semua radio dalam group sebagai error
-                    //         $(".step-3-content input[name='" + name + "']").addClass("is-invalid");
-                    //         isValid = false;
-                    //     } else {
-                    //         $(".step-3-content input[name='" + name + "']").removeClass("is-invalid");
-                    //     }
-                    // });
+                    // Cek apakah bagian tidak-bekerja aktif
+                    const isTidakBekerjaActive = $("#tidak-bekerja-content").is(":visible");
 
-                    // if (!isValid) {
-                    //     tampilkanAlert("Mohon isi semua pertanyaan di step 3 sebelum menyelesaikan!");
-                    //     return false;
-                    // }
+                    if (isTidakBekerjaActive) {
+                        // Validasi UMC5 (input alasan belum bekerja)
+                        const alasan = $("input[name='UMC5']").val().trim();
+                        if (alasan === "") {
+                            $("input[name='UMC5']").addClass("is-invalid");
+                            tampilkanAlert("Mohon isi alasan mengapa Anda belum memungkinkan untuk bekerja!");
+                            return false;
+                        }
 
+                        // Skip validasi step 3 karena tidak diperlukan
+                        $("#form-alert").addClass("d-none");
+                        $("#job-form-wizard").submit();
+                        return;
+                    }
+
+                    // Kalau bukan 'tidak bekerja', validasi step 3 seperti biasa
+                    $(".step-3-content").find("input[type=radio]").each(function () {
+                        let name = $(this).attr("name");
+                        if ($(".step-3-content input[name='" + name + "']:checked").length === 0) {
+                            $(".step-3-content input[name='" + name + "']").addClass("is-invalid");
+                            isValid = false;
+                        } else {
+                            $(".step-3-content input[name='" + name + "']").removeClass("is-invalid");
+                        }
+                    });
+
+                    if (!isValid) {
+                        tampilkanAlert("Mohon isi semua pertanyaan di step 3 sebelum menyelesaikan!");
+                        return false;
+                    }
+
+                    // Jika semua valid
                     $("#form-alert").addClass("d-none");
                     $("#job-form-wizard").submit();
-                },
+                }
+
             });
         });
     </script>
@@ -325,7 +346,7 @@
 
                 $kota.html('<option>Loading...</option>');
 
-                $.post('../backend/ts_data_kode_kabupaten_kota.php', {
+                $.post('backend/ts_data_kode_kabupaten_kota.php', {
                     kode_provinsi: kodeProvinsi
                 }, function (data) {
                     $kota.html(data);

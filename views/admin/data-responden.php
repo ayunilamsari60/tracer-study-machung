@@ -1,6 +1,6 @@
 <!-- dashboard.php -->
 <?php
-include '../../config/koneksi.php';
+include 'config/koneksi.php';
 $title = "Data Responden"; // Judul halaman
 $custom_css = '
         <!-- DataTables -->
@@ -61,14 +61,14 @@ $custom_js = '
 </script>
 ';
 // Ambil data dari tabel mahasiswa
-$query = "SELECT * FROM mahasiswa";
+$query = "SELECT * FROM ts_data_mahasiswa";
 $result = $conn->query($query);
 // Ambil data fakultas unik
-$fakultasQuery = "SELECT DISTINCT fakultas FROM mahasiswa";
+$fakultasQuery = "SELECT DISTINCT fakultas FROM ts_data_mahasiswa";
 $fakultasResult = $conn->query($fakultasQuery);
 
 // Ambil data program studi unik
-$prodiQuery = "SELECT DISTINCT nama_prodi FROM mahasiswa";
+$prodiQuery = "SELECT DISTINCT nama_prodi FROM ts_data_mahasiswa";
 $prodiResult = $conn->query($prodiQuery);
 
 ob_start(); // Mulai output buffering

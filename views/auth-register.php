@@ -45,7 +45,7 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="p-2">
-                                <form id="registerForm" action="../backend/ts_register_mahasiswa.php" method="POST"
+                                <form id="registerForm" action="register/post" method="POST"
                                     class="mt-4">
                                     <div class="mb-3">
                                         <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
@@ -117,7 +117,7 @@
             namaSelect.innerHTML = '<option value="">Loading...</option>';
             namaSelect.disabled = true;
 
-            fetch("../backend/ts_get_nama_mahasiswa.php", {
+            fetch("backend/ts_get_nama_mahasiswa.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: "tahun_lulus=" + encodeURIComponent(tahun),

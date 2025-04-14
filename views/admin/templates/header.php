@@ -30,7 +30,7 @@
         <div class="d-flex">
 
         <div class="d-flex align-items-center">
-            <a href="logout.php" class="text-danger d-flex align-items-center">
+            <a href="/admin/logout" class="text-danger d-flex align-items-center">
                 <i class="bx bx-log-out font-size-16 align-middle me-1"></i>
                 <span>Keluar</span>
             </a>
