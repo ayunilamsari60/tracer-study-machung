@@ -73,7 +73,9 @@
     margin: 0;
     position: relative;
     vertical-align: middle;
-    width: 100% !important;
+    /* width: 100% !important; */
+    min-width: 99.9% !important;
+    width: auto !important;
 }
 
 .select2-container .select2-selection--single {

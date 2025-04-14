@@ -3,9 +3,12 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form Mahasiswa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
@@ -43,6 +46,9 @@
             box-shadow: none !important;
             /* glow merah */
         }
+        body, html, .container {
+  overflow-x: hidden !important;
+}
     </style>
 </head>
 
@@ -138,26 +144,41 @@
                         let isValid = true;
 
                         // Validasi input
-                        $(".step-2-content input:visible:not(:disabled)").each(function () {
-                            const type = $(this).attr("type");
+                        // Dapatkan container yang sedang aktif
+                        const activeContainer = $(".step-2-content:visible");
+                        let radioNames = [];
+
+                        activeContainer.find("input:visible:not(:disabled)").each(function () {
+                            const $input = $(this);
+                            const type = $input.attr("type");
 
                             if (type === "radio") {
-                                const name = $(this).attr("name");
-                                if ($(`input[name='${name}']:checked`).length === 0) {
-                                    $(`input[name='${name}']`).addClass("is-invalid");
-                                    isValid = false;
-                                } else {
-                                    $(`input[name='${name}']`).removeClass("is-invalid");
+                                const name = $input.attr("name");
+
+                                // Validasi hanya 1x per grup name radio
+                                if (!radioNames.includes(name)) {
+                                    radioNames.push(name);
+
+                                    const radios = activeContainer.find(`input[type='radio'][name='${name}']:visible:not(:disabled)`);
+                                    const isChecked = radios.is(":checked");
+
+                                    if (!isChecked) {
+                                        radios.addClass("is-invalid");
+                                        isValid = false;
+                                    } else {
+                                        radios.removeClass("is-invalid");
+                                    }
                                 }
                             } else {
-                                if (!$(this).is("[readonly]") && $(this).val().trim() === "") {
-                                    $(this).addClass("is-invalid");
+                                if (!$input.is("[readonly]") && $input.val().trim() === "") {
+                                    $input.addClass("is-invalid");
                                     isValid = false;
                                 } else {
-                                    $(this).removeClass("is-invalid");
+                                    $input.removeClass("is-invalid");
                                 }
                             }
                         });
+
 
                         // ✅ 2. Validasi checkbox group (minimal 1 per group)
                         let groupNames = [];
@@ -230,27 +251,27 @@
                 },
 
                 onFinished: function (event, currentIndex) {
-                    let isValid = true;
+                    // let isValid = true;
 
-                    // Reset error
-                    $(".is-invalid").removeClass("is-invalid");
+                    // // Reset error
+                    // $(".is-invalid").removeClass("is-invalid");
 
-                    // Validasi semua radio group di step-3-content
-                    $(".step-3-content").find("input[type=radio]").each(function () {
-                        let name = $(this).attr("name");
-                        if ($(".step-3-content input[name='" + name + "']:checked").length === 0) {
-                            // Jika belum ada yang dipilih, tandai semua radio dalam group sebagai error
-                            $(".step-3-content input[name='" + name + "']").addClass("is-invalid");
-                            isValid = false;
-                        } else {
-                            $(".step-3-content input[name='" + name + "']").removeClass("is-invalid");
-                        }
-                    });
+                    // // Validasi semua radio group di step-3-content
+                    // $(".step-3-content").find("input[type=radio]").each(function () {
+                    //     let name = $(this).attr("name");
+                    //     if ($(".step-3-content input[name='" + name + "']:checked").length === 0) {
+                    //         // Jika belum ada yang dipilih, tandai semua radio dalam group sebagai error
+                    //         $(".step-3-content input[name='" + name + "']").addClass("is-invalid");
+                    //         isValid = false;
+                    //     } else {
+                    //         $(".step-3-content input[name='" + name + "']").removeClass("is-invalid");
+                    //     }
+                    // });
 
-                    if (!isValid) {
-                        tampilkanAlert("Mohon isi semua pertanyaan di step 3 sebelum menyelesaikan!");
-                        return false;
-                    }
+                    // if (!isValid) {
+                    //     tampilkanAlert("Mohon isi semua pertanyaan di step 3 sebelum menyelesaikan!");
+                    //     return false;
+                    // }
 
                     $("#form-alert").addClass("d-none");
                     $("#job-form-wizard").submit();
@@ -370,20 +391,22 @@
                     container.hide().find("input").val("").prop("required", false);
                 }
             });
-
-            $('input[name="f301"]').on('change', function () {
+            $('.step-2-content input[name="f302"], .step-2-content input[name="f303"]').prop('readonly', true);
+            $('.step-2-content input[name="f301"]').on('change', function () {
                 const selectedValue = $(this).val();
+                const container = $(this).closest(".step-2-content");
 
-                // Matikan semua input number dulu
-                $('input[name="f302"], input[name="f303"]').prop('readonly', true).val('');
+                // Semua input number di container ini diset readonly dan dikosongkan
+                container.find('input[name="f302"], input[name="f303"]').prop('readonly', true).val('');
 
-                // Aktifkan input sesuai radio yang dipilih
+                // Aktifkan input sesuai nilai radio
                 if (selectedValue === "1") {
-                    $('input[name="f302"]').prop('readonly', false);
+                    container.find('input[name="f302"]').prop('readonly', false);
                 } else if (selectedValue === "2") {
-                    $('input[name="f303"]').prop('readonly', false);
+                    container.find('input[name="f303"]').prop('readonly', false);
                 }
             });
+
         });
     </script>
 </body>

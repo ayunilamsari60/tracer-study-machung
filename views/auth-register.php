@@ -16,6 +16,12 @@
     <link href="assets/css/app.min.css" rel="stylesheet" />
     <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" />
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        body,
+        html {
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,46 +45,54 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="p-2">
-                                <form id="registerForm" action="../backend/ts_register_mahasiswa.php" method="POST" class="mt-4">
+                                <form id="registerForm" action="../backend/ts_register_mahasiswa.php" method="POST"
+                                    class="mt-4">
                                     <div class="mb-3">
                                         <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
-                                        <select id="tahun_lulus" name="tahun_lulus" class="form-select" required onchange="updateNamaMahasiswa()">
+                                        <select id="tahun_lulus" name="tahun_lulus" class="form-select" required
+                                            onchange="updateNamaMahasiswa()">
                                             <option value="" selected disabled>Pilih...</option>
                                             <!-- Loop dengan PHP -->
-                                             <?php for ($tahun = 2015; $tahun <= 2024; $tahun++) { ?>
-                                            <option value="<?php echo $tahun; ?>"><?php echo $tahun; ?></option>
+                                            <?php for ($tahun = 2015; $tahun <= 2024; $tahun++) { ?>
+                                                <option value="<?php echo $tahun; ?>"><?php echo $tahun; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label">Nama Mahasiswa <span class="text-danger">*</span></label>
-                                        <select id="nama" name="nama" class="form-control select2">
+                                        <label class="form-label">Nama Mahasiswa <span
+                                                class="text-danger">*</span></label>
+                                        <select id="nama" name="nama" class="form-control select2" required>
                                             <option>Cari...</option>
                                         </select>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="text" id="email" name="email" class="form-control" placeholder="Masukkan Email" required>
+                                        <input type="text" id="email" name="email" class="form-control"
+                                            placeholder="Masukkan Email" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">No. Telepon <span class="text-danger">*</span></label>
-                                        <input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="Masukkan No. Telepon" required>
+                                        <input type="text" id="no_telepon" name="no_telepon" class="form-control"
+                                            placeholder="Masukkan No. Telepon" required>
                                     </div>
 
                                     <div class="mt-4 d-grid">
-                                        <button id="btn-daftar" class="btn btn-primary waves-effect waves-light" type="submit">Daftar</button>
+                                        <button id="btn-daftar" class="btn btn-primary waves-effect waves-light"
+                                            type="submit">Daftar</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <p>© SI Trace Study <script>
+                        <p>© SI Trace Study
+                            <script>
                                 document.write(new Date().getFullYear())
-                            </script>, Crafted with <i class="mdi mdi-heart text-danger"></i> by Ma Chung</p>
+                            </script>, Crafted with <i class="mdi mdi-heart text-danger"></i> by Ma Chung
+                        </p>
                     </div>
                 </div>
             </div>
@@ -90,33 +104,36 @@
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/libs/select2/js/select2.min.js"></script>
     <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
-    <script src="assets/js/app.js"></script>
+    <!-- <script src="assets/js/app.js"></script> -->
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".select2").select2();
         });
         function updateNamaMahasiswa() {
-            var tahun = document.getElementById("tahun_lulus").value;
-            var namaSelect = document.getElementById("nama");
+            const tahun = document.getElementById("tahun_lulus").value;
+            const namaSelect = document.getElementById("nama");
 
-            // Hapus semua opsi sebelum menambahkan data baru
             namaSelect.innerHTML = '<option value="">Loading...</option>';
+            namaSelect.disabled = true;
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "../backend/ts_get_nama_mahasiswa.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    namaSelect.innerHTML = xhr.responseText; // Isi langsung dengan opsi HTML
-                } else {
-                    namaSelect.innerHTML = '<option value="">Tidak Ada data</option>';
-                }
-            };
-            xhr.send("tahun_lulus=" + tahun);
+            fetch("../backend/ts_get_nama_mahasiswa.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "tahun_lulus=" + encodeURIComponent(tahun),
+            })
+                .then(response => response.text())
+                .then(data => {
+                    namaSelect.innerHTML = data;
+                    namaSelect.disabled = false;
+                })
+                .catch(() => {
+                    namaSelect.innerHTML = '<option value="">Gagal memuat data</option>';
+                    namaSelect.disabled = false;
+                });
         }
 
-        document.getElementById("registerForm").addEventListener("submit", function(event) {
+        document.getElementById("registerForm").addEventListener("submit", function (event) {
             Swal.fire({
                 title: 'Proses...',
                 text: 'Mohon menunggu sebentar',
@@ -130,7 +147,7 @@
                 text: '<?php echo $_SESSION['error']; ?>',
                 icon: 'error'
             });
-        <?php unset($_SESSION['error']);
+            <?php unset($_SESSION['error']);
         } ?>
     </script>
 </body>

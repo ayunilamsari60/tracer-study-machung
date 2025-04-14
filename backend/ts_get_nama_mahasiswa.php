@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tahun_lulus'])) {
     }
 
     // Gunakan MySQLi untuk prepared statement
-    $stmt = $conn->prepare("SELECT nama FROM ts_data_mahasiswa WHERE tahun_kelulusan = ?");
+    $stmt = $conn->prepare("SELECT nama_mahasiswa FROM ts_data_mahasiswa WHERE tahun_lulus = ?");
     $stmt->bind_param("i", $tahun); // "i" untuk integer
     $stmt->execute();
     $result = $stmt->get_result();
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tahun_lulus'])) {
     // Mengambil semua data hanya dari kolom "nama" sebagai array
     $data_mahasiswa = [];
     while ($row = $result->fetch_assoc()) {
-        $data_mahasiswa[] = $row['nama'];
+        $data_mahasiswa[] = $row['nama_mahasiswa'];
     }
 
     // Debug: Cek apakah data ditemukan
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tahun_lulus'])) {
     }
 
     // Jika data ada, kirim dalam format HTML
-    echo '<option value="">Pilih Nama</option>';
+    echo '<option value=""selected disabled>Pilih Nama</option>';
     foreach ($data_mahasiswa as $nama) {
         echo '<option value="' . htmlspecialchars($nama) . '">' . htmlspecialchars($nama) . '</option>';
     }
