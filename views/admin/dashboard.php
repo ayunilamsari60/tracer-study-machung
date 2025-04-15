@@ -24,12 +24,12 @@ ob_start();
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Starter Page</h4>
+            <h4 class="mb-sm-0 font-size-18">Dashboard</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Utility</a></li>
-                    <li class="breadcrumb-item active">Starter Page</li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tracerstudy</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </div>
         </div>
@@ -43,7 +43,7 @@ ob_start();
                     <div class="col-7">
                         <div class="text-primary p-4">
                             <h5 class="text-primary mb-1">Selamat Datang!</h5>
-                            <h2 class="text-primary fw-bold">Ayu Nilam Sari</h2>
+                            <h2 class="text-primary fw-bold"><?= htmlspecialchars($_SESSION['username']) ?></h2>
                         </div>
                     </div>
                     <div class="col-5 d-flex justify-content-end align-items-end pe-3 pb-2">

@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="#" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="../assets/images/logo.svg" alt="" height="22">
+                        <img src="assets/images/logo.svg" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="../assets/images/logo-dark.png" alt="" height="17">
+                        <img src="assets/images/logo-dark.png" alt="" height="17">
                     </span>
                 </a>
 
                 <a href="#" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="../assets/images/logo-light.svg" alt="" height="22">
+                        <img src="assets/images/logo-light.svg" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="../assets/images/logo-light.png" alt="" height="19">
+                        <img src="assets/images/logo-light.png" alt="" height="19">
                     </span>
                 </a>
             </div>
@@ -30,7 +30,7 @@
         <div class="d-flex">
 
         <div class="d-flex align-items-center">
-            <a href="/admin/logout" class="text-danger d-flex align-items-center">
+            <a href="admin/logout" class="text-danger d-flex align-items-center">
                 <i class="bx bx-log-out font-size-16 align-middle me-1"></i>
                 <span>Keluar</span>
             </a>

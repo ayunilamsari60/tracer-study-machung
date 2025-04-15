@@ -12,13 +12,6 @@ $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
-try {
-    include __DIR__ . '/read_env.php';
-} catch (Exception $e) {
-    // Optional: log error
-    error_log($e->getMessage());
-}
-
 
 date_default_timezone_set('Asia/Jakarta');
 ?>

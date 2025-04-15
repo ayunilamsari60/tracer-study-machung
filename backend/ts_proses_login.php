@@ -1,16 +1,20 @@
 <?php
 session_start();
-
-// Username dan password statis (bisa kamu ganti sesuai keinginan)
-$valid_username = "admin";
-$valid_password = "123456";
+include "config/koneksi.php"; // Ganti dengan path ke config.php
 
 // Ambil input dari form
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
+// Hindari SQL Injection
+$username = mysqli_real_escape_string($conn, $username);
+
+// Cek user di database
+$query = mysqli_query($conn, "SELECT * FROM ts_admin WHERE username = '$username'");
+$user = mysqli_fetch_assoc($query);
 // Validasi login
-if ($username === $valid_username && $password === $valid_password) {
+if ($user && password_verify($password, $user['password'])) {
+    // Jika user ditemukan, set session
     $_SESSION['logged_in'] = true;
     $_SESSION['username'] = $username;
     header("Location: /tracer-study-machung/admin");

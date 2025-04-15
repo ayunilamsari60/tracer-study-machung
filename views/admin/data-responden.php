@@ -4,31 +4,37 @@ include 'config/koneksi.php';
 $title = "Data Responden"; // Judul halaman
 $custom_css = '
         <!-- DataTables -->
-        <link href="../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
         <!-- App favicon -->
     `   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 ';
 $custom_js = '
         <!-- Datatable JS -->
-        <script src="../assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="../assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="../assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="../assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-        <script src="../assets/libs/jszip/jszip.min.js"></script>
-        <script src="../assets/libs/pdfmake/build/pdfmake.min.js"></script>
-        <script src="../assets/libs/pdfmake/build/vfs_fonts.js"></script>
-        <script src="../assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="../assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="../assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-        <script src="../assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="../assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-        <script src="../assets/js/pages/datatables.init.js"></script>
+        <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+        <script src="assets/libs/jszip/jszip.min.js"></script>
+        <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+        <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+        <script src="assets/js/pages/datatables.init.js"></script>
+        <script src="assets/js/app.js"></script>
+
         <script>
     $(document).ready(function () {
         var table = $("#datatables").DataTable({
+        "pageLength": 10,
+        "processing": true,
+        "deferRender": true,
+
         "language": {
             "zeroRecords": "Tidak ada data yang tersedia",
         },
@@ -116,7 +122,8 @@ ob_start(); // Mulai output buffering
                 <!-- Tahun Lulus -->
                 <div class="col-md-4">
                     <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
-                    <select id="tahun_lulus" name="tahun_lulus" class="form-select" required onchange="updateNamaMahasiswa()">
+                    <select id="tahun_lulus" name="tahun_lulus" class="form-select" required
+                        onchange="updateNamaMahasiswa()">
                         <option value="" selected disabled>Pilih...</option>
                         <?php
                         for ($tahun = 2000; $tahun <= 2023; $tahun++) {

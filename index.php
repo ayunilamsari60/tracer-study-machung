@@ -44,12 +44,7 @@ route('GET', '/admin', function () {
     require 'views/admin/dashboard.php';
 });
 route('GET', '/admin/data-responden', function () {
-    session_start();
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-        header("Location: /tracer-study-machung/admin/login");
-        exit;
-    }
-    require 'views/admin/data-responden.php';
+    require 'views/admin/p.php';
 });
 
 route('GET', '/admin/login', function () {
@@ -66,6 +61,7 @@ route('POST', '/admin/login', function () {
 });
 
 route('GET', '/admin/logout', function () {
+    session_start();
     session_destroy();
     header("Location: /tracer-study-machung/admin/login");
     exit;

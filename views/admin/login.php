@@ -1,5 +1,4 @@
 <?php
-
 // Cek jika ada error dari login
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 ?>
