@@ -1,8 +1,10 @@
 <?php
+session_start();
 require 'config/koneksi.php'; // Panggil koneksi database
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil data dari form
+    $id_register = $_SESSION['id_register'] ?? null;
 
     // Step 1 data Start
     $F8 = isset($_POST["F8"]) ? $_POST["F8"] : '';
@@ -140,20 +142,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // echo "</pre>";
 
     // Query untuk menyimpan data
-    $sql = "INSERT INTO data_table 
-            (F8, F18a, F18b, F18c, F18d, F1101, F1102, F1201, F1202, 
+    $sql = "INSERT INTO submit_data 
+            (id_register, F8, F18a, F18b, F18c, F18d, F1101, F1102, F1201, F1202, 
             F1761, F1762, F1763, F1764, F1765, F1766, F1767, F1768, F1769, F1770, F1771, F1772, F1773, F1774, 
             f21, f22, f23, f24, f25, f26, f27, 
             f301, f302, f303, f401, f402, f403, f404, f405, f406, f407, f408, f409, f410, f411, f412, f413, f414, f415, f416,
             f505, f5a1, f5a2, f5b, f15, f5c, f5d, f502,
             UMC1, UMC2, UMC3, UMC4, UMC5,
             f1601, f1602, f1603, f1604, f1605, f1606, f1607, f1608, f1609, f1610, f1611, f1612, f1613, f1614, f14, f6, f7, f7a, f1001, f1002)
-            VALUES (" . implode(',', array_fill(0, 82, '?')) . ")";
+            VALUES (" . implode(',', array_fill(0, 83, '?')) . ")";
 
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        str_repeat("s", 82), 
+        "i" . str_repeat("s", 82), 
+        $id_register,
         $F8, $F18a, $F18b, $F18c, $F18d, $F1101, $F1102, $f1201, $f1202,
         $F1761, $F1762, $F1763, $F1764, $F1765, $F1766, $F1767, $F1768, $F1769, $F1770, $F1771, $F1772, $F1773, $F1774,
         $f21, $f22, $f23, $f24, $f25, $f26, $f27,

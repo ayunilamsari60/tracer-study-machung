@@ -1,35 +1,26 @@
 <?php
-require '../config/koneksi.php'; // Pastikan koneksi benar
+require '../config/koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tahun_lulus'])) {
     $tahun = $_POST['tahun_lulus'];
 
-    // Debug: Cek apakah tahun terkirim
     if (empty($tahun)) {
         die("Error: Tahun tidak dikirim!");
     }
 
-    // Gunakan MySQLi untuk prepared statement
-    $stmt = $conn->prepare("SELECT nama_mahasiswa FROM ts_data_mahasiswa WHERE tahun_lulus = ?");
-    $stmt->bind_param("i", $tahun); // "i" untuk integer
+    // Ganti query agar ambil id_user dan nama
+    $stmt = $conn->prepare("SELECT id_user, nama FROM ts_data_mahasiswa1 WHERE thn_ajaran = ?");
+    $stmt->bind_param("i", $tahun);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Mengambil semua data hanya dari kolom "nama" sebagai array
-    $data_mahasiswa = [];
-    while ($row = $result->fetch_assoc()) {
-        $data_mahasiswa[] = $row['nama_mahasiswa'];
-    }
-
-    // Debug: Cek apakah data ditemukan
-    if (empty($data_mahasiswa)) {
-        die("Error: Tidak ada data untuk tahun $tahun!");
-    }
-
-    // Jika data ada, kirim dalam format HTML
-    echo '<option value=""selected disabled>Pilih Nama</option>';
-    foreach ($data_mahasiswa as $nama) {
-        echo '<option value="' . htmlspecialchars($nama) . '">' . htmlspecialchars($nama) . '</option>';
+    if ($result->num_rows === 0) {
+        echo '<option value="" selected disabled>Tidak ada data mahasiswa pada tahun ini</option>';
+    } else {
+        echo '<option value="" selected disabled>Pilih Nama</option>';
+        while ($row = $result->fetch_assoc()) {
+            echo '<option value="' . htmlspecialchars($row['id_user']) . '">' . htmlspecialchars($row['nama']) . '</option>';
+        }
     }
 
     $stmt->close();
@@ -37,5 +28,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tahun_lulus'])) {
     exit();
 }
 
-// Jika tidak ada request POST
 die("Error: Request tidak valid!");

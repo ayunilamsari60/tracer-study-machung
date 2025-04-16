@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $conn->begin_transaction(); // Mulai transaksi
 
         // Ambil data pengguna dari database
-        $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM ts_register_mahasiswa WHERE email = ?");
+        $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM register_mahasiswa WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $otp_kadaluwarsa = date("Y-m-d H:i:s", strtotime("+10 minutes"));
 
         // Update OTP, jumlah pengiriman, dan updated_at di database
-        $stmt = $conn->prepare("UPDATE ts_register_mahasiswa 
+        $stmt = $conn->prepare("UPDATE register_mahasiswa 
                                 SET otp_kode = ?, otp_kadaluwarsa = ?, otp_pengiriman = ?, updated_at = NOW() 
                                 WHERE email = ?");
         $stmt->bind_param('ssis', $otp_kode, $otp_kadaluwarsa, $otp_attempts, $email);

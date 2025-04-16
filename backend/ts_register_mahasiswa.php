@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->begin_transaction(); // Mulai transaksi
 
         // Cek apakah email sudah terdaftar
-        $stmt = $conn->prepare("SELECT otp_verifikasi FROM ts_register_mahasiswa WHERE email = ?");
+        $stmt = $conn->prepare("SELECT otp_verifikasi FROM register_mahasiswa WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Ambil data pengguna dari database untuk mengecek jumlah permintaan OTP
-        $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM ts_register_mahasiswa WHERE email = ?");
+        $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM register_mahasiswa WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -69,18 +69,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insert atau Update data
         $stmt = $conn->prepare("
-            INSERT INTO ts_register_mahasiswa (tahun_kelulusan, nama, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman) 
-            VALUES (?, ?, ?, ?, ?, ?, 0, ?)
+            INSERT INTO register_mahasiswa (id_user, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman) 
+            VALUES (?, ?, ?, ?, ?, 0, ?)
             ON DUPLICATE KEY UPDATE 
-            tahun_kelulusan = VALUES(tahun_kelulusan), 
-            nama = VALUES(nama), 
+            id_user = VALUES(id_user),
             no_telepon = VALUES(no_telepon),
             otp_kode = VALUES(otp_kode), 
             otp_kadaluwarsa = VALUES(otp_kadaluwarsa), 
             otp_verifikasi = 0,
             otp_pengiriman = VALUES(otp_pengiriman)
         ");
-        $stmt->bind_param("isssssi", $tahun_kelulusan, $nama, $email, $no_telepon, $otp_kode, $otp_kadaluwarsa, $otp_attempts);
+        $stmt->bind_param("issssi", $nama, $email, $no_telepon, $otp_kode, $otp_kadaluwarsa, $otp_attempts);
         $stmt->execute();
         $stmt->close();
 

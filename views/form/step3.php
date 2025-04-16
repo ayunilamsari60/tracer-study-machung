@@ -99,8 +99,7 @@ $opsi = [
         <!-- Pertanyaan Content Start -->
         <div class="mb-3">
         <label for="label-content">
-                Pada saat lulus, pada tingkat mana kompetensi di bawah ini anda kuasai? (A)  
-                Pada saat ini, pada tingkat mana kompetensi di bawah ini diperlukan dalam pekerjaan? (B) <span class="text-danger">*(Wajib diisi)</span>
+        Menurut anda seberapa besar penekanan pada metode pembelajaran dibawah ini dilaksanakan di program studi anda? <span class="text-danger">*(Wajib diisi)</span>
         </label>
 
 

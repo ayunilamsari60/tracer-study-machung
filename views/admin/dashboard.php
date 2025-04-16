@@ -1,5 +1,6 @@
 <!-- dashboard.php -->
 <?php
+include "backend/ts_dashboard.php"; // Mengambil data dari backend
 $title = "Dashboard";
 $custom_css = '
     <!-- tui charts Css -->
@@ -19,6 +20,7 @@ $custom_js = '
     <!--<script src="/tracer-study-machung/assets/js/app.js"></script>-->
 ';
 ob_start();
+
 ?>
 
 <div class="row">
@@ -60,7 +62,7 @@ ob_start();
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-muted fw-medium">Alumni Sudah Mengisi Form</p>
-                                <h3 class="mb-6">0</h3>
+                                <h3 class="mb-6"><?php  echo $total_submit;?></h3>
                             </div>
 
                             <div class="flex-shrink-0 align-self-center">
@@ -81,7 +83,7 @@ ob_start();
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-muted fw-medium">Alumni Belum Mengisi Form</p>
-                                <h3 class="mb-6">1230</h3>
+                                <h3 class="mb-6"><?php echo $total_belum_submit ?></h3>
                             </div>
 
                             <div class="flex-shrink-0 align-self-center">
@@ -113,7 +115,7 @@ ob_start();
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="text-muted fw-medium"">Jumlah Pengisian Berdasarkan Tahun</h5>
+                        <h5 class="text-muted fw-medium">Jumlah Pengisian Berdasarkan Tahun</h5>
 
                         <div id="spline_area" class="apex-charts" dir="ltr"></div>                      
                     </div>
