@@ -35,16 +35,19 @@ route('POST', '/form/submit', function () {
     require 'backend/ts_form_submit.php';
 });
 
+// Admin Routes
+
 route('GET', '/admin', function () {
-    session_start();
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-        header("Location: /tracer-study-machung/admin/login");
-        exit;
-    }
+    auth_check();
     require 'views/admin/dashboard.php';
 });
 route('GET', '/admin/data-responden', function () {
-    require 'views/admin/p.php';
+    auth_check();
+    require 'views/admin/data-responden.php';
+});
+route('GET', '/admin/pertanyaan', function () {
+    auth_check();
+    require 'views/admin/pertanyaan.php';
 });
 
 route('GET', '/admin/login', function () {
@@ -62,7 +65,21 @@ route('POST', '/admin/login', function () {
 
 route('GET', '/admin/logout', function () {
     session_start();
+    include "config/koneksi.php";
+
+    // Hapus token dari DB juga
+    if (isset($_SESSION['user_id'])) {
+        $conn->query("UPDATE ts_admin SET remember_token = NULL WHERE id = " . $_SESSION['user_id']);
+    }
+    session_unset();
     session_destroy();
-    header("Location: /tracer-study-machung/admin/login");
+    setcookie('remember_token', '', time() - 3600, '/');
+
     exit;
 });
+
+if (empty($routeMatched)) {
+    http_response_code(404);
+    require 'views/errors/404.php'; // Pastikan file ini ada
+    exit;
+}

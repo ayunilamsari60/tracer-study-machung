@@ -70,7 +70,6 @@
                     include 'form/step2.php';
                     include 'form/step3.php'; 
                     ?>
-
                 </form>
             </div>
         </div>

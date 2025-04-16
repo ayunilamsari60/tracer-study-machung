@@ -16,7 +16,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']); // Ambil nama file dari URL
                 </li>
 
                 <li>
-                    <a href="pertanyaan.php" class="<?= ($current_page == 'pertanyaan.php') ? 'mm-active' : '' ?>">
+                    <a href="admin/pertanyaan" class="<?= ($current_page == 'pertanyaan.php') ? 'mm-active' : '' ?>">
                         <i class="fas fa-list-alt"></i>
                         <span key="t-dashboards">Pertanyaan</span>
                     </a>
