@@ -1,50 +1,37 @@
 <?php
-include "../config/koneksi.php";
+include "config/koneksi.php";
 
-$request = $_REQUEST;
+// Query utama gabungan
+$sql = "
+SELECT 
+    m.thn_ajaran AS tahun,
+    m.id_prodi,
+    COUNT(m.id_user) AS total,
+    SUM(CASE WHEN s.id_register IS NOT NULL THEN 1 ELSE 0 END) AS sudah,
+    SUM(CASE WHEN s.id_register IS NULL THEN 1 ELSE 0 END) AS belum
+FROM ts_data_mahasiswa1 m
+LEFT JOIN register_mahasiswa r ON m.id_user = r.id_user
+LEFT JOIN submit_data s ON r.id_register = s.id_register
+GROUP BY m.thn_ajaran, m.id_prodi
+ORDER BY m.thn_ajaran DESC, m.id_prodi ASC
+";
 
-// Cek jumlah total data
-$sql = "SELECT COUNT(*) AS total FROM ts_data_mahasiswa";
-$totalResult = $conn->query($sql)->fetch_assoc();
-$totalData = $totalResult['total'];
-
-$columns = ['tahun_lulus', 'fakultas', 'nama_prodi', 'nim', 'nama_mahasiswa', 'no_telepon', 'email'];
-$orderColumn = $columns[$request['order'][0]['column'] - 1];
-$orderDir = $request['order'][0]['dir'];
-
-$start = $request['start'];
-$length = $request['length'];
-$search = $conn->real_escape_string($request['search']['value']);
-
-$where = "";
-if (!empty($search)) {
-    $where .= " WHERE nama_mahasiswa LIKE '%$search%' OR nim LIKE '%$search%' ";
-}
-
-$sql = "SELECT * FROM ts_data_mahasiswa $where ORDER BY $orderColumn $orderDir LIMIT $start, $length";
-$dataResult = $conn->query($sql);
-
+$result = $conn->query($sql);
 $data = [];
-$no = $start + 1;
-while ($row = $dataResult->fetch_assoc()) {
-    $data[] = [
-        "no" => $no++,
-        "tahun_lulus" => $row['tahun_lulus'],
-        "fakultas" => $row['fakultas'],
-        "nama_prodi" => $row['nama_prodi'],
-        "nim" => $row['nim'],
-        "nama_mahasiswa" => $row['nama_mahasiswa'],
-        "no_telepon" => $row['no_telepon'],
-        "email" => $row['email'],
-        "aksi" => '<button class="btn btn-sm btn-outline-primary">Lihat</button>'
-    ];
+
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $data[] = [
+            'tahun' => $row['tahun'],
+            'prodi' => $row['id_prodi'],
+            'sudah' => (int)$row['sudah'],
+            'belum' => (int)$row['belum']
+        ];
+    }
+} else {
+    $data = []; // kosong jika tidak ada data
 }
 
-$response = [
-    "draw" => intval($request['draw']),
-    "recordsTotal" => intval($totalData),
-    "recordsFiltered" => intval($totalData), // Bisa beda kalau pakai filter
-    "data" => $data
-];
-
-echo json_encode($response);
+header('Content-Type: application/json');
+echo json_encode($data);
+?>

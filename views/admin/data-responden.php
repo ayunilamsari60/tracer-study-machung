@@ -1,8 +1,14 @@
 <!-- dashboard.php -->
 <?php
-include 'config/koneksi.php';
+include "backend/ts_filter_data_responden.php"; // Memanggil file untuk mengambil data responden
+include_once "templates/section.php"; // Memanggil file section.php untuk mendukung fungsi section dan endsection
 $title = "Data Responden"; // Judul halaman
-$custom_css = '
+// Ambil data dari tabel mahasiswa
+// $query = "SELECT * FROM ts_data_mahasiswa";
+// $result = $conn->query($query);
+
+?>
+<?php push('styles') ?>
         <!-- DataTables -->
         <link href="/tracer-study-machung/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="/tracer-study-machung/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -10,8 +16,125 @@ $custom_css = '
 
         <!-- App favicon -->
     `   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
-';
-$custom_js = '
+<?php endpush('styles') ?>
+<?php 
+section('content'); // Memulai section untuk konten dinamis
+?>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Data Responden </h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Skote</a></li>
+                    <li class="breadcrumb-item active">Data Responden</li>
+                </ol>
+            </div>
+
+        </div>
+
+        <div class="card p-4">
+            <h5>Filter</h5>
+            <div class="row g-3">
+                <!-- Fakultas -->
+                <div class="col-md-4">
+                    <label for="fakultas" class="form-label">Fakultas</label>
+                    <select id="fakultas" name="fakultas" class="form-select">
+                        <option value="">Pilih Fakultas</option>
+                        <?php while ($row = $fakultasResult->fetch_assoc()): ?>
+                            <option value="<?= $row['fakultas'] ?>"><?= $row['fakultas'] ?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
+
+                <!-- Program Studi -->
+                <div class="col-md-4">
+                    <label for="prodi" class="form-label">Program Studi</label>
+                    <select id="prodi" name="prodi" class="form-select">
+                        <option value="">Pilih Program Studi</option>
+                        <?php while ($row = $prodiResult->fetch_assoc()): ?>
+                            <option value="<?= $row['id_prodi'] ?>"><?= $row['id_prodi'] ?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
+
+                <!-- Tahun Lulus -->
+                <div class="col-md-4">
+                    <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
+                    <select id="tahun_lulus" name="tahun_lulus" class="form-select" required
+                        onchange="updateNamaMahasiswa()">
+                        <option value="" selected disabled>Pilih...</option>
+                        <?php
+                        for ($tahun = 2000; $tahun <= date("Y"); $tahun++) {
+                            echo "<option value='$tahun'>$tahun</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <!-- Tombol Filter -->
+                <div class="col-12">
+                    <button class="btn btn-primary mt-2" id="applyFilter" type="submit">
+                        <i class="bi bi-funnel"></i> Terapkan Filter
+                    </button>
+                    <button id="resetFilter" class="btn btn-secondary mt-2">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <!-- Wrapping div for horizontal scroll -->
+                <div class="table-responsive">
+                    <table id="datatables" class="table table-bordered table-striped nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>TAHUN LULUS</th>
+                                <th>FAKULTAS</th>
+                                <th>NAMA PRODI</th>
+                                <th>NIM</th>
+                                <th>NAMA MAHASISWA</th>
+                                <th>NO. TELEPON</th>
+                                <th>EMAIL</th>
+                                <th>AKSI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            while ($row = $result->fetch_assoc()) { ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $row['thn_ajaran']; ?></td>
+                                    <td></td>
+                                    <td><?= $row['id_prodi']; ?></td>
+                                    <td><?= $row['nim_mahasiswa']; ?></td>
+                                    <td><?= $row['nama']; ?></td>
+                                    <td><?= $row['no_telepon']; ?></td>
+                                    <td><?= $row['email']; ?></td>
+                                    <td>
+                                        <a href="data-responden/<?php echo $row['submit_id']; ?>"
+                                            class="btn btn-outline-primary btn-sm">
+                                            Lihat
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php 
+endsection(); // Mengakhiri section untuk konten dinamis
+?>
+<?php push('scripts') ?>
         <!-- Datatable JS -->
         <script src="/tracer-study-machung/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/tracer-study-machung/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -64,130 +187,8 @@ $custom_js = '
         });
       });
 </script>
-';
-// Ambil data dari tabel mahasiswa
-$query = "SELECT * FROM ts_data_mahasiswa";
-$result = $conn->query($query);
-// Ambil data fakultas unik
-$fakultasQuery = "SELECT DISTINCT fakultas FROM ts_data_mahasiswa";
-$fakultasResult = $conn->query($fakultasQuery);
-
-// Ambil data program studi unik
-$prodiQuery = "SELECT DISTINCT nama_prodi FROM ts_data_mahasiswa";
-$prodiResult = $conn->query($prodiQuery);
-
-ob_start(); // Mulai output buffering
-?>
-
-<div class="row">
-    <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Data Responden </h4>
-
-            <div class="page-title-right">
-                <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Skote</a></li>
-                    <li class="breadcrumb-item active">Data Responden</li>
-                </ol>
-            </div>
-
-        </div>
-
-        <div class="card p-4">
-            <h5>Filter</h5>
-            <div class="row g-3">
-                <!-- Fakultas -->
-                <div class="col-md-4">
-                    <label for="fakultas" class="form-label">Fakultas</label>
-                    <select id="fakultas" name="fakultas" class="form-select">
-                        <option value="">Pilih Fakultas</option>
-                        <?php while ($row = $fakultasResult->fetch_assoc()): ?>
-                            <option value="<?= $row['fakultas'] ?>"><?= $row['fakultas'] ?></option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
-
-                <!-- Program Studi -->
-                <div class="col-md-4">
-                    <label for="prodi" class="form-label">Program Studi</label>
-                    <select id="prodi" name="prodi" class="form-select">
-                        <option value="">Pilih Program Studi</option>
-                        <?php while ($row = $prodiResult->fetch_assoc()): ?>
-                            <option value="<?= $row['nama_prodi'] ?>"><?= $row['nama_prodi'] ?></option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
-
-                <!-- Tahun Lulus -->
-                <div class="col-md-4">
-                    <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
-                    <select id="tahun_lulus" name="tahun_lulus" class="form-select" required
-                        onchange="updateNamaMahasiswa()">
-                        <option value="" selected disabled>Pilih...</option>
-                        <?php
-                        for ($tahun = 2000; $tahun <= 2023; $tahun++) {
-                            echo "<option value='$tahun'>$tahun</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-
-                <!-- Tombol Filter -->
-                <div class="col-12">
-                    <button class="btn btn-primary mt-2" id="applyFilter" type="submit">
-                        <i class="bi bi-funnel"></i> Terapkan Filter
-                    </button>
-                    <button id="resetFilter" class="btn btn-secondary mt-2">Reset</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <!-- Wrapping div for horizontal scroll -->
-                <div class="table-responsive">
-                    <table id="datatables" class="table table-bordered table-striped nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>TAHUN LULUS</th>
-                                <th>FAKULTAS</th>
-                                <th>NAMA PRODI</th>
-                                <th>NIM</th>
-                                <th>NAMA MAHASISWA</th>
-                                <th>NO. TELEPON</th>
-                                <th>EMAIL</th>
-                                <th>AKSI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            while ($row = $result->fetch_assoc()) { ?>
-                                <tr>
-                                    <td><?= $no++; ?></td>
-                                    <td><?= $row['tahun_lulus']; ?></td>
-                                    <td><?= $row['fakultas']; ?></td>
-                                    <td><?= $row['nama_prodi']; ?></td>
-                                    <td><?= $row['nim']; ?></td>
-                                    <td><?= $row['nama_mahasiswa']; ?></td>
-                                    <td><?= $row['no_telepon']; ?></td>
-                                    <td><?= $row['email']; ?></td>
-                                    <td><button class="btn btn-outline-primary btn-sm">Lihat</button></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+<?php endpush('scripts') ?>
 
 <?php
-$content = ob_get_clean(); // Simpan konten yang sudah dibuat
 include 'templates/master.php'; // Gunakan template utama
 ?>

@@ -26,7 +26,7 @@ $custom_js = isset($custom_js) ? $custom_js : ""; // Default kosong jika tidak a
     <link href="/tracer-study-machung/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <link href="/tracer-study-machung/assets/css/app.min.css" rel="stylesheet" />
     <!-- Custom CSS dari halaman -->
-    <?php echo $custom_css; ?>
+    <?php stack('styles')?>
 </head>
 
 <body data-sidebar="dark">
@@ -42,8 +42,8 @@ $custom_js = isset($custom_js) ? $custom_js : ""; // Default kosong jika tidak a
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
-                    <?php echo $content; // Ini yang akan diganti di setiap halaman 
-                    ?>
+                    <?php // echo $content; // Ini yang akan diganti di setiap halaman ?>
+                    <?php yields('content'); // Ini yang akan diganti di setiap halaman ?>
                 </div>
             </div>
 
@@ -59,11 +59,9 @@ $custom_js = isset($custom_js) ? $custom_js : ""; // Default kosong jika tidak a
     <script src="/tracer-study-machung/assets/libs/metismenu/metisMenu.min.js"></script>
     <script src="/tracer-study-machung/assets/libs/simplebar/simplebar.min.js"></script>
     <script src="/tracer-study-machung/assets/libs/node-waves/waves.min.js"></script>
-    <script src="/tracer-study-machung/assets/libs/apexcharts/apexcharts.min.js"></script>
-
     <script src="/tracer-study-machung/assets/js/app.js"></script>
     <!-- Custom JS dari halaman -->
-    <?php echo $custom_js; ?>
+    <?php stack('scripts'); ?>
 </body>
 
 </html>

@@ -1,60 +1,11 @@
-var barChartWidth = $("#bar-charts").width(),
-    container = document.getElementById("bar-charts"),
-    data = {
-        categories: [
-            "Informatika", 
-            "Sistem Informasi", 
-            "Manajemen", 
-            "Akuntansi", 
-            "Ilmu Komunikasi", 
-            "Sastra Inggris", 
-            "DKV", 
-            "Bioteknologi", 
-            "Farmasi", 
-            "Psikologi"
-        ],
-        series: [
-            {
-                name: "Sudah Mengisi",
-                data: [35, 42, 27, 50, 40, 31, 28, 39, 45, 33]
-            },
-            {
-                name: "Belum Mengisi",
-                data: [5, 3, 8, 2, 4, 6, 7, 1, 3, 4]
-            }
-        ]
-    },
-    options = {
-        chart: {
-            width: barChartWidth,
-            height: 500, // disesuaikan biar ga kepotong
-            format: "1,000",
-            orientation: "horizontal" // ⬅️ tambahkan ini
-        },
-        yAxis: {
-            title: {
-                text: "Program Studi",
-                offsetX: 0,
-                offsetY: 10 // Tambah jarak ke bawah dari top
-            },
-            label: {
-                margin: 15 // Tambah jarak atas antara label dan chart
-            }
-        },
-        xAxis: {
-            title: {
-                text: "Jumlah Responden",
-                align: "center",
-                offsetY: 10 // Naik sedikit biar ke tengah
-            },
-            min: 0,
-            max: 60
-        },        
-        series: {
-            showLabel: false
-        }
-    },
-    theme = {
+(async () => {
+    const container = document.getElementById("bar-charts");
+    let barChartWidth = $("#bar-charts").width();
+    const tahunNow = new Date().getFullYear();
+
+    
+
+    const theme = {
         chart: {
             background: {
                 color: "#fff",
@@ -95,18 +46,106 @@ var barChartWidth = $("#bar-charts").width(),
         }
     };
 
-tui.chart.registerTheme("myTheme", theme),
-options.theme = "myTheme";
+    try {
+        const response = await fetch("api/statistik_mahasiswa");
+        const data = await response.json();
+        
+        // Ambil semua prodi tanpa filter
+        const categories = [...new Set(data.map(item => item.prodi))];
 
-var barChart = tui.chart.barChart(container, data, options);
+        // // Buat map dari data tahunNow untuk cepat akses
+        // const tahunNowData = data
+        // .filter(item => item.tahun == tahunNow)
+        // .reduce((acc, curr) => {
+        //     acc[curr.prodi] = {
+        //     sudah: curr.sudah,
+        //     belum: curr.belum
+        //     };
+        //     return acc;
+        // }, {});
 
-$(window).resize(function () {
-    barChartWidth = $("#bar-charts").width();
-    barChart.resize({
-        width: barChartWidth,
-        height: 500
-    });
-});
+        // // Buat array jumlah "sudah" dan "belum" sesuai urutan categories
+        // const sudah = categories.map(prodi => tahunNowData[prodi]?.sudah || 0);
+        // const belum = categories.map(prodi => tahunNowData[prodi]?.belum || 0);
+
+        // Buat akumulasi data dari semua tahun tanpa filter
+        const semuaTahunData = data.reduce((acc, curr) => {
+            if (!acc[curr.prodi]) {
+                acc[curr.prodi] = { sudah: 0, belum: 0 };
+            }
+            acc[curr.prodi].sudah += curr.sudah;
+            acc[curr.prodi].belum += curr.belum;
+            return acc;
+        }, {});
+
+        const sudah = categories.map(prodi => semuaTahunData[prodi]?.sudah || 0);
+        const belum = categories.map(prodi => semuaTahunData[prodi]?.belum || 0);
+
+        const maxValue = Math.max(...categories.map(prodi => {
+            const s = semuaTahunData[prodi]?.sudah || 0;
+            const b = semuaTahunData[prodi]?.belum || 0;
+            return s + b;
+        }));
+        const xAxisMax = Math.ceil(maxValue * 1.1); // Tambah 20% ruang
+        
+
+        const chartData = {
+            categories: categories,
+            series: [
+                { name: "Sudah Mengisi", data: sudah },
+                { name: "Belum Mengisi", data: belum }
+            ]
+        };
+
+        const options = {
+            chart: {
+                width: barChartWidth,
+                height: 600,
+                format: "1,000",
+                orientation: "horizontal"
+            },
+            yAxis: {
+                title: {
+                    text: "Program Studi",
+                    offsetX: 0,
+                    offsetY: 10
+                },
+                label: {
+                    margin: 15
+                }
+            },
+            xAxis: {
+                title: {
+                    text: "Jumlah Responden",
+                    align: "center",
+                    offsetY: 10
+                },
+                min: 0,
+                max: xAxisMax
+            },
+            series: {
+                showLabel: false
+            },
+            theme: "myTheme"
+        };
+
+        tui.chart.registerTheme("myTheme", theme);
+        const barChart = tui.chart.barChart(container, chartData, options);
+
+        // Resize ketika ukuran window berubah
+        $(window).resize(function () {
+            barChartWidth = $("#bar-charts").width();
+            barChart.resize({
+                width: barChartWidth,
+                height: 500
+            });
+        });
+
+    } catch (error) {
+        console.error("Gagal mengambil data:", error);
+    }
+})();
+
 
 
 var columnChartWidth=$("#column-charts").width(),

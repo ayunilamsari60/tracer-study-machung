@@ -1,6 +1,10 @@
 <?php 
 session_start();
-
+if (!isset($_SESSION['id_register'])) {
+    $_SESSION['error'] = "Session expired. Silakan register ulang.";
+    header("Location: /tracer-study-machung/");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

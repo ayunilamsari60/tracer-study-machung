@@ -1,17 +1,28 @@
 <!-- dashboard.php -->
 <?php
 include "backend/ts_dashboard.php"; // Mengambil data dari backend
-include_once "templates/section.php"; // Memanggil file section.php untuk mendukung fungsi section dan endsection
-$title = 'Dashboard';
-?>
-<?php push('styles') ?>
+$title = "Dashboard";
+$custom_css = '
     <!-- tui charts Css -->
     <link href="/tracer-study-machung/assets/libs/tui-chart/tui-chart.min.css" rel="stylesheet" type="text/css" />
-<?php endpush('styles') ?>
+';
+$custom_js = '
+    <!-- tui charts plugins -->
+    <script src="/tracer-study-machung/assets/libs/tui-chart/tui-chart-all.min.js"></script>
+    <script src="/tracer-study-machung/assets/libs/tui-chart/maps/usa.js"></script>
+    <script src="/tracer-study-machung/assets/js/pages/tui-charts.init.js?v=' . time() . '"></script>
 
-<?php 
-section('content'); // Memulai section untuk konten dinamis
+    <!-- apexcharts -->
+    <script src="/tracer-study-machung/assets/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="/tracer-study-machung/assets/js/pages/apexcharts.init.js?v=' . time() . '"></script>
+
+    <!-- App js -->
+    <!--<script src="/tracer-study-machung/assets/js/app.js"></script>-->
+';
+ob_start();
+
 ?>
+
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -113,26 +124,13 @@ section('content'); // Memulai section untuk konten dinamis
         </div>
         <!-- end row -->
         </div>
+
+
     <!-- end row -->
 
 </div>
-<?php 
-endsection(); // Mengakhiri section untuk konten dinamis
-?>
-<?php push('scripts') ?>
-    <!-- tui charts plugins -->
-    <script src="/tracer-study-machung/assets/libs/tui-chart/tui-chart-all.min.js"></script>
-    <script src="/tracer-study-machung/assets/libs/tui-chart/maps/usa.js"></script>
-    <script src="/tracer-study-machung/assets/js/pages/tui-charts.init.js?v=' . time() . '"></script>
-
-    <!-- apexcharts -->
-    <script src="/tracer-study-machung/assets/libs/apexcharts/apexcharts.min.js"></script>
-    <script src="/tracer-study-machung/assets/js/pages/apexcharts.init.js?v=' . time() . '"></script>
-
-    <!-- App js -->
-    <!--<script src="/tracer-study-machung/assets/js/app.js"></script>-->
-<?php endpush('scripts') ?>
 
 <?php
+$content = ob_get_clean(); // Simpan konten yang sudah dibuat
 include 'templates/master.php'; // Gunakan template utama
 ?>

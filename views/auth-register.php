@@ -53,7 +53,7 @@
                                             onchange="updateNamaMahasiswa()">
                                             <option value="" selected disabled>Pilih...</option>
                                             <!-- Loop dengan PHP -->
-                                            <?php for ($tahun = 2015; $tahun <= 2024; $tahun++) { ?>
+                                            <?php for ($tahun = 2015; $tahun <= date("Y"); $tahun++) { ?>
                                                 <option value="<?php echo $tahun; ?>"><?php echo $tahun; ?></option>
                                             <?php } ?>
                                         </select>

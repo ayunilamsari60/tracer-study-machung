@@ -2,6 +2,11 @@
 require 'routes.php';
 define('BASE_PATH', __DIR__);
 
+// API Routes
+route('GET', '/api/statistik_mahasiswa', function () {
+    require 'backend/tes.php';
+});
+
 route('GET', '/', function () {
     require 'views/auth-register.php';
 });
@@ -41,9 +46,20 @@ route('GET', '/admin', function () {
     auth_check();
     require 'views/admin/dashboard.php';
 });
+
 route('GET', '/admin/data-responden', function () {
     auth_check();
     require 'views/admin/data-responden.php';
+});
+route('GET', '/admin/data-responden', function () {
+    auth_check();
+    require 'views/admin/data-responden.php';
+});
+
+route('GET', '/admin/data-responden/{id}', function ($id) {
+    auth_check();
+    $_GET['id'] = $id; // agar bisa dibaca di views
+    require 'views/admin/view_form_data.php';
 });
 route('GET', '/admin/pertanyaan', function () {
     auth_check();
@@ -74,7 +90,7 @@ route('GET', '/admin/logout', function () {
     session_unset();
     session_destroy();
     setcookie('remember_token', '', time() - 3600, '/');
-
+    header('Location: /tracer-study-machung/admin/login');
     exit;
 });
 

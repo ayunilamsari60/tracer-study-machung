@@ -16,7 +16,7 @@
             <label>Dimana lokasi tempat Anda bekerja?</label>
             <div class="row">
                 <div class="col-md-6">
-                <label class="form-label">Nama Mahasiswa <span class="text-danger">*</span></label>
+                <label class="form-label">Provinsi <span class="text-danger">*</span></label>
                     <select id="provinsi" class="form-control select2" name="f5a1">
                         <option value="" selected disabled>Pilih Provinsi</option>
                         <?php

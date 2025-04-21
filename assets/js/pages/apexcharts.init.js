@@ -151,53 +151,62 @@ grid: {
 };
 (chart = new ApexCharts(document.querySelector("#line_chart_dashed"), options)).render();
 
-options = {
-    chart: {
+fetch('api/statistik_mahasiswa')
+  .then(res => res.json())
+  .then(data => {
+    // Kumpulkan total per tahun
+    const grouped = {};
+
+    data.forEach(item => {
+      if (!grouped[item.tahun]) {
+        grouped[item.tahun] = { sudah: 0, belum: 0 };
+      }
+      grouped[item.tahun].sudah += item.sudah;
+      grouped[item.tahun].belum += item.belum;
+    });
+
+    // Ambil tahun terurut
+    const categories = Object.keys(grouped).sort();
+
+    // Ambil data sesuai urutan tahun
+    const sudahData = categories.map(tahun => grouped[tahun].sudah);
+    const belumData = categories.map(tahun => grouped[tahun].belum);
+
+    // Update chart
+    const options = {
+      chart: {
         height: 350,
         type: "area",
-        toolbar: {
-            show: false
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: "smooth",
-        width: 3
-    },
-    series: [{
-        name: "Sudah Mengisi",
-        data: [120, 150, 180, 200, 170, 210, 190]
-    }, {
-        name: "Belum Mengisi",
-        data: [30, 25, 20, 15, 18, 10, 12]
-    }],
-    colors: ["#556ee6", "#34c38f"],
-    xaxis: {
+        toolbar: { show: false }
+      },
+      dataLabels: { enabled: false },
+      stroke: { curve: "smooth", width: 3 },
+      series: [
+        { name: "Sudah Mengisi", data: sudahData },
+        { name: "Belum Mengisi", data: belumData }
+      ],
+      colors: ["#556ee6", "#34c38f"],
+      xaxis: {
         type: "category",
-        categories: ["2019", "2020", "2021", "2022", "2023", "2024", "2025"],
-        title: {
-            text: "Tahun"
-        }
-    },
-    yaxis: {
-        title: {
-            text: "Jumlah Responden"
-        }
-    },
-    grid: {
-        borderColor: "#f1f1f1"
-    },
-    tooltip: {
+        categories: categories,
+        title: { text: "Tahun" }
+      },
+      yaxis: {
+        title: { text: "Jumlah Responden" }
+      },
+      grid: { borderColor: "#f1f1f1" },
+      tooltip: {
         y: {
-            formatter: function (val) {
-                return val + " orang";
-            }
+          formatter: val => `${val} orang`
         }
-    }
-};
-(chart = new ApexCharts(document.querySelector("#spline_area"), options)).render();
+      }
+    };
+
+    const chart = new ApexCharts(document.querySelector("#spline_area"), options);
+    chart.render();
+  })
+  .catch(err => console.error("Gagal ambil data spline area:", err));
+
 options = {
 chart: {
     height: 350,
