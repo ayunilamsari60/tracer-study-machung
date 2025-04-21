@@ -1,28 +1,70 @@
 <?php
+$routes = [];
+$routeMatched = false;
 
-function route($method, $pattern, $callback) {
-    global $routeMatched;
+function route($method, $pattern, $callback)
+{
+    global $routes;
+    $method = strtoupper($method);
 
-    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $basePath = '/tracer-study-machung'; // Ganti sesuai project kamu
-
-    // Hapus base path dari URL
-    $route = substr($uri, strlen($basePath));
-
-    // Ganti {parameter} dengan regex
     $patternRegex = preg_replace('#\{([a-zA-Z_][a-zA-Z0-9_]*)\}#', '(?P<\1>[^/]+)', $pattern);
     $patternRegex = "#^" . $patternRegex . "$#";
 
-    if ($_SERVER['REQUEST_METHOD'] === strtoupper($method) && preg_match($patternRegex, $route, $matches)) {
-        $routeMatched = true;
-        // Ambil hanya named parameter
-        $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
-        call_user_func_array($callback, $params);
-        exit;
-    }
+    $routes[] = [
+        'method' => $method,
+        'pattern' => $pattern,
+        'regex' => $patternRegex,
+        'callback' => $callback
+    ];
 }
 
-function auth_check() {
+function resolve()
+{
+    global $routes, $routeMatched;
+
+    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+    // Ambil direktori root project (misal: /tracer-study-machung)
+    $scriptName = $_SERVER['SCRIPT_NAME']; // contoh: /tracer-study-machung/index.php
+    $basePath = rtrim(dirname($scriptName), '/'); // hasil: /tracer-study-machung
+
+    $route = substr($uri, strlen($basePath));
+    if ($route === false || $route === '')
+        $route = '/';
+
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    foreach ($routes as $r) {
+        if ($method === $r['method'] && preg_match($r['regex'], $route, $matches)) {
+            $routeMatched = true;
+            $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+            call_user_func_array($r['callback'], $params);
+            return;
+        }
+    }
+
+    http_response_code(404);
+    require 'views/errors/404.php'; // Pastikan file ini ada
+    exit;
+}
+
+
+function base_url($path = '')
+{
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+    $host = $_SERVER['HTTP_HOST'];
+    $script = dirname($_SERVER['SCRIPT_NAME']); // misal: /tracer-study-machung/admin
+
+    // Pastikan nggak ada double slash
+    $base = rtrim($protocol . "://" . $host . $script, "/");
+
+    // Gabungkan dengan path tambahan
+    return $base . '/' . ltrim($path, '/');
+}
+
+
+function auth_check()
+{
     session_start();
     include_once __DIR__ . '/config/koneksi.php';
 
@@ -45,7 +87,7 @@ function auth_check() {
 
     // Jika tetap belum login, redirect
     if (!isset($_SESSION['logged_in'])) {
-        header("Location: /tracer-study-machung/admin/login");
+        header("Location: admin/login");
         exit;
     }
 }

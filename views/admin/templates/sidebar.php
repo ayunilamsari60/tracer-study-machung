@@ -9,21 +9,21 @@ $current_page = basename($_SERVER['SCRIPT_NAME']); // Ambil nama file dari URL
                 <li class="menu-title" key="t-menu">Menu</li>
 
                 <li>
-                    <a href="/tracer-study-machung/admin" class="<?= ($current_page == 'admin') ? 'mm-active' : '' ?>">
+                    <a href="<?= base_url('admin') ?>" class="<?= ($current_page == 'admin') ? 'mm-active' : '' ?>">
                         <i class="fas fa-home"></i>
                         <span key="t-dashboards">Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="admin/pertanyaan" class="<?= ($current_page == 'pertanyaan.php') ? 'mm-active' : '' ?>">
+                    <a href="<?= base_url('admin-pp') ?>" class="<?= ($current_page == 'pertanyaan.php') ? 'mm-active' : '' ?>">
                         <i class="fas fa-list-alt"></i>
                         <span key="t-dashboards">Pertanyaan</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="/tracer-study-machung/admin/data-responden" class="<?= ($current_page == 'data-responden') ? 'mm-active' : '' ?>">
+                    <a href="<?= base_url('admin/data-responden') ?>" class="<?= ($current_page == 'data-responden') ? 'mm-active' : '' ?>">
                         <i class="fas fa-user-graduate"></i>
                         <span key="t-dashboards">Data Responden</span>
                     </a>

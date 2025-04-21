@@ -94,8 +94,10 @@ route('GET', '/admin/logout', function () {
     exit;
 });
 
-if (empty($routeMatched)) {
-    http_response_code(404);
-    require 'views/errors/404.php'; // Pastikan file ini ada
-    exit;
-}
+resolve();
+
+// if (empty($routeMatched)) {
+//     http_response_code(404);
+//     require 'views/errors/404.php'; // Pastikan file ini ada
+//     exit;
+// }
