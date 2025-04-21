@@ -168,8 +168,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Data berhasil disimpan!";
-        header("Location: /halaman_tujuan.php"); // Ganti dengan halaman yang sesuai
-        exit;
+        header("Location: " . base_url('selesai'));
+        exit; // Penting, agar redirect benar-benar berhenti
     } else {
         echo "Error: " . $stmt->error;
     }

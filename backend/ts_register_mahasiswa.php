@@ -12,6 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'] ?? null;
     $no_telepon = $_POST['no_telepon'] ?? null;
 
+    if ($no_telepon) {
+        // 1. Hapus semua karakter non-angka
+        $no_telepon = preg_replace('/[^0-9]/', '', $no_telepon);
+
+        // 2. Hapus leading '0' jika ada, lalu tambahkan +62
+        $no_telepon = '+62' . ltrim($no_telepon, '0');
+
+        // 3. Validasi panjang nomor (contoh: +628123456789 = 12 digit)
+        // if (strlen($no_telepon) < 11 || strlen($no_telepon) > 15) {
+        //     die("Nomor telepon tidak valid!");
+        // }
+    }
     if (!$tahun_kelulusan || !$nama || !$email || !$no_telepon) {
         $_SESSION['error'] = "Semua data wajib diisi!";
         header("Location: /tracer-study-machung");
@@ -27,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->begin_transaction(); // Mulai transaksi
 
         // Cek apakah email sudah terdaftar
-        $stmt = $conn->prepare("SELECT otp_verifikasi FROM register_mahasiswa WHERE email = ?");
+        $stmt = $conn->prepare("SELECT otp_verifikasi FROM ts_register_mahasiswa WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -41,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Ambil data pengguna dari database untuk mengecek jumlah permintaan OTP
-        $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM register_mahasiswa WHERE email = ?");
+        $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM ts_register_mahasiswa WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -69,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insert atau Update data
         $stmt = $conn->prepare("
-            INSERT INTO register_mahasiswa (id_user, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman) 
+            INSERT INTO ts_register_mahasiswa (id_user, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman) 
             VALUES (?, ?, ?, ?, ?, 0, ?)
             ON DUPLICATE KEY UPDATE 
             id_user = VALUES(id_user),

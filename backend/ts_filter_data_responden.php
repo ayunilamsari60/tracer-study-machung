@@ -7,18 +7,20 @@ $sql = "
         rm.id_user,
         rm.email,
         rm.no_telepon,
+        tp.*,
         tm.*
     FROM submit_data sd
-    JOIN register_mahasiswa rm ON rm.id_register = sd.id_register
+    JOIN ts_register_mahasiswa rm ON rm.id_register = sd.id_register
     JOIN ts_data_mahasiswa1 tm ON tm.id_user = rm.id_user
+    JOIN ts_data_prodi tp ON tp.id = tm.id_prodi
 ";
 // 4. Eksekusi query
 $result = $conn->query($sql);
 
 // Ambil data fakultas unik
-$fakultasQuery = "SELECT DISTINCT fakultas FROM ts_data_mahasiswa";
-$fakultasResult = $conn->query($fakultasQuery);
+// $fakultasQuery = "SELECT DISTINCT fakultas FROM ts_data_mahasiswa";
+// $fakultasResult = $conn->query($fakultasQuery);
 
 // Ambil data program studi unik
-$prodiQuery = "SELECT DISTINCT id_prodi FROM ts_data_mahasiswa1";
+$prodiQuery = "SELECT DISTINCT kode_prodi FROM ts_data_prodi";
 $prodiResult = $conn->query($prodiQuery);

@@ -9,15 +9,20 @@ $title = "Data Responden"; // Judul halaman
 
 ?>
 <?php push('styles') ?>
-        <!-- DataTables -->
-        <link href="/tracer-study-machung/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="/tracer-study-machung/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="/tracer-study-machung/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<!-- DataTables -->
+<link href="<?= base_url('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>" rel="stylesheet"
+    type="text/css" />
+<link href="<?= base_url('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'); ?>" rel="stylesheet"
+    type="text/css" />
+<link href="<?= base_url('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css'); ?>"
+    rel="stylesheet" type="text/css" />
 
-        <!-- App favicon -->
-    `   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+<!-- App favicon -->
+`
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 <?php endpush('styles') ?>
-<?php 
+<?php
 section('content'); // Memulai section untuk konten dinamis
 ?>
 <div class="row">
@@ -37,16 +42,6 @@ section('content'); // Memulai section untuk konten dinamis
         <div class="card p-4">
             <h5>Filter</h5>
             <div class="row g-3">
-                <!-- Fakultas -->
-                <div class="col-md-4">
-                    <label for="fakultas" class="form-label">Fakultas</label>
-                    <select id="fakultas" name="fakultas" class="form-select">
-                        <option value="">Pilih Fakultas</option>
-                        <?php while ($row = $fakultasResult->fetch_assoc()): ?>
-                            <option value="<?= $row['fakultas'] ?>"><?= $row['fakultas'] ?></option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
 
                 <!-- Program Studi -->
                 <div class="col-md-4">
@@ -54,7 +49,7 @@ section('content'); // Memulai section untuk konten dinamis
                     <select id="prodi" name="prodi" class="form-select">
                         <option value="">Pilih Program Studi</option>
                         <?php while ($row = $prodiResult->fetch_assoc()): ?>
-                            <option value="<?= $row['id_prodi'] ?>"><?= $row['id_prodi'] ?></option>
+                            <option value="<?= $row['kode_prodi'] ?>"><?= $row['kode_prodi'] ?></option>
                         <?php endwhile; ?>
                     </select>
                 </div>
@@ -85,6 +80,11 @@ section('content'); // Memulai section untuk konten dinamis
 
         <div class="card">
             <div class="card-body">
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="<?= base_url('export') ?>" class="btn btn-success">
+                        <i class="mdi mdi-file-excel"></i> Export to Excel
+                    </a>
+                </div>
                 <!-- Wrapping div for horizontal scroll -->
                 <div class="table-responsive">
                     <table id="datatables" class="table table-bordered table-striped nowrap w-100">
@@ -92,7 +92,7 @@ section('content'); // Memulai section untuk konten dinamis
                             <tr>
                                 <th>NO</th>
                                 <th>TAHUN LULUS</th>
-                                <th>FAKULTAS</th>
+                                <th>KODE PRODI</th>
                                 <th>NAMA PRODI</th>
                                 <th>NIM</th>
                                 <th>NAMA MAHASISWA</th>
@@ -108,8 +108,8 @@ section('content'); // Memulai section untuk konten dinamis
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><?= $row['thn_ajaran']; ?></td>
-                                    <td></td>
-                                    <td><?= $row['id_prodi']; ?></td>
+                                    <td><?= $row['kode_prodi']; ?></td>
+                                    <td><?= $row['nama_prodi']; ?></td>
                                     <td><?= $row['nim_mahasiswa']; ?></td>
                                     <td><?= $row['nama']; ?></td>
                                     <td><?= $row['no_telepon']; ?></td>
@@ -131,61 +131,63 @@ section('content'); // Memulai section untuk konten dinamis
         </div>
     </div>
 </div>
-<?php 
+<?php
 endsection(); // Mengakhiri section untuk konten dinamis
 ?>
 <?php push('scripts') ?>
-        <!-- Datatable JS -->
-        <script src="/tracer-study-machung/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/jszip/jszip.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/pdfmake/build/pdfmake.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/pdfmake/build/vfs_fonts.js"></script>
-        <script src="/tracer-study-machung/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-        <script src="/tracer-study-machung/assets/js/pages/datatables.init.js"></script>
+<!-- Datatable JS -->
+<script src="<?= base_url('assets/libs/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/jszip/jszip.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/pdfmake/build/pdfmake.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/pdfmake/build/vfs_fonts.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/datatables.net-buttons/js/buttons.html5.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/datatables.net-buttons/js/buttons.print.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/datatables.net-buttons/js/buttons.colVis.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js'); ?>"></script>
+<script src="<?= base_url('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/pages/datatables.init.js'); ?>"></script>
 
-        <script>
+<script>
     $(document).ready(function () {
         var table = $("#datatables").DataTable({
-        "pageLength": 10,
-        "processing": true,
-        "deferRender": true,
+            "pageLength": 10,
+            "processing": true,
+            "deferRender": true,
 
-        "language": {
-            "zeroRecords": "Tidak ada data yang tersedia",
-        },
-        "dom": "lrtip" // Menghilangkan search bawaan tapi tetap bisa pakai filter manual
+            "language": {
+                "zeroRecords": "Tidak ada data yang tersedia",
+                "infoEmpty": "Data kosong", // Pesan jika tabel kosong
+                "search": "Cari:" // Label search input
+            },
+            // "dom": "lrtip" // Menghilangkan search bawaan tapi tetap bisa pakai filter manual
         });
 
         // Event listener untuk tombol filter
         $("#applyFilter").on("click", function () {
-          var fakultas = $("#fakultas").val();
-          var prodi = $("#prodi").val();
-          var tahun_lulus = $("#tahun_lulus").val();
-        //   var tahun_lulus = parseFloat($("#filterHarga").val()) || 0;
+            var fakultas = $("#fakultas").val();
+            var prodi = $("#prodi").val();
+            var tahun_lulus = $("#tahun_lulus").val();
+            //   var tahun_lulus = parseFloat($("#filterHarga").val()) || 0;
 
-          // Terapkan filter ke kolom masing-masing (perhatikan indeks!)
-        table.column(1).search(tahun_lulus || "", true, false).draw();
-        table.column(2).search(fakultas || "", true, false).draw();
-        table.column(3).search(prodi || "", true, false).draw();
+            // Terapkan filter ke kolom masing-masing (perhatikan indeks!)
+            table.column(1).search(tahun_lulus || "", true, false).draw();
+            table.column(2).search(prodi || "", true, false).draw();
+            // table.column(3).search(prodi || "", true, false).draw();
         });
 
         // Event listener untuk tombol reset filter
         $("#resetFilter").on("click", function () {
-          $("#tahun_lulus").val("");
-          $("#fakultas").val("");
-          $("#prodi").val("");
+            $("#tahun_lulus").val("");
+            //   $("#fakultas").val("");
+            $("#prodi").val("");
 
-          // Hapus semua filter
-          table.search("").columns().search("").draw();
+            // Hapus semua filter
+            table.search("").columns().search("").draw();
         });
-      });
+    });
 </script>
 <?php endpush('scripts') ?>
 

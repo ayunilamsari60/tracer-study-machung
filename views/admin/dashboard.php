@@ -6,7 +6,7 @@ $title = 'Dashboard';
 ?>
 <?php push('styles') ?>
     <!-- tui charts Css -->
-    <link href="/tracer-study-machung/assets/libs/tui-chart/tui-chart.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/tui-chart/tui-chart.min.css" rel="stylesheet" type="text/css" />
 <?php endpush('styles') ?>
 
 <?php 
@@ -38,7 +38,7 @@ section('content'); // Memulai section untuk konten dinamis
                         </div>
                     </div>
                     <div class="col-5 d-flex justify-content-end align-items-end pe-3 pb-2">
-                        <img src="/tracer-study-machung/assets/images/profile-img.png" alt="Dashboard Banner" class="img-fluid" style="max-width: 80%;">
+                        <img src="assets/images/profile-img.png" alt="Dashboard Banner" class="img-fluid" style="max-width: 80%;">
                     </div>
                 </div>
             </div>
@@ -121,16 +121,16 @@ endsection(); // Mengakhiri section untuk konten dinamis
 ?>
 <?php push('scripts') ?>
     <!-- tui charts plugins -->
-    <script src="/tracer-study-machung/assets/libs/tui-chart/tui-chart-all.min.js"></script>
-    <script src="/tracer-study-machung/assets/libs/tui-chart/maps/usa.js"></script>
-    <script src="/tracer-study-machung/assets/js/pages/tui-charts.init.js?v=' . time() . '"></script>
+    <script src="assets/libs/tui-chart/tui-chart-all.min.js"></script>
+    <script src="assets/libs/tui-chart/maps/usa.js"></script>
+    <script src="assets/js/pages/tui-charts.init.js?v=' . time() . '"></script>
 
     <!-- apexcharts -->
-    <script src="/tracer-study-machung/assets/libs/apexcharts/apexcharts.min.js"></script>
-    <script src="/tracer-study-machung/assets/js/pages/apexcharts.init.js?v=' . time() . '"></script>
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/js/pages/apexcharts.init.js?v=' . time() . '"></script>
 
     <!-- App js -->
-    <!--<script src="/tracer-study-machung/assets/js/app.js"></script>-->
+    <!--<script src="assets/js/app.js"></script>-->
 <?php endpush('scripts') ?>
 
 <?php

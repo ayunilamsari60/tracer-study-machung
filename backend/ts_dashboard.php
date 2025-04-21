@@ -18,7 +18,7 @@ if ($result_total_mahasiswa->num_rows > 0) {
 $sql_total_submit = "
     SELECT COUNT(*) AS total_submit
     FROM ts_data_mahasiswa1 m
-    LEFT JOIN register_mahasiswa r ON m.id_user = r.id_user
+    LEFT JOIN ts_register_mahasiswa r ON m.id_user = r.id_user
     LEFT JOIN submit_data s ON r.id_register = s.id_register
     WHERE s.id_register IS NOT NULL
 ";

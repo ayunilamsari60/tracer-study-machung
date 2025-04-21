@@ -4,7 +4,7 @@ define('BASE_PATH', __DIR__);
 
 // API Routes
 route('GET', '/api/statistik_mahasiswa', function () {
-    require 'backend/tes.php';
+    require 'backend/ts_data_chart_dashboard.php';
 });
 
 route('GET', '/', function () {
@@ -21,6 +21,14 @@ route('GET', '/verifikasi-otp', function () {
 route('POST', '/verifikasi-otp/post', function () {
     require 'backend/ts_verifikasi_otp.php';
 });
+route('GET', '/selesai', function () {
+    require 'views/halaman_terakhir.php';
+});
+
+route('GET', '/export', function () {
+    require 'backend/ts_export_data.php';
+});
+
 
 // 💡 Versi dengan parameter dinamis
 route('GET', '/verifikasi-otp/{status}', function ($status) {

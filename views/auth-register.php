@@ -73,8 +73,9 @@
                                             placeholder="Masukkan Email" required>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">No. Telepon <span class="text-danger">*</span></label>
+                                    <label class="form-label">No. Telepon <span class="text-danger">*</span></label>
+                                    <div class="mb-3 input-group">
+                                        <div class="input-group-text">+62</div>
                                         <input type="text" id="no_telepon" name="no_telepon" class="form-control"
                                             placeholder="Masukkan No. Telepon" required>
                                     </div>
