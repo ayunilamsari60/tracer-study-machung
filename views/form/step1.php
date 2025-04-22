@@ -7,19 +7,20 @@
         <label class="form-check-label" for="bekerja">Bekerja</label>
     </div>
     <div class="form-check mb-3">
-        <input class="form-check-input" id="wiraswasta" type="radio" name="F8" value="2" />
+        <input class="form-check-input" id="belum-bekerja" type="radio" name="F8" value="2" />
+        <label class="form-check-label" for="belum-bekerja">Belum memungkinkan bekerja</label>
+    </div>
+    <div class="form-check mb-3">
+        <input class="form-check-input" id="wiraswasta" type="radio" name="F8" value="3" />
         <label class="form-check-label" for="wiraswasta">Wiraswasta</label>
     </div>
     <div class="form-check mb-3">
-        <input class="form-check-input" id="pendidikan" type="radio" name="F8" value="3" />
+        <input class="form-check-input" id="pendidikan" type="radio" name="F8" value="4" />
         <label class="form-check-label" for="pendidikan">Melanjutkan Pendidikan</label>
     </div>
     <div class="form-check mb-3">
-        <input class="form-check-input" id="mencari-kerja" type="radio" name="F8" value="4" />
+        <input class="form-check-input" id="mencari-kerja" type="radio" name="F8" value="5" />
         <label class="form-check-label" for="mencari-kerja">Tidak kerja, sedang mencari kerja</label>
     </div>
-    <div class="form-check mb-3">
-        <input class="form-check-input" id="belum-bekerja" type="radio" name="F8" value="5" />
-        <label class="form-check-label" for="belum-bekerja">Belum memungkinkan bekerja</label>
-    </div>
+
 </section>

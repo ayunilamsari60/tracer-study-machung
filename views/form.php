@@ -128,13 +128,13 @@ if (!isset($_SESSION['id_register'])) {
                         if (statusKerja === "1") {
                             $("#bekerja-content").show().find("input, select, textarea, button").prop("disabled", false);
                         } else if (statusKerja === "2") {
-                            $("#wiraswasta-content").show().find("input, select, textarea, button").prop("disabled", false);
-                        } else if (statusKerja === "3") {
-                            $("#pendidikan-content").show().find("input, select, textarea, button").prop("disabled", false);
-                        } else if (statusKerja === "4") {
-                            $("#mencari-kerja-content").show().find("input, select, textarea, button").prop("disabled", false);
-                        } else if (statusKerja === "5") {
                             $("#tidak-bekerja-content").show().find("input, select, textarea, button").prop("disabled", false);
+                        } else if (statusKerja === "3") {
+                            $("#wiraswasta-content").show().find("input, select, textarea, button").prop("disabled", false);
+                        } else if (statusKerja === "4") {
+                            $("#pendidikan-content").show().find("input, select, textarea, button").prop("disabled", false);
+                        } else if (statusKerja === "5") {
+                            $("#mencari-kerja-content").show().find("input, select, textarea, button").prop("disabled", false);
                         }
 
                         // Simpan status kerja ke global variable (supaya bisa diakses nanti)

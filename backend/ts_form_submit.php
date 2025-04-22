@@ -167,6 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     if ($stmt->execute()) {
+        unset($_SESSION['id_register']); // Misalnya kamu hanya ingin menghapus ini
         echo "Data berhasil disimpan!";
         header("Location: " . base_url('selesai'));
         exit; // Penting, agar redirect benar-benar berhenti

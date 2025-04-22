@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico')?>">
 
     <!-- CSS Dependencies -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" />
-    <link href="assets/css/app.min.css" rel="stylesheet" />
-    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" />
-    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/css/icons.min.css')?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/css/app.min.css')?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/libs/select2/css/select2.min.css')?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.css')?>" rel="stylesheet" type="text/css" />
     <style>
         body,
         html {
@@ -76,7 +76,7 @@
                                     <label class="form-label">No. Telepon <span class="text-danger">*</span></label>
                                     <div class="mb-3 input-group">
                                         <div class="input-group-text">+62</div>
-                                        <input type="text" id="no_telepon" name="no_telepon" class="form-control"
+                                        <input type="tel" id="no_telepon" name="no_telepon" class="form-control"
                                             placeholder="Masukkan No. Telepon" required>
                                     </div>
 
@@ -101,10 +101,10 @@
     </div>
 
     <!-- JS Dependencies -->
-    <script src="assets/libs/jquery/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/select2/js/select2.min.js"></script>
-    <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+    <script src="<?= base_url('assets/libs/jquery/jquery.min.js')?>"></script>
+    <script src="<?= base_url('assets/libs/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <script src="<?= base_url('assets/libs/select2/js/select2.min.js')?>"></script>
+    <script src="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.js')?>"></script>
     <!-- <script src="assets/js/app.js"></script> -->
 
     <script>

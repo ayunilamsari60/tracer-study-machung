@@ -36,8 +36,8 @@ $opsi = [
         <!-- Kompetensi Content Start -->
         <div class="mb-5">
             <label for="label-content">
-                Pada saat lulus, pada tingkat mana kompetensi di bawah ini anda kuasai? (A)  
-                Pada saat ini, pada tingkat mana kompetensi di bawah ini diperlukan dalam pekerjaan? (B) <span class="text-danger">*(Wajib diisi)</span>
+                (A) Pada saat lulus, pada tingkat mana kompetensi di bawah ini anda kuasai? <span class="text-danger">*(Wajib diisi)</span><br>
+                (B) Pada saat ini, pada tingkat mana kompetensi di bawah ini diperlukan dalam pekerjaan? <span class="text-danger">*(Wajib diisi)</span>
             </label>
 
             <!-- Warning untuk mobile -->
