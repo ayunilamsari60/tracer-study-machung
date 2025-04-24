@@ -143,10 +143,10 @@ if (!isset($_SESSION['id_register'])) {
                     }
 
                     // Di Step 2, kalau status "tidak bekerja", klik next langsung trigger finish
-                    if (currentIndex === 1 && window.statusKerja === "5" && newIndex > currentIndex) {
-                        $("#job-form-wizard").steps("finish");
-                        return false; // Cegah ke step 3
-                    }
+                    // if (currentIndex === 1 && window.statusKerja === "5" && newIndex > currentIndex) {
+                    //     $("#job-form-wizard").steps("finish");
+                    //     return false; // Cegah ke step 3
+                    // }
 
                     // Validasi Step 2 sebelum lanjut ke Step 3 (HANYA saat Next)
                     if (currentIndex === 1 && newIndex > currentIndex) {
@@ -248,16 +248,16 @@ if (!isset($_SESSION['id_register'])) {
 
                     return true;
                 },
-                onStepChanged: function (event, currentIndex, priorIndex) {
-                    let statusKerja = $("input[name='F8']:checked").val();
+                // onStepChanged: function (event, currentIndex, priorIndex) {
+                //     let statusKerja = $("input[name='F8']:checked").val();
 
-                    // Hanya ubah tombol jika di step 1 menuju step 2 dan status tidak bekerja
-                    if (currentIndex === 1 && statusKerja === "5") {
-                        $(".actions ul li a[href='#next']").text("Selesai");
-                    } else {
-                        $(".actions ul li a[href='#next']").text("Lanjut");
-                    }
-                },
+                //     // Hanya ubah tombol jika di step 1 menuju step 2 dan status tidak bekerja
+                //     if (currentIndex === 1 && statusKerja === "5") {
+                //         $(".actions ul li a[href='#next']").text("Selesai");
+                //     } else {
+                //         $(".actions ul li a[href='#next']").text("Lanjut");
+                //     }
+                // },
 
                 onFinished: function (event, currentIndex) {
                     let isValid = true;

@@ -834,8 +834,8 @@
             </div>
 
             <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="f301" value="3" id="cariKerja3">
-                <label class="form-check-label" for="cariKerja3">Saya tidak mencari kerja</label>
+                <input class="form-check-input" type="radio" name="f301" value="3" id="cariKerja3-mk">
+                <label class="form-check-label" for="cariKerja3-mk">Saya tidak mencari kerja</label>
             </div>
         </div>
 

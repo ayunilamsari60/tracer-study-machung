@@ -7,6 +7,10 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 
+// Tangkap input dari POST
+$tahunLulus = isset($_POST['tahun_lulus']) ? $_POST['tahun_lulus'] : '';
+$prodi = isset($_POST['prodi']) ? $_POST['prodi'] : '';
+
 // Ambil data dari tabel
 $query = "
     SELECT 
@@ -16,6 +20,7 @@ $query = "
     rm.no_telepon,
     rm.email,
     tm.thn_ajaran,
+    rm.NIK,
 
     sd.F8, sd.F502, sd.F505, sd.F5a1, sd.F5a2, sd.F1101, sd.F1102, sd.F5b, sd.F5c, sd.F5d, 
     sd.F18a, sd.F18b, sd.F18c, sd.F18d, sd.F1201, sd.F14, sd.F15, sd.F1761, sd.F1762, sd.F1763, 
@@ -24,12 +29,27 @@ $query = "
     sd.F303, sd.F401, sd.F402, sd.F403, sd.F404, sd.F405, sd.F406, sd.F407, sd.F408, sd.F409, sd.F410, 
     sd.F411, sd.F412, sd.F413, sd.F414, sd.F415, sd.F416, sd.F6, sd.F7, sd.F7a, sd.F1001, sd.F1601, sd.F1602, 
     sd.F1603, sd.F1604, sd.F1605, sd.F1606, sd.F1607, sd.F1608, sd.F1609, sd.F1610, sd.F1611, sd.F1612, sd.F1613, sd.F1614
+";
 
+if ($_POST['export_form'] == 'umc') {
+    $query .= ", sd.UMC1, sd.UMC2, sd.UMC3, sd.UMC4, sd.UMC5";
+}
+
+
+$query .= " 
     FROM submit_data sd
     JOIN ts_register_mahasiswa rm ON rm.id_register = sd.id_register
     JOIN ts_data_mahasiswa1 tm ON tm.id_user = rm.id_user
-    JOIN ts_data_prodi tp ON tp.id = tm.id_prodi
-";
+    JOIN ts_data_prodi tp ON tp.id = tm.id_prodi";
+
+if (!empty($tahunLulus)) {
+    $tahunLulus = $conn->real_escape_string($tahunLulus);
+    $query .= " WHERE tm.thn_ajaran = '$tahunLulus'";
+}
+if (!empty($prodi)) {
+    $prodi = $conn->real_escape_string($prodi);
+    $query .= " WHERE tp.kode_prodi = '$prodi'";
+}
 // $query = "SELECT * FROM submit_data";
 $result = $conn->query($query);
 
@@ -57,8 +77,12 @@ $sheetColumnIndex = 1; // Untuk melacak posisi kolom Excel (A, B, C, ...)
 foreach ($columns as $index => $columnName) {
     // Sisipkan kolom NIK setelah kolom ke-2 (yaitu setelah index 1)
     if ($index === 0) {
-        $colLetterNIK = Coordinate::stringFromColumnIndex($sheetColumnIndex++);
-        $sheet->setCellValue($colLetterNIK . '1', 'Kode PT'); // Header 'NIK'
+        $colLetterKPT = Coordinate::stringFromColumnIndex($sheetColumnIndex++);
+        $sheet->setCellValue($colLetterKPT . '1', 'Kode PT'); // Header 'NIK'
+    }
+    if ($index === 7) {
+        $colLetterNPWP = Coordinate::stringFromColumnIndex($sheetColumnIndex++);
+        $sheet->setCellValue($colLetterNPWP . '1', 'NPWP'); // Header 'NIK'
     }
 
     // Kolom normal dari database
@@ -75,12 +99,16 @@ while ($row = $result->fetch_assoc()) {
     $colIndex = 1;
     foreach ($columns as $index => $columnName) {
         if ($index === 0) {
-            $colLetterNIK = Coordinate::stringFromColumnIndex($colIndex++);
-            $sheet->setCellValueExplicit($colLetterNIK . $rowIndex, '071074', DataType::TYPE_STRING); // Misalnya dari variabel lain
+            $colLetterKPT = Coordinate::stringFromColumnIndex($colIndex++);
+            $sheet->setCellValueExplicit($colLetterKPT . $rowIndex, '071074', DataType::TYPE_STRING); // Misalnya dari variabel lain
+        }
+        if ($index === 7) {
+            $colLetterNPWP = Coordinate::stringFromColumnIndex($colIndex++);
+            $sheet->setCellValueExplicit($colLetterNPWP . $rowIndex, '0', DataType::TYPE_STRING); // Misalnya dari variabel lain
         }
 
         $colLetter = Coordinate::stringFromColumnIndex($colIndex++);
-        $sheet->setCellValueExplicit($colLetter . $rowIndex, $row[$columnName],DataType::TYPE_STRING);
+        $sheet->setCellValueExplicit($colLetter . $rowIndex, $row[$columnName], DataType::TYPE_STRING);
     }
     $rowIndex++;
 }

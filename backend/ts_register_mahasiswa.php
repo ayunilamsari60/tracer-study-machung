@@ -9,6 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tahun_kelulusan = $_POST['tahun_lulus'] ?? null;
     $nama = $_POST['nama'] ?? null;
+    $nik = $_POST['nik'] ?? null;
     $email = $_POST['email'] ?? null;
     $no_telepon = $_POST['no_telepon'] ?? null;
 
@@ -81,8 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insert atau Update data
         $stmt = $conn->prepare("
-            INSERT INTO ts_register_mahasiswa (id_user, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman) 
-            VALUES (?, ?, ?, ?, ?, 0, ?)
+            INSERT INTO ts_register_mahasiswa (id_user, nik, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman) 
+            VALUES (?, ?, ?, ?, ?, ?, 0, ?)
             ON DUPLICATE KEY UPDATE 
             id_user = VALUES(id_user),
             no_telepon = VALUES(no_telepon),
@@ -91,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             otp_verifikasi = 0,
             otp_pengiriman = VALUES(otp_pengiriman)
         ");
-        $stmt->bind_param("issssi", $nama, $email, $no_telepon, $otp_kode, $otp_kadaluwarsa, $otp_attempts);
+        $stmt->bind_param("isssssi", $nama, $nik, $email, $no_telepon, $otp_kode, $otp_kadaluwarsa, $otp_attempts);
         $stmt->execute();
         $stmt->close();
 

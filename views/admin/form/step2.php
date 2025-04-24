@@ -462,8 +462,18 @@
     <?php } ?>
     <!-- Pekerjaan Content End -->
 
-    <!-- Wiraswasta Content Start -->
+    <!-- Tidak Bekerja Content Start -->
     <?php if ($data['F8'] == 2) { ?>
+        <div id="tidak-bekerja-content" class="step-2-content">
+            <label>Mengapa Anda belum memungkinkan untuk bekerja?</label>
+            <input type="text" class="form-control" name="UMC5" placeholder="<?php echo htmlspecialchars($data['UMC5']); ?>"
+                value="<?php echo htmlspecialchars($data['UMC5']); ?>" disabled />
+        </div>
+    <?php } ?>
+    <!-- Tidak Bekerja Content End -->
+
+    <!-- Wiraswasta Content Start -->
+    <?php if ($data['F8'] == 3) { ?>
         <div id="wiraswasta-content" class="step-2-content">
             <div class="mb-4">
                 <label>Dalam berapa bulan Anda memulai wiraswasta?</label>
@@ -769,7 +779,7 @@
     <!-- Wiraswasta Content End -->
 
     <!-- Pendidikan Content Start -->
-    <?php if ($data['F8'] == 3) { ?>
+    <?php if ($data['F8'] == 4) { ?>
         <div id="pendidikan-content" class="step-2-content">
             <div class="mb-4">
                 <label for="sumber_biaya" class="form-label">Sumber Biaya</label>
@@ -851,7 +861,7 @@
     <!-- Pendidikan Content End -->
 
     <!-- Mencari Kerja Content Start -->
-    <?php if ($data['F8'] == 4) { ?>
+    <?php if ($data['F8'] == 5) { ?>
         <div id="mencari-kerja-content" class="step-2-content">
             <div class="mb-4">
                 <label class="form-label">Kapan Anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak
@@ -1041,13 +1051,5 @@
     <?php } ?>
     <!-- Mencari Kerja Content End -->
 
-    <!-- Tidak Bekerja Content Start -->
-    <?php if ($data['F8'] == 5) { ?>
-        <div id="tidak-bekerja-content" class="step-2-content">
-            <label>Mengapa Anda belum memungkinkan untuk bekerja?</label>
-            <input type="text" class="form-control" name="UMC5" placeholder="<?php echo htmlspecialchars($data['UMC5']); ?>"
-                value="<?php echo htmlspecialchars($data['UMC5']); ?>" disabled />
-        </div>
-    <?php } ?>
-    <!-- Tidak Bekerja Content End -->
+
 </section>

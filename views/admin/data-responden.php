@@ -41,95 +41,101 @@ section('content'); // Memulai section untuk konten dinamis
 
         <div class="card p-4">
             <h5>Filter</h5>
-            <div class="row g-3">
+            <form action="<?= base_url('export') ?>" method="post" id="exportform">
+                <div class="row g-3">
 
-                <!-- Program Studi -->
-                <div class="col-md-4">
-                    <label for="prodi" class="form-label">Program Studi</label>
-                    <select id="prodi" name="prodi" class="form-select">
-                        <option value="">Pilih Program Studi</option>
-                        <?php while ($row = $prodiResult->fetch_assoc()): ?>
-                            <option value="<?= $row['kode_prodi'] ?>"><?= $row['kode_prodi'] ?></option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
+                    <!-- Program Studi -->
+                    <div class="col-md-4">
+                        <label for="prodi" class="form-label">Program Studi</label>
+                        <select id="prodi" name="prodi" class="form-select">
+                            <option value="">Pilih Program Studi</option>
+                            <?php while ($row = $prodiResult->fetch_assoc()): ?>
+                                <option value="<?= $row['kode_prodi'] ?>"><?= $row['kode_prodi'] ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
 
-                <!-- Tahun Lulus -->
-                <div class="col-md-4">
-                    <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
-                    <select id="tahun_lulus" name="tahun_lulus" class="form-select" required
-                        onchange="updateNamaMahasiswa()">
-                        <option value="" selected disabled>Pilih...</option>
-                        <?php
-                        for ($tahun = 2000; $tahun <= date("Y"); $tahun++) {
-                            echo "<option value='$tahun'>$tahun</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-
-                <!-- Tombol Filter -->
-                <div class="col-12">
-                    <button class="btn btn-primary mt-2" id="applyFilter" type="submit">
-                        <i class="bi bi-funnel"></i> Terapkan Filter
-                    </button>
-                    <button id="resetFilter" class="btn btn-secondary mt-2">Reset</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-end mb-3">
-                    <a href="<?= base_url('export') ?>" class="btn btn-success">
-                        <i class="mdi mdi-file-excel"></i> Export to Excel
-                    </a>
-                </div>
-                <!-- Wrapping div for horizontal scroll -->
-                <div class="table-responsive">
-                    <table id="datatables" class="table table-bordered table-striped nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>TAHUN LULUS</th>
-                                <th>KODE PRODI</th>
-                                <th>NAMA PRODI</th>
-                                <th>NIM</th>
-                                <th>NAMA MAHASISWA</th>
-                                <th>NO. TELEPON</th>
-                                <th>EMAIL</th>
-                                <th>AKSI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <!-- Tahun Lulus -->
+                    <div class="col-md-4">
+                        <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
+                        <select id="tahun_lulus" name="tahun_lulus" class="form-select"
+                            onchange="updateNamaMahasiswa()">
+                            <option value="" selected disabled>Pilih...</option>
                             <?php
-                            $no = 1;
-                            while ($row = $result->fetch_assoc()) { ?>
-                                <tr>
-                                    <td><?= $no++; ?></td>
-                                    <td><?= $row['thn_ajaran']; ?></td>
-                                    <td><?= $row['kode_prodi']; ?></td>
-                                    <td><?= $row['nama_prodi']; ?></td>
-                                    <td><?= $row['nim_mahasiswa']; ?></td>
-                                    <td><?= $row['nama']; ?></td>
-                                    <td><?= $row['no_telepon']; ?></td>
-                                    <td><?= $row['email']; ?></td>
-                                    <td>
-                                        <a href="data-responden/<?php echo $row['submit_id']; ?>"
-                                            class="btn btn-outline-primary btn-sm">
-                                            Lihat
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
+                            for ($tahun = 2000; $tahun <= date("Y"); $tahun++) {
+                                echo "<option value='$tahun'>$tahun</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+            </form>
 
-
-                    </table>
-                </div>
+            <!-- Tombol Filter -->
+            <div class="col-12">
+                <button class="btn btn-primary mt-2" id="applyFilter" type="button">
+                    <i class="bi bi-funnel"></i> Terapkan Filter
+                </button>
+                <button id="resetFilter" class="btn btn-secondary mt-2" type="button">Reset</button>
             </div>
         </div>
     </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-end mb-3 gap-3">
+                <button type="submit" class="btn btn-success" form="exportform" name="export_form"
+                    value="kemendiksaintek">
+                    <i class="mdi mdi-file-excel"></i> Export to Excel Kemendiksaintek
+                </button>
+                <button type="submit" class="btn btn-outline-success" form="exportform" name="export_form" value="umc">
+                    <i class="mdi mdi-file-excel"></i> Export to Excel UMC
+                </button>
+            </div>
+            <!-- Wrapping div for horizontal scroll -->
+            <div class="table-responsive">
+                <table id="datatables" class="table table-bordered table-striped nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>TAHUN LULUS</th>
+                            <th>KODE PRODI</th>
+                            <th>NAMA PRODI</th>
+                            <th>NIM</th>
+                            <th>NAMA MAHASISWA</th>
+                            <th>NO. TELEPON</th>
+                            <th>EMAIL</th>
+                            <th>AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        while ($row = $result->fetch_assoc()) { ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $row['thn_ajaran']; ?></td>
+                                <td><?= $row['kode_prodi']; ?></td>
+                                <td><?= $row['nama_prodi']; ?></td>
+                                <td><?= $row['nim_mahasiswa']; ?></td>
+                                <td><?= $row['nama']; ?></td>
+                                <td><?= $row['no_telepon']; ?></td>
+                                <td><?= $row['email']; ?></td>
+                                <td>
+                                    <a href="data-responden/<?php echo $row['submit_id']; ?>"
+                                        class="btn btn-outline-primary btn-sm">
+                                        Lihat
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <?php
 endsection(); // Mengakhiri section untuk konten dinamis

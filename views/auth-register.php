@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico')?>">
+    <link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico') ?>">
 
     <!-- CSS Dependencies -->
-    <link href="<?= base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet" />
-    <link href="<?= base_url('assets/css/icons.min.css')?>" rel="stylesheet" />
-    <link href="<?= base_url('assets/css/app.min.css')?>" rel="stylesheet" />
-    <link href="<?= base_url('assets/libs/select2/css/select2.min.css')?>" rel="stylesheet" />
-    <link href="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.css')?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/css/icons.min.css') ?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/css/app.min.css') ?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/libs/select2/css/select2.min.css') ?>" rel="stylesheet" />
+    <link href="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.css') ?>" rel="stylesheet" type="text/css" />
     <style>
         body,
         html {
@@ -45,8 +45,7 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="p-2">
-                                <form id="registerForm" action="register/post" method="POST"
-                                    class="mt-4">
+                                <form id="registerForm" action="register/post" method="POST" class="mt-4">
                                     <div class="mb-3">
                                         <label class="form-label">Tahun Lulus <span class="text-danger">*</span></label>
                                         <select id="tahun_lulus" name="tahun_lulus" class="form-select" required
@@ -68,16 +67,28 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label class="form-label">NIK <span class="text-danger">*</span></label>
+                                        <input type="text" id="nik" name="nik" class="form-control"
+                                            placeholder="Masukkan NIK" inputmode="numeric"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                            maxlength="16" required />
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label class="form-label">Email <span class="text-danger">*</span></label>
                                         <input type="text" id="email" name="email" class="form-control"
                                             placeholder="Masukkan Email" required>
                                     </div>
 
                                     <label class="form-label">No. Telepon <span class="text-danger">*</span></label>
-                                    <div class="mb-3 input-group">
-                                        <div class="input-group-text">+62</div>
-                                        <input type="tel" id="no_telepon" name="no_telepon" class="form-control"
-                                            placeholder="Masukkan No. Telepon" required>
+                                    <div class="mb-3">
+                                        <div class="input-group">
+                                            <div class="input-group-text">+62</div>
+                                            <input type="tel" id="no_telepon" name="no_telepon" class="form-control"
+                                                placeholder="Masukkan No. Telepon" required>
+                                        </div>
+                                        <div id="nikHelp" class="form-text">*Masukan Nomor langsung ke angka 8 contoh:
+                                            831232....</div>
                                     </div>
 
                                     <div class="mt-4 d-grid">
@@ -101,10 +112,10 @@
     </div>
 
     <!-- JS Dependencies -->
-    <script src="<?= base_url('assets/libs/jquery/jquery.min.js')?>"></script>
-    <script src="<?= base_url('assets/libs/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
-    <script src="<?= base_url('assets/libs/select2/js/select2.min.js')?>"></script>
-    <script src="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.js')?>"></script>
+    <script src="<?= base_url('assets/libs/jquery/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('assets/libs/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= base_url('assets/libs/select2/js/select2.min.js') ?>"></script>
+    <script src="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.js') ?>"></script>
     <!-- <script src="assets/js/app.js"></script> -->
 
     <script>

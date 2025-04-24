@@ -25,7 +25,7 @@ route('GET', '/selesai', function () {
     require 'views/halaman_terakhir.php';
 });
 
-route('GET', '/export', function () {
+route('POST', '/export', function () {
     require 'backend/ts_export_data.php';
 });
 
