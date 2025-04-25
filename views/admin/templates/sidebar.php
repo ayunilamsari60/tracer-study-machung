@@ -21,12 +21,14 @@ $current_page = basename($_SERVER['SCRIPT_NAME']); // Ambil nama file dari URL
                         <span key="t-dashboards">Data Responden</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="<?= base_url('admin/konfigurasi') ?>" class="<?= ($current_page == 'konfigurasi') ? 'mm-active' : '' ?>">
                         <i class="bx bx-cog"></i>
                         <span key="t-dashboards">Konfigurasi</span>
                     </a>
                 </li>
+                
             </ul>
         </div>
     </div>

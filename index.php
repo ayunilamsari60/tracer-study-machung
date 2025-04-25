@@ -25,9 +25,6 @@ route('GET', '/selesai', function () {
     require 'views/halaman_terakhir.php';
 });
 
-route('POST', '/export', function () {
-    require 'backend/ts_export_data.php';
-});
 
 
 // 💡 Versi dengan parameter dinamis
@@ -59,10 +56,21 @@ route('GET', '/admin/data-responden', function () {
     auth_check();
     require 'views/admin/data-responden.php';
 });
-route('GET', '/admin/data-responden', function () {
-    auth_check();
-    require 'views/admin/data-responden.php';
+
+route('POST', '/export', function () {
+    require 'backend/ts_export_data.php';
 });
+
+route('GET', '/admin/konfigurasi', function () {
+    auth_check();
+    require 'views/admin/konfigurasi.php';
+});
+
+route('POST', '/admin/konfigurasi', function () {
+    auth_check();
+    require 'backend/ts_konfigurasi.php';
+});
+
 
 route('GET', '/admin/data-responden/{id}', function ($id) {
     auth_check();

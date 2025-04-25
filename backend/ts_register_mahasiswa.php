@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tahun_kelulusan = $_POST['tahun_lulus'] ?? null;
+    $tahun_isian = $_POST['tahun_isian'] ?? null;
     $nama = $_POST['nama'] ?? null;
     $nik = $_POST['nik'] ?? null;
     $email = $_POST['email'] ?? null;

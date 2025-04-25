@@ -1,4 +1,13 @@
-<?php session_start() ?>
+<?php 
+include "config/koneksi.php";
+session_start();
+$query = "SELECT * FROM ts_konfigurasi WHERE id = 1";
+$result = $conn->query($query);
+$row = $result->fetch_assoc();
+$tahun_lulus_mulai = $row['tahun_lulus_mulai'];
+$tahun_lulus_akhir = $row['tahun_lulus_akhir'];
+$tahun_isian = $row['tahun_isian'];
+?>
 <!doctype html>
 <html lang="en">
 
@@ -52,10 +61,16 @@
                                             onchange="updateNamaMahasiswa()">
                                             <option value="" selected disabled>Pilih...</option>
                                             <!-- Loop dengan PHP -->
-                                            <?php for ($tahun = 2015; $tahun <= date("Y"); $tahun++) { ?>
-                                                <option value="<?php echo $tahun; ?>"><?php echo $tahun; ?></option>
+                                            <?php for ($tahun_lulus_mulai; $tahun_lulus_mulai <= $tahun_lulus_akhir; $tahun_lulus_mulai++) { ?>
+                                                <option value="<?php echo $tahun_lulus_mulai; ?>"><?php echo $tahun_lulus_mulai; ?></option>
                                             <?php } ?>
                                         </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Tahun Isian <span class="text-danger">*</span></label>
+                                        <input type="text" id="tahun_isian" name="tahun_isian" class="form-control"
+                                            placeholder="Masukkan Tahun Isian" value="<?= $tahun_isian ?>" readonly>
                                     </div>
 
                                     <div class="mb-3">
