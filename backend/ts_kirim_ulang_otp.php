@@ -7,26 +7,27 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['email']) || !isset($_SESSION['tahun_isian'])) {
         header("Location: index.php?status=error");
         exit();
     }
 
     $email = $_SESSION['email'];
+    $tahun_isian = $_SESSION['tahun_isian'];
 
     try {
         $conn->begin_transaction(); // Mulai transaksi
 
-        // Ambil data pengguna dari database
-        $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM ts_register_mahasiswa WHERE email = ?");
-        $stmt->bind_param("s", $email);
+        // Ambil data pengguna berdasarkan email dan tahun isian
+        $stmt = $conn->prepare("SELECT otp_pengiriman, updated_at FROM ts_register_mahasiswa WHERE email = ? AND tahun_isian = ?");
+        $stmt->bind_param("si", $email, $tahun_isian);
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
         $stmt->close();
 
         if (!$user) {
-            throw new Exception("User tidak ditemukan");
+            throw new Exception("User tidak ditemukan untuk tahun isian tersebut.");
         }
 
         $lastUpdatedDate = date("Y-m-d", strtotime($user['updated_at']));
@@ -37,9 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
 
         // Batasi pengiriman OTP maksimal 2 kali sehari
         if ($otp_attempts > 2) {
-            echo "Maaf, Anda hanya bisa meminta OTP sebanyak 2 kali dalam sehari.";
             header("Location: /tracer-study-machung/verifikasi-otp/limit");
-
             exit();
         }
 
@@ -50,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         // Update OTP, jumlah pengiriman, dan updated_at di database
         $stmt = $conn->prepare("UPDATE ts_register_mahasiswa 
                                 SET otp_kode = ?, otp_kadaluwarsa = ?, otp_pengiriman = ?, updated_at = NOW() 
-                                WHERE email = ?");
-        $stmt->bind_param('ssis', $otp_kode, $otp_kadaluwarsa, $otp_attempts, $email);
+                                WHERE email = ? AND tahun_isian = ?");
+        $stmt->bind_param('ssisi', $otp_kode, $otp_kadaluwarsa, $otp_attempts, $email, $tahun_isian);
         $stmt->execute();
         $stmt->close();
 
@@ -62,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = getenv('EMAIL_USERNAME'); // Ambil dari environment variable
-        $mail->Password = getenv('EMAIL_PASSWORD'); // Ambil dari environment variable
+        $mail->Username = getenv('EMAIL_USERNAME');
+        $mail->Password = getenv('EMAIL_PASSWORD');
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
@@ -96,13 +95,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
 
         $mail->send();
 
-        // Redirect dengan status sukses
+        // Redirect sukses
         header("Location: /tracer-study-machung/verifikasi-otp/success");
         exit();
     } catch (Exception $e) {
-        $conn->rollBack(); // Batalkan transaksi jika ada error
-        error_log("Error: " . $e->getMessage()); // Logging error
+        $conn->rollBack();
+        error_log("Error: " . $e->getMessage());
         header("Location: /tracer-study-machung/verifikasi-otp/error");
         exit();
     }
 }
+?>

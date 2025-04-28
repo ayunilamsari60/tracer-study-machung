@@ -73,6 +73,7 @@ section('content'); // Memulai section untuk konten dinamis
                             <div class="flex-grow-1">
                                 <p class="text-muted fw-medium">Alumni Belum Mengisi Form</p>
                                 <h3 class="mb-6"><?php echo $total_belum_submit ?></h3>
+                                <h3 class="mb-6"><?php echo $total_mahasiswa ?></h3>
                             </div>
 
                             <div class="flex-shrink-0 align-self-center">
@@ -92,7 +93,10 @@ section('content'); // Memulai section untuk konten dinamis
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="text-muted fw-medium">Jumlah Pengisian Berdasarkan Program Studi</h5>
+                        <div class="d-sm-flex align-items-center justify-content-between">
+                            <h5 class="text-muted fw-medium">Jumlah Pengisian Berdasarkan Program Studi</h5>
+                            <h5 class="text-muted fw-medium">Berdasarkan Tahun Isian : <?= $tahun_isian ?> </h5>
+                        </div>
 
                         <div id="bar-charts" dir="ltr"></div>
                     </div>

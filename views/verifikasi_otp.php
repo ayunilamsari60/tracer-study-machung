@@ -1,5 +1,9 @@
 <?php
 session_start();
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
+
 if (!isset($_SESSION['email'])) {
     $_SESSION['error'] = "Session expired. Silakan register ulang.";
     header("Location: /tracer-study-machung/");
@@ -20,7 +24,8 @@ if (!isset($_SESSION['email'])) {
     <link rel="shortcut icon" href="/tracer-study-machung/assets/images/favicon.ico">
 
     <!-- Bootstrap Css -->
-    <link href="/tracer-study-machung/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="/tracer-study-machung/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
     <!-- Icons Css -->
     <link href="/tracer-study-machung/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
@@ -41,13 +46,15 @@ if (!isset($_SESSION['email'])) {
                 <?php elseif (isset($_GET['status']) && $_GET['status'] == 'error'): ?>
                     <h4 class="alert alert-danger text-center otp-alert">Gagal mengirim OTP. Silakan coba lagi!</h4>
                 <?php elseif (isset($_GET['status']) && $_GET['status'] == 'limit'): ?>
-                    <h4 class="alert alert-warning text-center otp-alert">Maaf, Anda hanya bisa meminta OTP sebanyak 2 kali dalam sehari.</h4>
+                    <h4 class="alert alert-warning text-center otp-alert">Maaf, Anda hanya bisa meminta OTP sebanyak 2 kali
+                        dalam sehari.</h4>
                 <?php endif; ?>
 
                 <div class="row justify-content-center">
                     <div class="col-lg-12 text-center mb-5 text-muted">
                         <h2>Verifikasi Kode OTP</h2>
-                        <h6 class="mt-3">Silakan cek email Anda. Kami telah mengirimkan kode OTP untuk memastikan bahwa data yang Anda isi benar</h6>
+                        <h6 class="mt-3">Silakan cek email Anda. Kami telah mengirimkan kode OTP untuk memastikan bahwa
+                            data yang Anda isi benar</h6>
                     </div>
                 </div>
 
@@ -75,11 +82,14 @@ if (!isset($_SESSION['email'])) {
 
                                             <form action="/tracer-study-machung/verifikasi-otp/post" method="POST">
                                                 <div class="mb-3">
-                                                    <input type="text" class="form-control form-control-lg text-center" maxLength="4" id="otp-input" name="otp_kode" id="otp_kode" placeholder="Masukkan Kode OTP" required />
+                                                    <input type="text" class="form-control form-control-lg text-center"
+                                                        maxLength="4" id="otp-input" name="otp_kode" id="otp_kode"
+                                                        placeholder="Masukkan Kode OTP" required />
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <button type="submit" class="btn btn-success w-md">Verifikasi</button>
+                                                    <button type="submit"
+                                                        class="btn btn-success w-md">Verifikasi</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -93,7 +103,9 @@ if (!isset($_SESSION['email'])) {
                         <div class="mt-5 text-center">
                             <form action="/tracer-study-machung/kirim-ulang/post" method="POST">
                                 <p>Tidak mendapatkan OTP?
-                                    <button type="submit" name="resendOtp" class="fw-medium text-primary" style="border: none; background: none; cursor: pointer; color: blue;">Kirim Ulang</button>
+                                    <button type="submit" name="resendOtp" class="fw-medium text-primary"
+                                        style="border: none; background: none; cursor: pointer; color: blue;">Kirim
+                                        Ulang</button>
                                 </p>
                             </form>
 
@@ -139,7 +151,7 @@ if (!isset($_SESSION['email'])) {
                 }).then(() => {
                     window.location.href = "form"; // Redirect jika sukses
                 });
-                <?php unset($_SESSION['success']); ?>
+                <?php unset($_SESSION['success']);?>
             <?php } ?>
             // $(document).ready(function() {
             // $(".resend-otp").click(function(e) {
