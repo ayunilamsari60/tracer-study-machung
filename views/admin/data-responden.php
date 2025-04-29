@@ -50,7 +50,7 @@ section('content'); // Memulai section untuk konten dinamis
                         <select id="prodi" name="prodi" class="form-select">
                             <option value="">Pilih Program Studi</option>
                             <?php while ($row = $prodiResult->fetch_assoc()): ?>
-                                <option value="<?= $row['kode_prodi'] ?>"><?= $row['kode_prodi'] ?></option>
+                                <option value="<?= $row['kode_prodi'] ?>"><?= $row['nama_prodi'] ?></option>
                             <?php endwhile; ?>
                         </select>
                     </div>

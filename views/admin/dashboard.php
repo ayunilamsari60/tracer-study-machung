@@ -73,7 +73,6 @@ section('content'); // Memulai section untuk konten dinamis
                             <div class="flex-grow-1">
                                 <p class="text-muted fw-medium">Alumni Belum Mengisi Form</p>
                                 <h3 class="mb-6"><?php echo $total_belum_submit ?></h3>
-                                <h3 class="mb-6"><?php echo $total_mahasiswa ?></h3>
                             </div>
 
                             <div class="flex-shrink-0 align-self-center">

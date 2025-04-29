@@ -2,13 +2,15 @@
 include "config/koneksi.php"; // Ganti path sesuai struktur proyekmu
 
 // Query untuk mengambil nilai tahun_isian dari tabel ts_konfigurasi
-$sql_tahun_isian = "SELECT tahun_isian FROM ts_konfigurasi LIMIT 1"; // Mengambil hanya 1 record
+$sql_tahun_isian = "SELECT * FROM ts_konfigurasi LIMIT 1"; // Mengambil hanya 1 record
 $result_tahun_isian = $conn->query($sql_tahun_isian);
 
 // Mengecek hasil query untuk tahun_isian
 if ($result_tahun_isian->num_rows > 0) {
     $row_tahun_isian = $result_tahun_isian->fetch_assoc();
     $tahun_isian = $row_tahun_isian['tahun_isian'];
+    $tahun_mulai = $row_tahun_isian['tahun_lulus_mulai'];
+    $tahun_akhir = $row_tahun_isian['tahun_lulus_akhir'];
 } else {
     echo "Tidak ada konfigurasi tahun isian ditemukan.<br>";
     $tahun_isian = null; // Jika tidak ada data, atur ke null
@@ -16,15 +18,15 @@ if ($result_tahun_isian->num_rows > 0) {
 
 // Query untuk menghitung total mahasiswa terdaftar
 $sql_total_mahasiswa = "
-    SELECT COUNT(*) AS total_mahasiswa
-    FROM ts_data_mahasiswa1 m
+    SELECT COUNT(DISTINCT m.id_user) AS total_mahasiswa
+    FROM ts_data_mahasiswa m
     LEFT JOIN ts_register_mahasiswa r ON m.id_user = r.id_user
-    LEFT JOIN submit_data s ON r.id_register = s.id_register
+    LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
     WHERE s.id_register IS NULL
-    AND m.thn_ajaran = ?
+    AND m.thn_ajaran BETWEEN ? AND ?
 ";
 $stmt = $conn->prepare($sql_total_mahasiswa);
-$stmt->bind_param("s", $tahun_isian);  // Gantilah dengan nilai tahun_isian yang sesuai
+$stmt->bind_param("ss", $tahun_mulai, $tahun_akhir);
 $stmt->execute();
 $result_total_mahasiswa = $stmt->get_result();
 
@@ -33,16 +35,17 @@ if ($result_total_mahasiswa->num_rows > 0) {
     $total_mahasiswa = $row_total_mahasiswa['total_mahasiswa'];
 } else {
     echo "Tidak ada data mahasiswa yang ditemukan.<br>";
-    $total_mahasiswa = 0; // Default jika tidak ada data
+    $total_mahasiswa = 0;
 }
+
 
 
 // Query untuk menghitung mahasiswa yang sudah di-submit
 $sql_total_submit = "
     SELECT COUNT(*) AS total_submit
-    FROM ts_data_mahasiswa1 m
+    FROM ts_data_mahasiswa m
     LEFT JOIN ts_register_mahasiswa r ON m.id_user = r.id_user
-    LEFT JOIN submit_data s ON r.id_register = s.id_register
+    LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
     WHERE s.id_register IS NOT NULL
     AND r.tahun_isian = ?  -- Menambahkan WHERE untuk tahun_isian
 ";

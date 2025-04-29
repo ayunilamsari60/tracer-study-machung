@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tahun_lulus'])) {
     }
 
     // Ganti query agar ambil id_user dan nama
-    $stmt = $conn->prepare("SELECT id_user, nama FROM ts_data_mahasiswa1 WHERE thn_ajaran = ?");
+    $stmt = $conn->prepare("SELECT id_user, nama FROM ts_data_mahasiswa WHERE thn_ajaran = ?");
     $stmt->bind_param("i", $tahun);
     $stmt->execute();
     $result = $stmt->get_result();

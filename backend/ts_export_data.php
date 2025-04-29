@@ -37,9 +37,9 @@ if ($_POST['export_form'] == 'umc') {
 
 
 $query .= " 
-    FROM submit_data sd
+    FROM ts_form_submit sd
     JOIN ts_register_mahasiswa rm ON rm.id_register = sd.id_register
-    JOIN ts_data_mahasiswa1 tm ON tm.id_user = rm.id_user
+    JOIN ts_data_mahasiswa tm ON tm.id_user = rm.id_user
     JOIN ts_data_prodi tp ON tp.id = tm.id_prodi";
 
 if (!empty($tahunLulus)) {

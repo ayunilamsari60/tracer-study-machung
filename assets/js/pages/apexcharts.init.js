@@ -154,25 +154,21 @@ grid: {
 fetch('api/statistik_mahasiswa')
   .then(res => res.json())
   .then(data => {
-    // Kumpulkan total per tahun
     const grouped = {};
 
-    data.forEach(item => {
+    data.spilinechart.forEach(item => {
       if (!grouped[item.tahun]) {
-        grouped[item.tahun] = { sudah: 0, belum: 0 };
+        grouped[item.tahun] = { sudah_mengisi: 0, belum_mengisi: 0 };
       }
-      grouped[item.tahun].sudah += item.sudah;
-      grouped[item.tahun].belum += item.belum;
+      grouped[item.tahun].sudah_mengisi += item.sudah_mengisi;
+      grouped[item.tahun].belum_mengisi += item.belum_mengisi;
     });
 
-    // Ambil tahun terurut
     const categories = Object.keys(grouped).sort();
 
-    // Ambil data sesuai urutan tahun
-    const sudahData = categories.map(tahun => grouped[tahun].sudah);
-    const belumData = categories.map(tahun => grouped[tahun].belum);
+    const sudahData = categories.map(tahun => grouped[tahun].sudah_mengisi);
+    const belumData = categories.map(tahun => grouped[tahun].belum_mengisi);
 
-    // Update chart
     const options = {
       chart: {
         height: 350,

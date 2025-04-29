@@ -3,14 +3,7 @@
 include_once "templates/section.php"; // Memanggil file section.php untuk mendukung fungsi section dan endsection
 include_once "backend/ts_konfigurasi.php"; // Memanggil file koneksi.php untuk koneksi database
 $title = "Data Responden"; // Judul halaman
-if (isset($_SESSION['filter_success'])) {
-    echo "<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            new bootstrap.Toast(document.getElementById('liveToast')).show();
-        });
-    </script>";
-    unset($_SESSION['filter_success']);
-}
+
 ?>
 <?php push('styles') ?>
 <!-- DataTables -->
@@ -92,7 +85,7 @@ section('content'); // Memulai section untuk konten dinamis
                     <!-- Tombol Filter -->
                     <div class="col-12">
                         <button class="btn btn-primary mt-2" type="submit" onclick="showToast()">
-                            <i class="bi bi-funnel"></i> Terapkan Filter
+                            Submit
                         </button>
                         <button id="resetFilter" class="btn btn-secondary mt-2" type="reset">Reset</button>
                     </div>
@@ -119,6 +112,14 @@ section('content'); // Memulai section untuk konten dinamis
     </div>
 </div>
 <?php
+if (isset($_SESSION['filter_success'])) {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new bootstrap.Toast(document.getElementById('liveToast')).show();
+        });
+    </script>";
+    unset($_SESSION['filter_success']);
+}
 endsection(); // Mengakhiri section untuk konten dinamis
 ?>
 <?php push('scripts') ?>

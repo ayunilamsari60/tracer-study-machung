@@ -49,9 +49,30 @@
     try {
         const response = await fetch("api/statistik_mahasiswa");
         const data = await response.json();
+
+        const barData = data.barchart;
         
         // Ambil semua prodi tanpa filter
-        const categories = [...new Set(data.map(item => item.prodi))];
+        // Gabungkan semua data berdasarkan 'prodi'
+        const prodiMap = {};
+
+        barData.forEach(item => {
+            if (!prodiMap[item.prodi]) {
+                prodiMap[item.prodi] = { sudah: 0, belum: 0 };
+            }
+            prodiMap[item.prodi].sudah += item.sudah;
+            prodiMap[item.prodi].belum += item.belum;
+        });
+
+        // Setelah itu, buat array baru dari map tersebut
+        const categories = Object.keys(prodiMap);
+        const sudahData = categories.map(prodi => prodiMap[prodi].sudah);
+        const belumData = categories.map(prodi => prodiMap[prodi].belum);
+
+
+        const maxValue = Math.max(...sudahData.map((val, i) => val + belumData[i]));
+        const xAxisMax = Math.ceil(maxValue * 1.1); 
+
 
         // // Buat map dari data tahunNow untuk cepat akses
         // const tahunNowData = data
@@ -69,31 +90,31 @@
         // const belum = categories.map(prodi => tahunNowData[prodi]?.belum || 0);
 
         // Buat akumulasi data dari semua tahun tanpa filter
-        const semuaTahunData = data.reduce((acc, curr) => {
-            if (!acc[curr.prodi]) {
-                acc[curr.prodi] = { sudah: 0, belum: 0 };
-            }
-            acc[curr.prodi].sudah += curr.sudah;
-            acc[curr.prodi].belum += curr.belum;
-            return acc;
-        }, {});
+        // const semuaTahunData = data.reduce((acc, curr) => {
+        //     if (!acc[curr.prodi]) {
+        //         acc[curr.prodi] = { sudah: 0, belum: 0 };
+        //     }
+        //     acc[curr.prodi].sudah += curr.sudah;
+        //     acc[curr.prodi].belum += curr.belum;
+        //     return acc;
+        // }, {});
 
-        const sudah = categories.map(prodi => semuaTahunData[prodi]?.sudah || 0);
-        const belum = categories.map(prodi => semuaTahunData[prodi]?.belum || 0);
+        // const sudah = categories.map(prodi => semuaTahunData[prodi]?.sudah || 0);
+        // const belum = categories.map(prodi => semuaTahunData[prodi]?.belum || 0);
 
-        const maxValue = Math.max(...categories.map(prodi => {
-            const s = semuaTahunData[prodi]?.sudah || 0;
-            const b = semuaTahunData[prodi]?.belum || 0;
-            return s + b;
-        }));
-        const xAxisMax = Math.ceil(maxValue * 1.1); // Tambah 20% ruang
+        // const maxValue = Math.max(...categories.map(prodi => {
+        //     const s = semuaTahunData[prodi]?.sudah || 0;
+        //     const b = semuaTahunData[prodi]?.belum || 0;
+        //     return s + b;
+        // }));
+        // const xAxisMax = Math.ceil(maxValue * 1.1); // Tambah 20% ruang
         
 
         const chartData = {
             categories: categories,
             series: [
-                { name: "Sudah Mengisi", data: sudah },
-                { name: "Belum Mengisi", data: belum }
+                { name: "Sudah Mengisi", data: sudahData },
+                { name: "Belum Mengisi", data: belumData }
             ]
         };
 

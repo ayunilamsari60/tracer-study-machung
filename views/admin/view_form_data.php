@@ -3,8 +3,8 @@
 include 'config/koneksi.php';
 include_once 'templates/section.php';
 $title = "Lihat Data"; // Judul halaman
-// Buat query untuk mengambil data dari tabel submit_data berdasarkan ID
-$query = "SELECT * FROM submit_data WHERE id = $id";
+// Buat query untuk mengambil data dari tabel ts_form_submit berdasarkan ID
+$query = "SELECT * FROM ts_form_submit WHERE id = $id";
 $result = $conn->query($query);
 
 // Cek jika data ditemukan

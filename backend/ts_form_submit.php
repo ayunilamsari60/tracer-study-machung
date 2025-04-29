@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // echo "</pre>";
 
     // Query untuk menyimpan data
-    $sql = "INSERT INTO submit_data 
+    $sql = "INSERT INTO ts_form_submit 
             (id_register, F8, F18a, F18b, F18c, F18d, F1101, F1102, F1201, F1202, 
             F1761, F1762, F1763, F1764, F1765, F1766, F1767, F1768, F1769, F1770, F1771, F1772, F1773, F1774, 
             f21, f22, f23, f24, f25, f26, f27, 
