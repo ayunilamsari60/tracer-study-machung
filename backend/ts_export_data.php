@@ -14,12 +14,12 @@ $prodi = isset($_POST['prodi']) ? $_POST['prodi'] : '';
 // Ambil data dari tabel
 $query = "
     SELECT 
-    tp.kode_prodi,
+    tp.kode_dikti,
     tm.nim_mahasiswa,
-    tm.nama,
+    tm.nama_mahasiswa,
     rm.no_telepon,
     rm.email,
-    tm.thn_ajaran,
+    YEAR(w.tglsk) as thn_ajaran,
     rm.NIK,
 
     sd.F8, sd.F502, sd.F505, sd.F5a1, sd.F5a2, sd.F1101, sd.F1102, sd.F5b, sd.F5c, sd.F5d, 
@@ -39,12 +39,14 @@ if ($_POST['export_form'] == 'umc') {
 $query .= " 
     FROM ts_form_submit sd
     JOIN ts_register_mahasiswa rm ON rm.id_register = sd.id_register
-    JOIN ts_data_mahasiswa tm ON tm.id_user = rm.id_user
-    JOIN ts_data_prodi tp ON tp.id = tm.id_prodi";
+    JOIN akademik_master_mahasiswa tm ON tm.nim_mahasiswa = rm.nim_mahasiswa
+    JOIN akademik_master_program_studi tp ON tp.kode_prodi = tm.id_prodi
+    JOIN akademik_transaksi_wisuda_detail wd ON tm.nim_mahasiswa = wd.nim_mahasiswa
+    JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda";
 
 if (!empty($tahunLulus)) {
     $tahunLulus = $conn->real_escape_string($tahunLulus);
-    $query .= " WHERE tm.thn_ajaran = '$tahunLulus'";
+    $query .= " WHERE YEAR(w.tglsk) = '$tahunLulus'";
 }
 if (!empty($prodi)) {
     $prodi = $conn->real_escape_string($prodi);

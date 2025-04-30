@@ -25,5 +25,5 @@ $result = $conn->query($sql);
 // $fakultasResult = $conn->query($fakultasQuery);
 
 // Ambil data program studi unik
-$prodiQuery = "SELECT DISTINCT nama_prodi, kode_prodi FROM ts_data_prodi";
+$prodiQuery = "SELECT DISTINCT nama_prodi_in, kode_prodi FROM akademik_master_program_studi";
 $prodiResult = $conn->query($prodiQuery);
