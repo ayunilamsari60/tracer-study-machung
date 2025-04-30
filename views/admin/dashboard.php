@@ -50,7 +50,7 @@ section('content'); // Memulai section untuk konten dinamis
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-muted fw-medium">Alumni Sudah Mengisi Form</p>
+                                <p class="text-muted fw-medium">Alumni Sudah Mengisi Form pada tahun isian : <?= $tahun_isian ?></p>
                                 <h3 class="mb-6"><?php  echo $total_submit;?></h3>
                             </div>
 

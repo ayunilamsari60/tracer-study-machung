@@ -16,30 +16,31 @@ if ($result_tahun && $result_tahun->num_rows > 0) {
 // --- Query untuk BARCHART ---
 $sql_barchart = "
 SELECT 
-    tp.nama_prodi,
-    COUNT(DISTINCT m.id_user) AS total,  -- Menghitung mahasiswa unik
+    mps.nama_prodi_in AS nama_prodi,
+    COUNT(DISTINCT m.nim_mahasiswa) AS total,
     SUM(CASE WHEN s.id_register IS NOT NULL THEN 1 ELSE 0 END) AS sudah,
     SUM(
         CASE WHEN 
-            m.thn_ajaran BETWEEN '$tahun_mulai' AND '$tahun_akhir'
+            YEAR(w.tglsk) BETWEEN '$tahun_mulai' AND '$tahun_akhir'
             AND s.id_register IS NULL 
-            AND m.id_user NOT IN (
-                SELECT DISTINCT r.id_user
+            AND m.nim_mahasiswa NOT IN (
+                SELECT DISTINCT r.nim_mahasiswa
                 FROM ts_register_mahasiswa r
                 LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
                 WHERE s.id_register IS NULL
-            ) 
+            )
         THEN 1 ELSE 0 END
     ) AS belum
-FROM ts_data_prodi tp
-LEFT JOIN ts_data_mahasiswa m ON tp.id = m.id_prodi
-LEFT JOIN ts_register_mahasiswa r ON m.id_user = r.id_user 
-    AND r.tahun_isian = '$tahun_isian'
+FROM akademik_master_program_studi mps
+LEFT JOIN akademik_master_mahasiswa m ON m.id_prodi = mps.kode_prodi
+LEFT JOIN akademik_transaksi_wisuda_detail wd ON m.nim_mahasiswa = wd.nim_mahasiswa
+LEFT JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda
+LEFT JOIN ts_register_mahasiswa r ON m.nim_mahasiswa = r.nim_mahasiswa AND r.tahun_isian = '$tahun_isian'
 LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
-GROUP BY tp.id
-ORDER BY tp.nama_prodi ASC;
-
+GROUP BY mps.kode_prodi
+ORDER BY mps.nama_prodi_in ASC
 ";
+
 
 
 $result_barchart = $conn->query($sql_barchart);
@@ -64,11 +65,14 @@ for ($i = 0; $i < 5; $i++) {
     $tahun_lulus_mulai = $tahun_mulai - $i;
     $tahun_lulus_akhir = $tahun_akhir - $i;
 
-    // Query menghitung sudah mengisi
+    // Query menghitung sudah mengisi (sudah mengisi)
     $sql_sudah_mengisi = "
-        SELECT COUNT(*) AS sudah_mengisi
-        FROM ts_register_mahasiswa r
+        SELECT COUNT(DISTINCT m.nim_mahasiswa) AS sudah_mengisi
+        FROM akademik_master_mahasiswa m
+        LEFT JOIN ts_register_mahasiswa r ON m.nim_mahasiswa = r.nim_mahasiswa
         LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
+        LEFT JOIN akademik_transaksi_wisuda_detail wd ON m.nim_mahasiswa = wd.nim_mahasiswa
+        LEFT JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda
         WHERE r.tahun_isian = '$tahun_target'
           AND s.id_register IS NOT NULL
     ";
@@ -78,9 +82,11 @@ for ($i = 0; $i < 5; $i++) {
 
     // Query menghitung total mahasiswa di tahun itu
     $sql_total_mahasiswa = "
-        SELECT COUNT(*) AS total_mahasiswa
-        FROM ts_data_mahasiswa
-        WHERE thn_ajaran BETWEEN '$tahun_lulus_mulai' AND '$tahun_lulus_akhir'
+        SELECT COUNT(DISTINCT m.nim_mahasiswa) AS total_mahasiswa
+        FROM akademik_master_mahasiswa m
+        LEFT JOIN akademik_transaksi_wisuda_detail wd ON m.nim_mahasiswa = wd.nim_mahasiswa
+        LEFT JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda
+        WHERE YEAR(w.tglsk) BETWEEN '$tahun_lulus_mulai' AND '$tahun_lulus_akhir'
     ";
     $result_total = $conn->query($sql_total_mahasiswa);
     $row_total = $result_total->fetch_assoc();

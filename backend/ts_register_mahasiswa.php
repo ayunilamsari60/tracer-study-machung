@@ -50,19 +50,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         $conn->begin_transaction(); // Mulai transaksi
     
-        // 1. Cek apakah user sudah terverifikasi di tahun yang sama
-        $stmt = $conn->prepare("SELECT id_register FROM ts_register_mahasiswa WHERE id_user = ? AND tahun_isian = ? AND otp_verifikasi = 1");
+        // 1. Cek apakah user sudah submit di tahun yang sama
+        $stmt = $conn->prepare("
+            SELECT rm.id_register 
+            FROM ts_register_mahasiswa rm
+            INNER JOIN ts_form_submit fs ON rm.id_register = fs.id_register
+            WHERE rm.nim_mahasiswa = ? AND rm.tahun_isian = ?
+        ");
         $stmt->bind_param("ii", $nama, $tahun_isian);
         $stmt->execute();
         $result = $stmt->get_result();
         $userTahunSama = $result->fetch_assoc();
         $stmt->close();
-    
+
         if ($userTahunSama) {
-            $_SESSION['error'] = "Nama mahasiswa ini sudah terverifikasi untuk tahun $tahun_isian dan tidak bisa mendaftar ulang di tahun yang sama!";
+            $_SESSION['error'] = "Nama mahasiswa ini sudah mengirim isian untuk tahun $tahun_isian dan tidak bisa mendaftar ulang di tahun yang sama!";
             header("Location: " . base_url("/"));
             exit();
         }
+
     
         // 2. Cek apakah email sudah terverifikasi di tahun yang sama
         $stmt = $conn->prepare("SELECT otp_verifikasi FROM ts_register_mahasiswa WHERE email = ? AND tahun_isian = ?");
@@ -109,10 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // 5. Insert or Update berdasarkan UNIQUE (email, tahun_isian)
         $stmt = $conn->prepare("
             INSERT INTO ts_register_mahasiswa 
-                (id_user, nik, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman, tahun_isian) 
+                (nim_mahasiswa, nik, email, no_telepon, otp_kode, otp_kadaluwarsa, otp_verifikasi, otp_pengiriman, tahun_isian) 
             VALUES (?, ?, ?, ?, ?, ?, 0, ?, ?)
             ON DUPLICATE KEY UPDATE 
-                id_user = VALUES(id_user),
+                nim_mahasiswa = VALUES(nim_mahasiswa),
                 no_telepon = VALUES(no_telepon),
                 otp_kode = VALUES(otp_kode),
                 otp_kadaluwarsa = VALUES(otp_kadaluwarsa),

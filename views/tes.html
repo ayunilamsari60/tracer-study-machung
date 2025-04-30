@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="mahasiswaSelect" onchange="handleSelectChange(this)">
+        <!-- Options akan diisi dengan JavaScript -->
+      </select>
+      
+      <script>
+        // Contoh data dari API
+        const mahasiswaData = [
+          { nim: '123456', tglsk: '2023-09-01', nama: 'Andi', kode_prodi: 'TI01' },
+          { nim: '654321', tglsk: '2023-08-01', nama: 'Budi', kode_prodi: 'TI02' }
+        ];
+      
+        const select = document.getElementById('mahasiswaSelect');
+      
+        mahasiswaData.forEach(mhs => {
+          const option = document.createElement('option');
+          option.textContent = mhs.nama; // Label yang ditampilkan
+          option.value = JSON.stringify(mhs); // Simpan semua data sebagai string
+          select.appendChild(option);
+        });
+      
+        function handleSelectChange(selectElement) {
+          const selectedData = JSON.parse(selectElement.value);
+          console.log("Data Mahasiswa Terpilih:", selectedData);
+          // contoh: tampilkan NIM
+          alert(`NIM Mahasiswa: ${selectedData.nim}`);
+        }
+      </script>
+      
+</body>
+</html>

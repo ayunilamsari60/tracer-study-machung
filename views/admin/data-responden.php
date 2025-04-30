@@ -113,11 +113,11 @@ section('content'); // Memulai section untuk konten dinamis
                         while ($row = $result->fetch_assoc()) { ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $row['thn_ajaran']; ?></td>
+                                <td><?= $row['tahun_lulus'] ?></td>
                                 <td><?= $row['kode_prodi']; ?></td>
-                                <td><?= $row['nama_prodi']; ?></td>
+                                <td><?= $row['nama_prodi_in']; ?></td>
                                 <td><?= $row['nim_mahasiswa']; ?></td>
-                                <td><?= $row['nama']; ?></td>
+                                <td><?= $row['nama_mahasiswa']; ?></td>
                                 <td><?= $row['no_telepon']; ?></td>
                                 <td><?= $row['email']; ?></td>
                                 <td>

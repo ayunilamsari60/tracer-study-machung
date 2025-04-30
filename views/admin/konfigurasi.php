@@ -46,7 +46,7 @@ section('content'); // Memulai section untuk konten dinamis
                             <option value="" disabled <?= empty($tahun_lulus_mulai) ? 'selected' : '' ?>>Mulai...
                             </option>
                             <?php
-                            for ($tahun = 2000; $tahun <= date("Y"); $tahun++) {
+                            for ($tahun = 2000; $tahun <= date("Y") + 5; $tahun++) {
                                 $selected = ($tahun == $tahun_lulus_mulai) ? 'selected' : '';
                                 echo "<option value='$tahun' $selected>$tahun</option>";
                             }
@@ -60,7 +60,7 @@ section('content'); // Memulai section untuk konten dinamis
                             <option value="" disabled <?= empty($tahun_lulus_akhir) ? 'selected' : '' ?>>Akhir...
                             </option>
                             <?php
-                            for ($tahun = 2000; $tahun <= date("Y"); $tahun++) {
+                            for ($tahun = 2000; $tahun <= date("Y") + 5; $tahun++) {
                                 $selected = ($tahun == $tahun_lulus_akhir) ? 'selected' : '';
                                 echo "<option value='$tahun' $selected>$tahun</option>";
                             }
@@ -75,7 +75,7 @@ section('content'); // Memulai section untuk konten dinamis
                             <option value="" disabled <?= empty($tahun_isian) ? 'selected' : '' ?>>Pilih Tahun...
                             </option>
                             <?php
-                            for ($tahun = 2000; $tahun <= date("Y"); $tahun++) {
+                            for ($tahun = 2000; $tahun <= date("Y") + 5; $tahun++) {
                                 $selected = ($tahun == $tahun_isian) ? 'selected' : '';
                                 echo "<option value='$tahun' $selected>$tahun</option>";
                             }
