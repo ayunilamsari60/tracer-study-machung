@@ -2,7 +2,7 @@
 require 'routes.php';
 define('BASE_PATH', __DIR__);
 
-// echo base_url('admin');
+echo base_url('admin');
 
 // API Routes
 route('GET', '/api/statistik_mahasiswa', function () {
@@ -88,7 +88,7 @@ route('GET', '/admin/pertanyaan', function () {
 route('GET', '/admin/login', function () {
     session_start();
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-        header("Location: /tracer-study-machung/admin");
+        header("Location: " . base_url("admin"));
         exit;
     }
     require 'views/admin/login.php';
