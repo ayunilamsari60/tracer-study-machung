@@ -2,8 +2,6 @@
 require 'routes.php';
 define('BASE_PATH', __DIR__);
 
-echo base_url('admin');
-
 // API Routes
 route('GET', '/api/statistik_mahasiswa', function () {
     require 'backend/ts_data_chart_dashboard.php';
