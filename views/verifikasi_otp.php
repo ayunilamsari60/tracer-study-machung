@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
     $_SESSION['error'] = "Session expired. Silakan register ulang.";
-    header("Location: /tracer-study-machung/");
+    header("Location: " . base_url(""));
     exit();
 }
 ?>
@@ -18,16 +18,16 @@ if (!isset($_SESSION['email'])) {
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/tracer-study-machung/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url("assets/images/favicon.ico")?>">
 
     <!-- Bootstrap Css -->
-    <link href="/tracer-study-machung/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet"
+    <link href="<?= base_url("assets/css/bootstrap.min.css")?>" id="bootstrap-style" rel="stylesheet"
         type="text/css" />
     <!-- Icons Css -->
-    <link href="/tracer-study-machung/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/css/icons.min.css")?>" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="/tracer-study-machung/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-    <link href="/tracer-study-machung/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/css/app.min.css")?>" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/libs/sweetalert2/sweetalert2.min.css")?>" rel="stylesheet" type="text/css" />
 
 
 </head>
@@ -77,7 +77,7 @@ if (!isset($_SESSION['email'])) {
                                                 <span class="fw-semibold"><?php echo $_SESSION['email']; ?></span>
                                             </p>
 
-                                            <form action="/tracer-study-machung/verifikasi-otp/post" method="POST">
+                                            <form action="<?= base_url("verifikasi-otp/post")?>" method="POST">
                                                 <div class="mb-3">
                                                     <input type="text" class="form-control form-control-lg text-center"
                                                         maxLength="4" id="otp-input" name="otp_kode" id="otp_kode"
@@ -98,7 +98,7 @@ if (!isset($_SESSION['email'])) {
                         </div>
 
                         <div class="mt-5 text-center">
-                            <form action="/tracer-study-machung/kirim-ulang/post" method="POST">
+                            <form action="<?= base_url("kirim-ulang/post")?>" method="POST">
                                 <p>Tidak mendapatkan OTP?
                                     <button type="submit" name="resendOtp" class="fw-medium text-primary"
                                         style="border: none; background: none; cursor: pointer; color: blue;">Kirim
@@ -116,19 +116,19 @@ if (!isset($_SESSION['email'])) {
 
 
         <!-- JAVASCRIPT -->
-        <script src="/tracer-study-machung/assets/libs/jquery/jquery.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/node-waves/waves.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+        <script src="<?= base_url("assets/libs/jquery/jquery.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/metismenu/metisMenu.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/simplebar/simplebar.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/node-waves/waves.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/sweetalert2/sweetalert2.min.js")?>"></script>
 
 
         <!-- two-step-verification js -->
-        <script src="/tracer-study-machung/assets/js/pages/two-step-verification.init.js"></script>
+        <script src="<?= base_url("assets/js/pages/two-step-verification.init.js")?>"></script>
 
         <!-- App js -->
-        <script src="/tracer-study-machung/assets/js/app.js"></script>
+        <script src="<?= base_url("assets/js/app.js")?>"></script>
 
         <script>
             <?php if (isset($_SESSION['error'])) { ?>

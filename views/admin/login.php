@@ -9,14 +9,14 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="/tracer-study-machung/assets/images/favicon.ico">
+        <link rel="shortcut icon" href="<?= base_url("assets/images/favicon.ico")?>">
 
         <!-- Bootstrap Css -->
-        <link href="/tracer-study-machung/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url("assets/css/bootstrap.min.css")?>" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="/tracer-study-machung/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url("assets/css/icons.min.css")?>" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="/tracer-study-machung/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url("assets/css/app.min.css")?>" id="app-style" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
-                                        <img src="/tracer-study-machung/assets/images/profile-img.png" alt="" class="img-fluid">
+                                        <img src="<?= base_url("assets/images/profile-img.png")?>" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -85,13 +85,13 @@
         <!-- end account-pages -->
 
         <!-- JAVASCRIPT -->
-        <script src="/tracer-study-machung/assets/libs/jquery/jquery.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="/tracer-study-machung/assets/libs/node-waves/waves.min.js"></script>
+        <script src="<?= base_url("assets/libs/jquery/jquery.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/metismenu/metisMenu.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/simplebar/simplebar.min.js")?>"></script>
+        <script src="<?= base_url("assets/libs/node-waves/waves.min.js")?>"></script>
         
         <!-- App js -->
-        <script src="/tracer-study-machung/assets/js/app.js"></script>
+        <script src="<?= base_url("assets/js/app.js")?>"></script>
     </body>
 </html>

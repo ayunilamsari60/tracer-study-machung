@@ -31,7 +31,7 @@ if ($user && password_verify($password, $user['password'])) {
         $conn->query("UPDATE ts_admin SET updated_at = NOW() WHERE id = " . $user['id']);
     }
 
-    header("Location: /tracer-study-machung/admin");
+    header("Location: ". base_url("admin"));
     exit;
 }
  else {

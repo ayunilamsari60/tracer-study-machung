@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['id_register'])) {
     $_SESSION['error'] = "Session expired. Silakan register ulang.";
-    header("Location: /tracer-study-machung/");
+    header("Location: " . base_url(""));
     exit();
 }
 ?>
@@ -15,12 +15,12 @@ if (!isset($_SESSION['id_register'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url("assets/images/favicon.ico")?>">
 
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/css/bootstrap.min.css")?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/css/icons.min.css")?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/css/app.min.css")?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/libs/select2/css/select2.min.css")?>" rel="stylesheet" type="text/css" />
     <style>
         .alert {
             margin-bottom: 0;
@@ -83,10 +83,10 @@ if (!isset($_SESSION['id_register'])) {
         </div>
     </div>
 
-    <script src="assets/libs/jquery/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/select2/js/select2.min.js"></script>
-    <script src="assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="<?= base_url("assets/libs/jquery/jquery.min.js")?>"></script>
+    <script src="<?= base_url("assets/libs/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
+    <script src="<?= base_url("assets/libs/select2/js/select2.min.js")?>"></script>
+    <script src="<?= base_url("assets/libs/jquery-steps/build/jquery.steps.min.js")?>"></script>
     <script>
         $(document).ready(function () {
             function tampilkanAlert(teks) {

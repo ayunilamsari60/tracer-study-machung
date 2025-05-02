@@ -6,6 +6,9 @@ define('BASE_PATH', __DIR__);
 route('GET', '/api/statistik_mahasiswa', function () {
     require 'backend/ts_data_chart_dashboard.php';
 });
+route('POST', '/api/get-nama-mahasiswa', function () {
+    require 'backend/ts_get_nama_mahasiswa.php';
+});
 
 route('GET', '/', function () {
     require 'views/auth-register.php';
@@ -24,6 +27,8 @@ route('POST', '/verifikasi-otp/post', function () {
 route('GET', '/selesai', function () {
     require 'views/halaman_terakhir.php';
 });
+
+
 
 
 
@@ -106,7 +111,7 @@ route('GET', '/admin/logout', function () {
     session_unset();
     session_destroy();
     setcookie('remember_token', '', time() - 3600, '/');
-    header('Location: /tracer-study-machung/admin/login');
+    header('Location: ' . base_url('admin/login'));
     exit;
 });
 

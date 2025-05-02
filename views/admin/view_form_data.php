@@ -36,24 +36,22 @@ if ($result->num_rows > 0) {
             echo '</div>';
         }
         ?>
-        <?php if ($data['F8'] >= 1 && $data['F8'] <= 4): ?>
-            <div class="card p-5">
-                <?php include "form/step3.php"; ?>
-            </div>
-        <?php endif; ?>
+        <div class="card p-5">
+            <?php include "form/step3.php"; ?>
+        </div>
 
     </div>
 </div>
 <?php endsection(); ?>
 <?php push('scripts') ?>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // Ambil semua checkbox di halaman
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        
+
         // Menambahkan event listener untuk mencegah klik pada setiap checkbox
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('click', function(event) {
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('click', function (event) {
                 event.preventDefault();  // Mencegah perubahan status
                 return false;  // Mencegah aksi lebih lanjut
             });

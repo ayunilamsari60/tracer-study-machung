@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$otp_kode) {
         $_SESSION['error'] = "Kode OTP wajib diisi.";
-        header("Location: /tracer-study-machung/verifikasi-otp");
+        header("Location: " . base_url("/verifikasi-otp"));
         exit();
     }
 
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!$konfigurasi) {
             $_SESSION['error'] = "Konfigurasi sistem tidak ditemukan.";
-            header("Location: /tracer-study-machung/verifikasi-otp");
+            header("Location: " . base_url("/verifikasi-otp"));
             exit();
         }
 
@@ -45,25 +45,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!$user) {
             $_SESSION['error'] = "User tidak ditemukan untuk tahun isian saat ini.";
-            header("Location: /tracer-study-machung/verifikasi-otp");
+            header("Location: " . base_url("/verifikasi-otp"));
             exit();
         }
 
         if ($user['otp_verifikasi'] == 1) {
             $_SESSION['error'] = "Email sudah terverifikasi.";
-            header("Location: /tracer-study-machung/verifikasi-otp");
+            header("Location: " . base_url("/verifikasi-otp"));
             exit();
         }
 
         if (strtotime($user['otp_kadaluwarsa']) < time()) {
             $_SESSION['error'] = "Kode OTP sudah kadaluarsa.";
-            header("Location: /tracer-study-machung/verifikasi-otp");
+            header("Location: " . base_url("/verifikasi-otp"));
             exit();
         }
 
         if ($user['otp_kode'] != $otp_kode) {
             $_SESSION['error'] = "Kode OTP salah.";
-            header("Location: /tracer-study-machung/verifikasi-otp");
+            header("Location: " . base_url("/verifikasi-otp"));
             exit();
         }
 
@@ -75,11 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['id_register'] = $user['id_register'];
 
         $_SESSION['success'] = "OTP berhasil diverifikasi! Anda akan diarahkan ke form.";
-        header("Location: /tracer-study-machung/verifikasi-otp");
+        header("Location: " . base_url("/verifikasi-otp"));
         exit();
     } catch (Exception $e) {
         $_SESSION['error'] = "Gagal verifikasi: " . $e->getMessage();
-        header("Location: /tracer-study-machung/verifikasi-otp");
+        header("Location: " . base_url("/verifikasi-otp"));
         exit();
     }
 }

@@ -1,5 +1,5 @@
 <?php
-require '../config/koneksi.php';
+require 'config/koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tahun_lulus'])) {
     $tahun = $_POST['tahun_lulus'];

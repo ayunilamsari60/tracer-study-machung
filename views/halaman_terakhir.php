@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <h4 class="mt-5">Terimakasih sudah mengisi!!</h4>
-                            <p class="text-muted">It will be as simple as Occidental in fact it will be Occidental.</p>
+                            <!-- <p class="text-muted">It will be as simple as Occidental in fact it will be Occidental.</p> -->
 
                         </div>
                     </div>

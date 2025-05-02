@@ -14,33 +14,12 @@ if ($result_tahun && $result_tahun->num_rows > 0) {
 }
 
 // --- Query untuk BARCHART ---
-// $sql_barchart = "
-// SELECT 
-//     mps.nama_prodi_in AS nama_prodi,
-//     COUNT(DISTINCT m.nim_mahasiswa) AS total,
-//     COUNT(DISTINCT CASE WHEN s.id_register IS NOT NULL THEN m.nim_mahasiswa END) AS sudah,
-//     COUNT(DISTINCT CASE 
-//         WHEN s.id_register IS NULL AND r.id_register IS NOT NULL
-//         THEN m.nim_mahasiswa 
-//     END) AS belum
-// FROM akademik_master_program_studi mps
-// LEFT JOIN akademik_master_mahasiswa m ON m.id_prodi = mps.kode_prodi
-// LEFT JOIN akademik_transaksi_wisuda_detail wd ON m.nim_mahasiswa = wd.nim_mahasiswa
-// LEFT JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda
-// LEFT JOIN ts_register_mahasiswa r ON m.nim_mahasiswa = r.nim_mahasiswa AND r.tahun_isian = '$tahun_isian'
-// LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
-// GROUP BY mps.kode_prodi
-// ORDER BY mps.nama_prodi_in ASC
-
-// ";
 $sql_barchart = "
 SELECT 
     mps.nama_prodi_in AS nama_prodi,
     COUNT(DISTINCT m.nim_mahasiswa) AS total,
     COUNT(DISTINCT CASE WHEN s.id_register IS NOT NULL THEN m.nim_mahasiswa END) AS sudah,
-    COUNT(DISTINCT CASE 
-        WHEN s.id_register IS NULL THEN m.nim_mahasiswa 
-    END) AS belum
+    COUNT(DISTINCT m.nim_mahasiswa) - COUNT(DISTINCT CASE WHEN s.id_register IS NOT NULL THEN m.nim_mahasiswa END) AS belum
 FROM akademik_master_program_studi mps
 LEFT JOIN akademik_master_mahasiswa m ON m.id_prodi = mps.kode_prodi
 LEFT JOIN akademik_transaksi_wisuda_detail wd ON m.nim_mahasiswa = wd.nim_mahasiswa

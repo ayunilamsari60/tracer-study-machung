@@ -144,7 +144,7 @@ $tahun_isian = $row['tahun_isian'];
             namaSelect.innerHTML = '<option value="">Loading...</option>';
             namaSelect.disabled = true;
 
-            fetch("backend/ts_get_nama_mahasiswa.php", {
+            fetch("api/get-nama-mahasiswa", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: "tahun_lulus=" + encodeURIComponent(tahun),

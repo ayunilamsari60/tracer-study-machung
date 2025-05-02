@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
 
         // Batasi pengiriman OTP maksimal 2 kali sehari
         if ($otp_attempts > 2) {
-            header("Location: /tracer-study-machung/verifikasi-otp/limit");
+            header("Location: ") . base_url("verifikasi-otp/limit");
             exit();
         }
 
@@ -96,12 +96,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $mail->send();
 
         // Redirect sukses
-        header("Location: /tracer-study-machung/verifikasi-otp/success");
+        header("Location: " . base_url("verifikasi-otp/success"));
         exit();
     } catch (Exception $e) {
         $conn->rollBack();
         error_log("Error: " . $e->getMessage());
-        header("Location: /tracer-study-machung/verifikasi-otp/error");
+        header("Location: " . base_url("verifikasi-otp/error"));
         exit();
     }
 }

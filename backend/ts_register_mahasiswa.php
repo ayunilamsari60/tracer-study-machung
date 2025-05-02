@@ -167,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->send();
     
         $conn->commit(); // Simpan transaksi
-        header("Location: /tracer-study-machung/verifikasi-otp");
+        header("Location: " . base_url("verifikasi-otp"));
         exit();
     } 
     
