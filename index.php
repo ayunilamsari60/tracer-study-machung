@@ -2,6 +2,8 @@
 require 'routes.php';
 define('BASE_PATH', __DIR__);
 
+// echo base_url('admin');
+
 // API Routes
 route('GET', '/api/statistik_mahasiswa', function () {
     require 'backend/ts_data_chart_dashboard.php';
@@ -27,10 +29,6 @@ route('POST', '/verifikasi-otp/post', function () {
 route('GET', '/selesai', function () {
     require 'views/halaman_terakhir.php';
 });
-
-
-
-
 
 // 💡 Versi dengan parameter dinamis
 route('GET', '/verifikasi-otp/{status}', function ($status) {

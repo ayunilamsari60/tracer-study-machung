@@ -70,28 +70,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resendOtp'])) {
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = 'Kode OTP Baru';
-        $mail->Body = "
-        <div style='text-align:center; margin-top:20px;'>
-            <img src='cid:checklist_image' alt='logo' style='width:200px; height:auto;'>
+        $mail->Body = '
+        <div style="text-align:center; margin-top:20px;">
+            <img src="cid:checklist_image" alt="logo" style="width:200px; height:auto;">
         </div>
-        <div style='text-align: center; width: 400px; margin: 0 auto;'>
-            <b style='font-size: 18px;'>Verifikasi Email untuk Proses Tiket Anda!</b>
-            <b style='font-size: 18px;'>Kode OTP Anda adalah <strong>{$otp_kode}</strong> </b>
+        <div style="text-align: center; width: 400px; margin: 0 auto;">
+            <b style="font-size: 18px;">Verifikasi Email untuk Proses Tiket Anda!</b>
+            <b style="font-size: 18px;">Kode OTP Anda adalah <strong>' . $otp_kode . '</strong> </b>
 
-            <p style='text-align: justify;'>
+            <p style="text-align: justify;">
                 Tiket Anda memerlukan verifikasi OTP agar dapat diproses oleh admin. Silakan masukkan kode OTP di form verifikasi untuk melanjutkan proses.<br><br>
                 <b>Kode ini hanya berlaku selama 10 menit.</b>
             </p>
             <br>
-            <p style='text-align: justify;'>*Catatan: Mohon untuk tidak membalas email ini.</p>
+            <p style="text-align: justify;">*Catatan: Mohon untuk tidak membalas email ini.</p>
         </div>
-        <div style='margin-top: 2rem;'>
-            <img src='cid:logo_image' alt='logo' style='width:150px; height:auto;'><br>
+        <div style="margin-top: 2rem;">
+            <img src="cid:checklist_image" alt="logo" style="width:150px; height:auto;"><br>
             <b>Unit Sistem Informasi dan Pusat Data Universitas Ma Chung</b><br>
             Jika Anda memerlukan informasi lebih lanjut, silakan hubungi kontak di bawah ini.<br>
             E-mail   : uptsisteminformasi@machung.ac.id<br>
             Address  : Villa Puncak Tidar Blok N No. 01 Malang
-        </div>";
+        </div>
+        ';
 
         $mail->send();
 
