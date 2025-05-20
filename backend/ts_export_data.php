@@ -42,7 +42,7 @@ $query .= "
     JOIN akademik_master_mahasiswa tm ON tm.nim_mahasiswa = rm.nim_mahasiswa
     JOIN akademik_master_program_studi tp ON tp.kode_prodi = tm.id_prodi
     JOIN akademik_transaksi_wisuda_detail wd ON tm.nim_mahasiswa = wd.nim_mahasiswa
-    JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda";
+    JOIN akademik_transaksi_yudisium w ON wd.id_wisuda = w.id_yudisium";
 
 if (!empty($tahunLulus)) {
     $tahunLulus = $conn->real_escape_string($tahunLulus);

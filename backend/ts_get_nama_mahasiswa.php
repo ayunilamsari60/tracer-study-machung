@@ -11,10 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tahun_lulus'])) {
     // Ganti query agar ambil id_user dan nama
     // $stmt = $conn->prepare("SELECT id_user, nama FROM ts_data_mahasiswa WHERE thn_ajaran = ?");
     $stmt = $conn->prepare("SELECT t.tglsk, a.nim_mahasiswa, b.nama_mahasiswa 
-    FROM akademik_transaksi_wisuda t
-    LEFT JOIN akademik_transaksi_wisuda_detail a ON a.id_wisuda = t.id_wisuda
+    FROM akademik_transaksi_yudisium t
+    LEFT JOIN akademik_transaksi_wisuda_detail a ON a.id_wisuda = t.id_yudisium
     LEFT JOIN akademik_master_mahasiswa b ON b.nim_mahasiswa = a.nim_mahasiswa
     WHERE YEAR(t.tglsk) = ?");
+
+    
 
     $stmt->bind_param("i", $tahun);
     $stmt->execute();

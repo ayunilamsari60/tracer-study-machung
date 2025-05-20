@@ -23,7 +23,7 @@ SELECT
 FROM akademik_master_program_studi mps
 LEFT JOIN akademik_master_mahasiswa m ON m.id_prodi = mps.kode_prodi
 LEFT JOIN akademik_transaksi_wisuda_detail wd ON m.nim_mahasiswa = wd.nim_mahasiswa
-LEFT JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda
+LEFT JOIN akademik_transaksi_yudisium w ON wd.id_wisuda = w.id_yudisium
 LEFT JOIN ts_register_mahasiswa r ON m.nim_mahasiswa = r.nim_mahasiswa AND r.tahun_isian = '$tahun_isian'
 LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
 GROUP BY mps.kode_prodi
@@ -62,7 +62,7 @@ for ($i = 0; $i < 5; $i++) {
         LEFT JOIN ts_register_mahasiswa r ON m.nim_mahasiswa = r.nim_mahasiswa
         LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
         LEFT JOIN akademik_transaksi_wisuda_detail wd ON m.nim_mahasiswa = wd.nim_mahasiswa
-        LEFT JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda
+        LEFT JOIN akademik_transaksi_yudisium w ON wd.id_wisuda = w.id_yudisium
         WHERE r.tahun_isian = '$tahun_target'
           AND s.id_register IS NOT NULL
     ";
@@ -75,7 +75,7 @@ for ($i = 0; $i < 5; $i++) {
         SELECT COUNT(DISTINCT m.nim_mahasiswa) AS total_mahasiswa
         FROM akademik_master_mahasiswa m
         LEFT JOIN akademik_transaksi_wisuda_detail wd ON m.nim_mahasiswa = wd.nim_mahasiswa
-        LEFT JOIN akademik_transaksi_wisuda w ON wd.id_wisuda = w.id_wisuda
+        LEFT JOIN akademik_transaksi_yudisium w ON wd.id_wisuda = w.id_yudisium
         WHERE YEAR(w.tglsk) BETWEEN '$tahun_lulus_mulai' AND '$tahun_lulus_akhir'
     ";
     $result_total = $conn->query($sql_total_mahasiswa);

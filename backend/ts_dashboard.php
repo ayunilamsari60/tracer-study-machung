@@ -23,7 +23,7 @@ $sql_total_mahasiswa = "
     LEFT JOIN ts_register_mahasiswa r ON m.nim_mahasiswa = r.nim_mahasiswa
     LEFT JOIN ts_form_submit s ON r.id_register = s.id_register
     LEFT JOIN akademik_transaksi_wisuda_detail d ON m.nim_mahasiswa = d.nim_mahasiswa
-    LEFT JOIN akademik_transaksi_wisuda t ON d.id_wisuda = t.id_wisuda
+    LEFT JOIN akademik_transaksi_yudisium t ON d.id_wisuda = t.id_yudisium
     WHERE s.id_register IS NULL
     AND YEAR(t.tglsk) BETWEEN ? AND ?
 ";
