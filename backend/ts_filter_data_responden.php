@@ -15,7 +15,7 @@ $sql = "
     JOIN akademik_master_mahasiswa tm ON tm.nim_mahasiswa = rm.nim_mahasiswa
     JOIN akademik_master_program_studi tp ON tp.kode_prodi = tm.id_prodi
     JOIN akademik_transaksi_wisuda_detail twd ON twd.nim_mahasiswa = rm.nim_mahasiswa
-    JOIN akademik_transaksi_yudisium tw ON tw.id_wisuda = twd.id_yudisium
+    JOIN akademik_transaksi_yudisium tw ON tw.id_yudisium = twd.id_wisuda
 ";
 // 4. Eksekusi query
 $result = $conn->query($sql);

@@ -32,7 +32,7 @@ section('content'); // Memulai section untuk konten dinamis
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Skote</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tracerstudy</a></li>
                     <li class="breadcrumb-item active">Data Responden</li>
                 </ol>
             </div>

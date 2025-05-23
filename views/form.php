@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (!isset($_SESSION['id_register'])) {
     $_SESSION['error'] = "Session expired. Silakan register ulang.";
@@ -15,12 +15,12 @@ if (!isset($_SESSION['id_register'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <link rel="shortcut icon" href="<?= base_url("assets/images/favicon.ico")?>">
+    <link rel="shortcut icon" href="<?= base_url("assets/images/favicon.ico") ?>">
 
-    <link href="<?= base_url("assets/css/bootstrap.min.css")?>" rel="stylesheet" type="text/css" />
-    <link href="<?= base_url("assets/css/icons.min.css")?>" rel="stylesheet" type="text/css" />
-    <link href="<?= base_url("assets/css/app.min.css")?>" rel="stylesheet" type="text/css" />
-    <link href="<?= base_url("assets/libs/select2/css/select2.min.css")?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/css/bootstrap.min.css") ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/css/icons.min.css") ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/css/app.min.css") ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url("assets/libs/select2/css/select2.min.css") ?>" rel="stylesheet" type="text/css" />
     <style>
         .alert {
             margin-bottom: 0;
@@ -76,17 +76,17 @@ if (!isset($_SESSION['id_register'])) {
                     // Melanjutkan kode lain di form.php
                     include 'form/step1.php';
                     include 'form/step2.php';
-                    include 'form/step3.php'; 
+                    include 'form/step3.php';
                     ?>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="<?= base_url("assets/libs/jquery/jquery.min.js")?>"></script>
-    <script src="<?= base_url("assets/libs/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
-    <script src="<?= base_url("assets/libs/select2/js/select2.min.js")?>"></script>
-    <script src="<?= base_url("assets/libs/jquery-steps/build/jquery.steps.min.js")?>"></script>
+    <script src="<?= base_url("assets/libs/jquery/jquery.min.js") ?>"></script>
+    <script src="<?= base_url("assets/libs/bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
+    <script src="<?= base_url("assets/libs/select2/js/select2.min.js") ?>"></script>
+    <script src="<?= base_url("assets/libs/jquery-steps/build/jquery.steps.min.js") ?>"></script>
     <script>
         $(document).ready(function () {
             function tampilkanAlert(teks) {
@@ -141,12 +141,6 @@ if (!isset($_SESSION['id_register'])) {
                         window.statusKerja = statusKerja;
 
                     }
-
-                    // Di Step 2, kalau status "tidak bekerja", klik next langsung trigger finish
-                    // if (currentIndex === 1 && window.statusKerja === "5" && newIndex > currentIndex) {
-                    //     $("#job-form-wizard").steps("finish");
-                    //     return false; // Cegah ke step 3
-                    // }
 
                     // Validasi Step 2 sebelum lanjut ke Step 3 (HANYA saat Next)
                     if (currentIndex === 1 && newIndex > currentIndex) {
@@ -248,16 +242,6 @@ if (!isset($_SESSION['id_register'])) {
 
                     return true;
                 },
-                // onStepChanged: function (event, currentIndex, priorIndex) {
-                //     let statusKerja = $("input[name='F8']:checked").val();
-
-                //     // Hanya ubah tombol jika di step 1 menuju step 2 dan status tidak bekerja
-                //     if (currentIndex === 1 && statusKerja === "5") {
-                //         $(".actions ul li a[href='#next']").text("Selesai");
-                //     } else {
-                //         $(".actions ul li a[href='#next']").text("Lanjut");
-                //     }
-                // },
 
                 onFinished: function (event, currentIndex) {
                     let isValid = true;
@@ -312,6 +296,21 @@ if (!isset($_SESSION['id_register'])) {
     <script>
         // jquery untuk menampilkan inputan lainnya
         $(document).ready(function () {
+            $("#penghasilan").on("input", function () {
+                let value = $(this).val().replace(/\D/g, ""); // Hapus semua karakter non-digit
+                if (!value) {
+                    $(this).val("");
+                    return;
+                }
+                $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ".")); // Tambah titik setiap 3 digit dari belakang
+            });
+
+            // Hapus titik saat submit form
+            $("#job-form-wizard").on("submit", function () {
+                let raw = $("#penghasilan").val().replace(/\./g, ""); // Hilangkan semua titik
+                $("#penghasilan").val(raw); // Set kembali nilai mentah tanpa titik
+            });
+
             $(".select2").select2();
             // Hilangkan is-invalid ketika user mulai mengisi atau memilih
             $(".step-2-content input, .step-2-content textarea").on("input", function () {
@@ -375,10 +374,6 @@ if (!isset($_SESSION['id_register'])) {
                     $(".instansiLainnyaInput").hide();
                 }
             });
-            // $("input[name='f1101']").on("input", function () {
-            //     let selectedValue = $(this).val();
-            //     console.log("Real-time input: " + selectedValue);
-            // });
 
 
             $(document).ready(function () {

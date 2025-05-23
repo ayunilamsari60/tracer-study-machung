@@ -114,7 +114,11 @@ $tahun_isian = $row['tahun_isian'];
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5 text-center">
+                    <div class="mt-1 text-center">
+                        <p>Butuh bantuan? Kunjungi <a href="https://ithelpdesk.machung.ac.id/">https://ithelpdesk.machung.ac.id/</a> 
+                        </p>
+                    </div>
+                    <div class="mt-1 text-center">
                         <p>© SI Trace Study
                             <script>
                                 document.write(new Date().getFullYear())

@@ -3,20 +3,24 @@
     <!-- Pekerjaan Content Start -->
     <div id="bekerja-content" class="step-2-content" style="display: none">
         <div class="mb-4">
-            <label>Dalam berapa bulan Anda mendapatkan pekerjaan pertama?</label>
+            <label>Dalam berapa bulan Anda mendapatkan pekerjaan pertama?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="number" class="form-control" name="f502" placeholder="Masukkan jumlah bulan" />
         </div>
 
         <div class="mb-4">
-            <label>Berapa rata-rata pendapatan Anda per bulan? (take home pay)</label>
-            <input type="number" class="form-control" name="f505" placeholder="Masukkan pendapatan per bulan" />
+            <label>Berapa rata-rata pendapatan Anda per bulan? (take home pay)<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
+            <input type="text" class="form-control" name="f505" id="penghasilan"
+                placeholder="Masukkan pendapatan per bulan" inputmode="numeric" pattern="\d*" />
         </div>
 
         <div class="mb-4">
-            <label>Dimana lokasi tempat Anda bekerja?</label>
+            <label>Dimana lokasi tempat Anda bekerja?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <div class="row">
-                <div class="col-md-6">
-                <label class="form-label">Provinsi <span class="text-danger">*</span></label>
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="form-label">Provinsi <span class="text-danger">*</span></label>
                     <select id="provinsi" class="form-control select2" name="f5a1">
                         <option value="" selected disabled>Pilih Provinsi</option>
                         <?php
@@ -26,12 +30,12 @@
                         } catch (Exception $e) {
                             echo "Terjadi error: " . $e->getMessage();
                         }
-                          ?>
+                        ?>
                         <!-- Tambahkan daftar provinsi lainnya -->
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="kota" class="form-label">Kota/Kabupaten</label>
+                    <label for="kota" class="form-label">Kota/Kabupaten <span class="text-danger">*</span></label>
                     <select id="kota" class="form-control select2" name="f5a2">
                         <option value="" selected disabled>Pilih Kota/Kabupaten</option>
                         <!-- Opsi kota/kabupaten akan dimuat berdasarkan provinsi yang dipilih -->
@@ -41,22 +45,27 @@
         </div>
 
         <div class="mb-4">
-            <label>Alamat Instansi</label>
+            <label>Alamat Instansi<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="text" class="form-control" name="UMC1" placeholder="Masukkan alamat instansi" />
         </div>
 
         <div class="mb-4">
-            <label>Nama PIC/HRD/Atasan</label>
+            <label>Nama PIC/HRD/Atasan<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="text" class="form-control" name="UMC2" placeholder="Masukkan Nama PIC/HRD/Atasan" />
         </div>
 
         <div class="mb-4">
-            <label>Telepon/Email PIC/HRD/Atasan</label>
+            <label>Telepon/Email PIC/HRD/Atasan<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="text" class="form-control" name="UMC3" placeholder="Masukkan Telepon/Email PIC/HRD/Atasan" />
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Apa jenis perusahaan/instansi/institusi tempat Anda bekerja sekarang?</label>
+            <label class="form-label">Apa jenis perusahaan/instansi/institusi tempat Anda bekerja sekarang?<span
+                    class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="f1101" value="1" id="instansi1">
@@ -98,12 +107,15 @@
         </div>
 
         <div class="mb-4">
-            <label>Apa nama perusahaan/kantor tempat Anda bekerja?</label>
+            <label>Apa nama perusahaan/kantor tempat Anda bekerja?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="text" class="form-control" name="f5b" placeholder="Masukkan nama perusahan/kantor" />
         </div>
 
         <div class="mb-4">
-            <label for="tingkat_pekerjaan" class="form-label">Apa tingkat tempat kerja Anda?</label>
+            <label for="tingkat_pekerjaan" class="form-label">Apa tingkat tempat kerja Anda?<span class="text-danger">
+                    *(Wajib
+                    diisi)</span></label>
             <select id="tingkat_pekerjaan" class="form-select" name="f5d">
                 <option selected disabled>Silahkan Pilih...</option>
                 <option value="1">Lokal/Wilayah/wirausaha tidak berbadan hukum</option>
@@ -113,7 +125,9 @@
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Seberapa erat hubungan bidang studi dengan pekerjaan Anda?</label>
+            <label class="form-label">Seberapa erat hubungan bidang studi dengan pekerjaan Anda?<span
+                    class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="f14" value="1" id="hubungan1">
                 <label class="form-check-label" for="hubungan1">Sangat erat</label>
@@ -142,7 +156,8 @@
 
         <div class="mb-4">
             <label class="form-label">Tingkat pendidikan apa yang paling tepat/sesuai untuk pekerjaan Anda saat
-                ini?</label>
+                ini?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="f15" value="1" id="pendidikan1">
@@ -167,16 +182,17 @@
 
         <div class="mb-4">
             <label class="form-label">Kapan Anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak
-                dimasukkan</label>
+                dimasukkan<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
-            <div class="form-check mb-2 d-flex align-items-center gap-2">
+            <div class="form-check mb-2 d-flex flex-wrap align-items-center gap-2">
                 <input class="form-check-input" type="radio" name="f301" value="1" id="cariKerja1">
                 <label class="form-check-label" for="cariKerja1">Kira-kira</label>
                 <input type="number" class="form-control form-control-sm w-auto" name="f302" min="0" placeholder="...">
                 Bulan sebelum lulus
             </div>
 
-            <div class="form-check mb-2 d-flex align-items-center gap-2">
+            <div class="form-check mb-2 d-flex flex-wrap align-items-center gap-2">
                 <input class="form-check-input" type="radio" name="f301" value="2" id="cariKerja2">
                 <label class="form-check-label" for="cariKerja2">Kira-kira</label>
                 <input type="number" class="form-control form-control-sm w-auto" name="f303" min="0" placeholder="...">
@@ -190,7 +206,8 @@
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?</label>
+            <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1"
@@ -292,29 +309,36 @@
 
         <div class="mb-4">
             <label class="form-label">Berapa perusahaan/instansi/institusi yang sudah Anda lamar (lewat surat/email)
-                sebelum memperoleh pekerjaan pertama?</label>
+                sebelum memperoleh pekerjaan pertama?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="number" class="form-control" name="f6" placeholder="Masukkan jumlah lamaran" min="0" />
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Berapa banyak perusahaan/instansi/institusi yang merespons lamaran Anda?</label>
+            <label class="form-label">Berapa banyak perusahaan/instansi/institusi yang merespons lamaran Anda?<span
+                    class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="number" class="form-control" name="f7" placeholder="Masukkan jumlah respons" min="0" />
         </div>
 
         <div class="mb-4">
             <label class="form-label">Berapa banyak perusahaan/instansi/institusi yang mengundang Anda untuk
-                wawancara?</label>
+                wawancara?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="number" class="form-control" name="f7a" placeholder="Masukkan jumlah wawancara" min="0" />
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Berapa perusahaan/instansi yang telah Anda masuki untuk bekerja?</label>
+            <label class="form-label">Berapa perusahaan/instansi yang telah Anda masuki untuk bekerja?<span
+                    class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="number" class="form-control" name="UMC4" placeholder="Masukkan jumlah perusahaan" min="0" />
         </div>
 
         <div class="mb-4">
             <label class="form-label">Apakah Anda aktif mencari pekerjaan dalam 4 minggu terakhir? Pilihlah satu
-                jawaban</label>
+                jawaban<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="f1001" value="1" id="Kerja1">
                 <label class="form-check-label" for="Kerja1">Tidak</label>
@@ -338,7 +362,8 @@
 
         <div class="mb-4">
             <label class="form-label">Jika menurut Anda pekerjaan Anda saat ini tidak sesuai dengan pendidikan Anda,
-                mengapa Anda mengambilnya? Jawaban bisa lebih dari satu.</label>
+                mengapa Anda mengambilnya? Jawaban bisa lebih dari satu.<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" name="f1601" value="1" id="alasan1"
@@ -438,12 +463,15 @@
     <!-- Wiraswasta Content Start -->
     <div id="wiraswasta-content" class="step-2-content" style="display: none">
         <div class="mb-4">
-            <label>Dalam berapa bulan Anda memulai wiraswasta?</label>
+            <label>Dalam berapa bulan Anda memulai wiraswasta?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="number" class="form-control" name="f502" placeholder="Masukkan jumlah bulan" />
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Apa jenis perusahaan/instansi/institusi tempat Anda bekerja sekarang?</label>
+            <label class="form-label">Apa jenis perusahaan/instansi/institusi tempat Anda bekerja sekarang?<span
+                    class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="f1101" value="1" id="instansi1w">
@@ -486,7 +514,8 @@
 
         <div class="mb-4">
             <label for="posisi_wiraswasta" class="form-label">Bila berwiraswasta, apa posisi/jabatan Anda saat
-                ini?</label>
+                ini?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <select id="posisi_wiraswasta" class="form-select" name="f5c">
                 <option selected disabled>Silahkan Pilih...</option>
                 <option value="1">Founder</option>
@@ -497,7 +526,9 @@
         </div>
 
         <div class="mb-4">
-            <label for="tingkat_pekerjaan" class="form-label">Apa tingkat tempat kerja Anda?</label>
+            <label for="tingkat_pekerjaan" class="form-label">Apa tingkat tempat kerja Anda?<span class="text-danger">
+                    *(Wajib
+                    diisi)</span></label>
             <select id="tingkat_pekerjaan" class="form-select" name="f5d">
                 <option selected disabled>Silahkan Pilih...</option>
                 <option value="1">Lokal/Wilayah/wirausaha tidak berbadan hukum</option>
@@ -507,7 +538,9 @@
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Seberapa erat hubungan bidang studi dengan pekerjaan Anda?</label>
+            <label class="form-label">Seberapa erat hubungan bidang studi dengan pekerjaan Anda?<span
+                    class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="f14" value="1" id="hubungan1w">
                 <label class="form-check-label" for="hubungan1w">Sangat erat</label>
@@ -535,7 +568,8 @@
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?</label>
+            <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1-w"
@@ -638,7 +672,8 @@
 
         <div class="mb-4">
             <label class="form-label">Jika menurut Anda pekerjaan Anda saat ini tidak sesuai dengan pendidikan Anda,
-                mengapa Anda mengambilnya? Jawaban bisa lebih dari satu.</label>
+                mengapa Anda mengambilnya? Jawaban bisa lebih dari satu.<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" name="f1601" value="1" id="alasan1-w"
@@ -742,7 +777,8 @@
     <!-- Pendidikan Content Start -->
     <div id="pendidikan-content" class="step-2-content" style="display: none">
         <div class="mb-4">
-            <label for="sumber_biaya" class="form-label">Sumber Biaya</label>
+            <label for="sumber_biaya" class="form-label">Sumber Biaya<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <select id="sumber_biaya" class="form-select" name="F18a">
                 <option selected disabled>Silahkan Pilih...</option>
                 <option value="1">Biaya Sendiri</option>
@@ -751,24 +787,28 @@
         </div>
 
         <div class="mb-4">
-            <label for="perguruan_tinggi">Perguruan Tinggi</label>
+            <label for="perguruan_tinggi">Perguruan Tinggi<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="text" class="form-control" name="F18b" id="perguruan_tinggi"
                 placeholder="Masukkan nama perguruan tinggi" />
         </div>
 
         <div class="mb-4">
-            <label for="program_studi">Program Studi</label>
+            <label for="program_studi">Program Studi<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="text" class="form-control" name="F18c" id="program_studi"
                 placeholder="Masukkan nama program studi" />
         </div>
 
         <div class="mb-4">
-            <label for="tanggal_masuk">Tanggal Masuk</label>
+            <label for="tanggal_masuk">Tanggal Masuk<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
             <input type="date" class="form-control" name="F18d" id="tanggal_masuk" />
         </div>
 
         <div class="mb-4">
-            <label>Sebutkan sumber dana dalam pembiayaan kuliah?</label>
+            <label>Sebutkan sumber dana dalam pembiayaan kuliah?<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="radio" name="F1201" id="sumber_dana1" value="1" />
@@ -817,7 +857,8 @@
     <div id="mencari-kerja-content" class="step-2-content" style="display: none">
         <div class="mb-4">
             <label class="form-label">Kapan Anda mulai mencari pekerjaan? Mohon pekerjaan sambilan tidak
-                dimasukkan</label>
+                dimasukkan<span class="text-danger"> *(Wajib
+                    diisi)</span></label>
 
             <div class="form-check mb-2 d-flex align-items-center gap-2">
                 <input class="form-check-input" type="radio" name="f301" value="1" id="cariKerja1-mk">
@@ -840,7 +881,8 @@
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?</label>
+            <label class="form-label">Bagaimana Anda mencari pekerjaan tersebut?<span class="text-danger"> *(Wajib
+            diisi)</span></label>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" name="f401" value="1" id="cari1-mk"
@@ -943,18 +985,21 @@
 
         <div class="mb-4">
             <label class="form-label">Berapa perusahaan/instansi/institusi yang sudah Anda lamar (lewat surat/email)
-                sebelum memperoleh pekerjaan pertama?</label>
+                sebelum memperoleh pekerjaan pertama?<span class="text-danger"> *(Wajib
+            diisi)</span></label>
             <input type="number" class="form-control" name="f6" placeholder="Masukkan jumlah lamaran" min="0" />
         </div>
 
         <div class="mb-4">
-            <label class="form-label">Berapa banyak perusahaan/instansi/institusi yang merespons lamaran Anda?</label>
+            <label class="form-label">Berapa banyak perusahaan/instansi/institusi yang merespons lamaran Anda?<span class="text-danger"> *(Wajib
+            diisi)</span></label>
             <input type="number" class="form-control" name="f7" placeholder="Masukkan jumlah respons" min="0" />
         </div>
 
         <div class="mb-4">
             <label class="form-label">Berapa banyak perusahaan/instansi/institusi yang mengundang Anda untuk
-                wawancara?</label>
+                wawancara?<span class="text-danger"> *(Wajib
+            diisi)</span></label>
             <input type="number" class="form-control" name="f7a" placeholder="Masukkan jumlah wawancara" min="0" />
         </div>
 
@@ -991,7 +1036,8 @@
 
     <!-- Tidak Bekerja Content Start -->
     <div id="tidak-bekerja-content" class="step-2-content" style="display: none">
-        <label>Mengapa Anda belum memungkinkan untuk bekerja?</label>
+        <label>Mengapa Anda belum memungkinkan untuk bekerja?<span class="text-danger"> *(Wajib
+                diisi)</span></label>
         <input type="text" class="form-control" name="UMC5" placeholder="Jelaskan alasan Anda" />
     </div>
     <!-- Tidak Bekerja Content End -->
