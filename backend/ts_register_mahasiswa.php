@@ -146,6 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         $mail->setFrom(getenv('EMAIL_USERNAME'), 'Tracer Study Universitas Ma Chung');
         $mail->addEmbeddedImage('assets/images/checklist.png', 'checklist_image');
+        $mail->addEmbeddedImage('assets/images/logo-machung.png', 'logo_machung');
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = 'Kode OTP Anda';
@@ -158,14 +159,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <b style="font-size: 18px;">Kode OTP Anda adalah <strong>' . $otp_kode . '</strong> </b>
 
             <p style="text-align: justify;">
-                Tiket Anda memerlukan verifikasi OTP agar dapat diproses oleh admin. Silakan masukkan kode OTP di form verifikasi untuk melanjutkan proses.<br><br>
+                Halaman ini memerlukan verifikasi OTP. Silakan masukkan kode OTP di form verifikasi untuk melanjutkan pengisian form TracerStudy.<br><br>
                 <b>Kode ini hanya berlaku selama 10 menit.</b>
             </p>
             <br>
             <p style="text-align: justify;">*Catatan: Mohon untuk tidak membalas email ini.</p>
         </div>
         <div style="margin-top: 2rem;">
-            <img src="cid:checklist_image" alt="logo" style="width:150px; height:auto;"><br>
+            <img src="cid:logo_machung" alt="logo" style="width:150px; height:auto;"><br>
             <b>Unit Sistem Informasi dan Pusat Data Universitas Ma Chung</b><br>
             Jika Anda memerlukan informasi lebih lanjut, silakan hubungi kontak di bawah ini.<br>
             E-mail   : uptsisteminformasi@machung.ac.id<br>
