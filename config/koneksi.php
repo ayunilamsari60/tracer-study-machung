@@ -1,9 +1,9 @@
 <?php
 // include __DIR__ . '/read_env.php';
-$host = '127.0.0.1';
+$host = 'db';
 $dbname = 'tracer_study';
-$username = 'root';
-$password = '';
+$username = 'user';
+$password = 'userpass';
 
 // $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
